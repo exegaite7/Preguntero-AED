@@ -1,0 +1,5802 @@
+[
+ {
+  "id": "c14-1",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "El cálculo del valor a^(n) (para simplificar, asumimos a > 0 y n >= 0 y sabiendo que si n = 0 entonces a^(0) = 1) es igual a multiplicar n veces el número a por sí mismo. Por caso, 5^(3) = 5 * 5 * 5 = 125. Sabiendo esto, ¿cuál de las siguientes sería una definición recursiva matemáticamente correcta de la operación potencia(a, n)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "img",
+    "s": "c14_1_a.png"
+   },
+   {
+    "t": "img",
+    "s": "c14_1_b.png"
+   },
+   {
+    "t": "img",
+    "s": "c14_1_c.png"
+   },
+   {
+    "t": "img",
+    "s": "c14_1_d.png"
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Lo que se achica en cada paso es el exponente n, no la base: aⁿ = a · aⁿ⁻¹, con caso base a⁰ = 1. La (a) achica la base, la (b) nunca achica nada (recursión infinita) y la (d) suma en vez de multiplicar.",
+  "ref": "Ficha 14 · Programación recursiva",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-2",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026",
+   "Parcial 5 · 2021 (pregunta 10)",
+   "Final · julio 2022 (pregunta 21)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se quiere plantear una definición recursiva del concepto de bosque. ¿Cuál de las siguientes propuestas generales es correcta y constituye la mejor definición?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Un bosque es un conjunto de árboles que puede estar vacío, o puede contener uno o más árboles agrupados con otro bosque."
+   },
+   {
+    "t": "p",
+    "s": "Un bosque es un bosque."
+   },
+   {
+    "t": "p",
+    "s": "Un bosque es un conjunto de árboles que puede estar vacío, o puede contener n árboles (con n > 0)."
+   },
+   {
+    "t": "p",
+    "s": "Un bosque es un conjunto que puede contener uno o más árboles agrupados con otro bosque."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Una buena definición recursiva tiene caso base (bosque vacío) y una parte recursiva (árboles + otro bosque). La (d) es recursiva pero sin caso base: regresión infinita. La (c) no es recursiva y la (b) es circular.",
+  "ref": "Ficha 14 · Introducción (definiciones recursivas)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-3",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026",
+   "Parcial 5 · 2021 (pregunta 7)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de los siguientes son factores esenciales a tener en cuenta cuando se realiza el análisis de la eficiencia de un algoritmo (por ejemplo, para efectuar una comparación de rendimiento entre dos algoritmos que resuelven el mismo problema)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El diseño de la interfaz de usuario."
+   },
+   {
+    "t": "p",
+    "s": "La complejidad aparente del código fuente."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución."
+   },
+   {
+    "t": "p",
+    "s": "El consumo de memoria."
+   }
+  ],
+  "correctas": [
+   1,
+   2,
+   3
+  ],
+  "tuya": [
+   2,
+   3
+  ],
+  "erraste": true,
+  "explicacion": "Para la cátedra son tres: tiempo de ejecución, consumo de memoria y complejidad aparente del código fuente. Ojo: en tu intento marcaste solo tiempo y memoria (te dio parcial). En el Parcial 5 de 2021 la respuesta oficial incluye los tres.",
+  "ref": "Ficha 27 · Introducción y conceptos básicos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-4",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que la versión recursiva de la función para el cálculo del factorial  que se presentó en clases fuese redefinida en la forma siguiente:"
+   },
+   {
+    "t": "code",
+    "s": "def factorial(n):\n    f = n * factorial(n - 1)\n    if n == 0:\n        return 1\n    return f"
+   },
+   {
+    "t": "p",
+    "s": "¿Cuá es el problema (si lo hubiese) con esta versión de la función?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La función siempre retorna un 1, sin importar cual sea el valor de n."
+   },
+   {
+    "t": "p",
+    "s": "Contiene todos los elementos que debería tener una función recursiva bien planteada, pero en el orden incorrecto: la condición para chequear si n es cero debería estar antes que la llamada recursiva para evitar la recursión infinita."
+   },
+   {
+    "t": "p",
+    "s": "Para calcular el factorial necesita un ciclo for que genere los números a multiplicar. Así planteada, la función hace un único primer cálculo incompleto y lo retorna."
+   },
+   {
+    "t": "p",
+    "s": "No hay ningún problema. Funciona correctamente."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "La llamada recursiva se ejecuta ANTES de preguntar si n == 0, así que nunca se llega a cortar: recursión infinita hasta desbordar el stack. La condición de corte siempre va antes de la invocación recursiva.",
+  "ref": "Ficha 14 · Programación recursiva",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-5",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "A lo largo del curso hemos visto la forma de plantear programas controlados por menú de opciones, y sabemos que esos programas incluyen un ciclo para el control del proceso. Pero también podríamos hacer un planteo basado en recursión, sin usar el ciclo, en forma similar a la que se muestra aquí:"
+   },
+   {
+    "t": "code",
+    "s": "__author__ = 'Cátedra de AED'\ndef menu():\n    print('1. Opcion 1')\n    print('2. Opcion 2')\n    print('3. Salir')\n    op = int(input('Ingrese opcion: '))\n    if op == 1:\n        print('Eligio la opcion 1...')\n    elif op == 2:\n        print('Eligio la opcion 2...')\n    elif op == 3:\n        return\n    menu()\n# script principal...\nmenu()"
+   },
+   {
+    "t": "p",
+    "s": "¿Hay algún problema o contraindicación respecto del uso y aplicación de esta versión recursiva para la gestión de un menú? Seleccione la respuesta que mejor describa este punto."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Esta versión recursiva es completamente equivalente a la versión iterativa. No hay ningún motivo para preferir la una sobre la otra. Da lo mismo si el programador usa la recursiva o la iterativa."
+   },
+   {
+    "t": "p",
+    "s": "No hay ningún problema ni contraindicación. Y no sólo eso: la versión recursiva es más simple y compacta que la versión basada en un ciclo, por lo cual es incluso preferible usarla."
+   },
+   {
+    "t": "p",
+    "s": "La versión recursiva que se mostró no funciona. Sólo permite cargar una vez la opción elegida, e inmediatamente se detiene."
+   },
+   {
+    "t": "p",
+    "s": "Esta versión recursiva posiblemente sea más simple y compacta que la versión basada en un ciclo, pero la versión recursiva pide memoria de stack cada vez que se invoca, por lo que es más conveniente la iterativa."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Funciona, pero cada vuelta del menú es una nueva invocación que ocupa el stack segment. Si el usuario usa mucho el menú, el stack crece sin necesidad. Si la versión iterativa es igual de clara, conviene la iterativa.",
+  "ref": "Ficha 14 · Consideraciones generales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-6",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "El producto de dos números a y b mayores o iguales cero, es en última instancia una suma: se puede ver como sumar b veces el número a, o como sumar a veces el número b. Por ejemplo: 5 * 3 = 5 + 5 + 5  o bien 5 * 3 = 3 + 3 + 3 + 3 + 3. Sabiendo esto, se puede intentar hacer una definición recursiva de la operación producto(a, b) [a >= 0, b >= 0], que podría ser la que sigue:\n¿Es correcto el siguiente planteo de la función producto(a, b)?"
+   },
+   {
+    "t": "code",
+    "s": "def producto(a, b):\n    if a == 0 or b == 0:\n        return 0\n    return a + producto(a, b-1)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "No. La función sugerida siempre retornará 0, sean cuales fuesen los valores de a y b."
+   },
+   {
+    "t": "p",
+    "s": "No. La última línea debería decir return a + producto(a-1, b-1) en lugar de return a + producto(a, b-1)."
+   },
+   {
+    "t": "p",
+    "s": "Sí. Es correcto."
+   },
+   {
+    "t": "p",
+    "s": "No. La propia definición previa del concepto de producto es incorrecta: un producto es una multiplicación, y no una suma..."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Tiene caso base (si algún factor es 0, retorna 0) y en cada llamada b se achica en 1 hasta llegar a 0. Ejemplo: producto(5, 3) = 5 + 5 + 5 + 0 = 15.",
+  "ref": "Ficha 14 · Aplicación elemental de la recursión",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-7",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "En la tabla siguiente se muestra un resumen comparativo entre las versiones iterativa (basada en ciclos) y recursiva del algoritmo de cálculo del término n-ésimo de la Sucesión de Fibonacci. Note que se han dejado sin completar los casilleros que corresponden al tiempo de ejecución para ambos casos."
+   },
+   {
+    "t": "tabla",
+    "head": [
+     "Cálculo  del  término n-ésimo de  Fibonacci  [F(n)]",
+     "Complejidad código fuente",
+     "Consumo de memoria",
+     "Tiempo de ejecución"
+    ],
+    "rows": [
+     [
+      "Versión iterativa",
+      "Aceptable",
+      "Constante (no depende de n)",
+      "????"
+     ],
+     [
+      "Versión recursiva",
+      "Optima",
+      "Proporcional a n (lineal)",
+      "????"
+     ]
+    ]
+   },
+   {
+    "t": "p",
+    "s": "¿Cuál es la estimación para el tiempo de ejecución de ambos algoritmos?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Versión iterativa:  tiempo proporcional a n (lineal)   -   Versión recursiva: tiempo proporcional a b^(n) (exponencial, para algún b > 1)"
+   },
+   {
+    "t": "p",
+    "s": "Versión iterativa:  tiempo constante (no depende de n)   -   Versión recursiva: tiempo proporcional a b^(n) (exponencial, para algún b > 1)"
+   },
+   {
+    "t": "p",
+    "s": "Versión iterativa:  tiempo proporcional a b^(n) (exponencial, para algún b > 1)   -   Versión recursiva: tiempo proporcional a n (lineal)"
+   },
+   {
+    "t": "p",
+    "s": "Versión iterativa:  tiempo proporcional a n (lineal)    -    Versión recursiva: tiempo proporcional a n (lineal)"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "La iterativa hace un ciclo de n vueltas, así que es lineal. La recursiva hace dos llamadas por nivel y recalcula los mismos subproblemas muchas veces, así que su tiempo crece en forma exponencial.",
+  "ref": "Ficha 14 · Caso de análisis: la Sucesión de Fibonacci",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-8",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes propuestas generales son ciertas en relación al segmento de memoria conocido como Stack Segment?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El Stack Segment funciona como una pila (o apilamiento) de datos (modalidad LIFO: Last In - First Out): el último dato en llegar, se almacena en la cima del stack, y será por eso el primero en ser retirado."
+   },
+   {
+    "t": "p",
+    "s": "El Stack Segment funciona como una cola (o fila) de datos (modalidad FIFO: First In - First Out): el primer dato en llegar, se almacena al frente del stack, y será por eso el primero en ser retirado."
+   },
+   {
+    "t": "p",
+    "s": "El Stack Segment se utiliza como soporte interno solamente en el proceso de invocación a funciones recursivas: se va llenando a medida que la cascada recursiva se va desarrollando, y se vacía a medida que se produce el proceso de regreso o vuelta atrás."
+   },
+   {
+    "t": "p",
+    "s": "El Stack Segment se utiliza como soporte interno en el proceso de invocación a funciones (con o sin recursividad): se va llenando a medida que se desarrolla la cascada de invocaciones, y se vacía a medida que se produce el proceso de regreso o vuelta atrás."
+   }
+  ],
+  "correctas": [
+   0,
+   3
+  ],
+  "tuya": [
+   0,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "El stack es LIFO y lo usa TODA invocación a función, sea recursiva o no. La recursión solo lo usa más intensamente.",
+  "ref": "Ficha 14 · Seguimiento de la recursividad",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-9",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026",
+   "Final · julio 2022 (pregunta 16)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Sabemos que la recursión es una de las técnicas o estrategias básicas para el planteo de algoritmos y que una de sus ventajas es que permite el diseño de algoritmos compactos y muy claros, aunque al costo de usar algo de memoria extra en el stack segment y por consiguiente también un algo de tiempo extra por la gestión del stack. Algunos problemas pueden plantearse en forma directa  procesando recursivamente diversos subproblemas menores. Tal es el caso de la sucesión de Fibonacci, en la cual cada término se calcula como la suma de los dos inmediatamente anteriores [esto se expresa con la siguiente relación de recurrencia: F(n) = F(n-1) + F(n-2) con F(0) = 0 y F(1) = 1]. La función sencilla que mostramos a continuación que calcula el término n-ésimo de la sucesión en forma recursiva:"
+   },
+   {
+    "t": "code",
+    "s": "def fibo(n):\n    if n <= 1:\n        return 1\n    return fibo(n-1) + fibo(n-2)"
+   },
+   {
+    "t": "p",
+    "s": "Sin embargo, un inconveniente adicional es que la aplicación directa de dos o más invocaciones recursivas en el planteo de un algoritmo podría hacer que un mismo subproblema se resuelva más de una vez, incrementando el tiempo total de ejecución. Por ejemplo, para calcular fibo(4) el árbol de llamadas recursivas es el siguiente:"
+   },
+   {
+    "t": "img",
+    "s": "fibo4_arbol.png"
+   },
+   {
+    "t": "p",
+    "s": "y puede verse que en este caso, se calcula 2 veces el valor de fibo(2), 3 veces el valor de fibo(1) y 2 veces el valor de fibo(0)... con lo que la cantidad de llamadas a funciones para hacer más de una vez el mismo trabajo es de 7 (= 2 + 3 + 2). Suponga que se quiere calcular el valor del sexto término de la sucesión. Analice el árbol de llamadas recursivas que se genera al hacer la invocación t = fibo(6) ¿Cuántas veces en total la función fibo() se invoca para hacer más de una vez el mismo trabajo, SIN incluir en ese conteo a las invocaciones para obtener fibo(0) y fibo(1)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "0"
+   },
+   {
+    "t": "p",
+    "s": "12"
+   },
+   {
+    "t": "p",
+    "s": "11"
+   },
+   {
+    "t": "p",
+    "s": "10"
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "En el árbol de fibo(6): fibo(4) aparece 2 veces, fibo(3) 3 veces y fibo(2) 5 veces. Se cuentan todas las apariciones de los subproblemas repetidos (como en el ejemplo de fibo(4)): 2 + 3 + 5 = 10.",
+  "ref": "Ficha 14 · Caso de análisis: la Sucesión de Fibonacci",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-10",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿En cuáles de las siguientes situaciones el uso de recursividad está efectivamente recomendado? (Más de una respuesta puede ser válida. Marque todas las que considere correctas)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Siempre que se pueda escribir una definición recursiva del problema."
+   },
+   {
+    "t": "p",
+    "s": "Recorrido y procesamiento de estructuras de datos no lineales como árboles y grafos."
+   },
+   {
+    "t": "p",
+    "s": "Nunca."
+   },
+   {
+    "t": "p",
+    "s": "Generación y procesamiento de imágenes y gráficos fractales (figuras compuestas por versiones más simples de la misma figura original)."
+   }
+  ],
+  "correctas": [
+   1,
+   3
+  ],
+  "tuya": [
+   1,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Se recomienda cuando la versión iterativa sería muy compleja: estructuras no lineales (árboles, grafos) y fractales. Que exista una definición recursiva no alcanza (Fibonacci es el contraejemplo).",
+  "ref": "Ficha 14 · Consideraciones generales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c14-11",
+  "unidad": "F14",
+  "origen": [
+   "Tu cuestionario 14 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 2)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son CIERTAS en relación al sistema de coordenadas de pantalla?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Las filas de pantalla o de ventana con número de orden más bajo, se encuentran más cerca del borde superior que las filas con número de orden más alto."
+   },
+   {
+    "t": "p",
+    "s": "El origen del sistema de coordenadas se encuentra en el punto inferior izquierdo de la pantalla o de la ventana que se esté usando."
+   },
+   {
+    "t": "p",
+    "s": "Las filas de pantalla o de ventana con número de orden más alto, se encuentran más cerca del borde superior que las filas con número de orden más bajo."
+   },
+   {
+    "t": "p",
+    "s": "El origen del sistema de coordenadas se encuentra en el punto superior izquierdo de la pantalla o de la ventana que se esté usando."
+   }
+  ],
+  "correctas": [
+   0,
+   3
+  ],
+  "tuya": [
+   0,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "En pantalla el origen (0, 0) está arriba a la izquierda y la coordenada y crece hacia abajo, al revés que en el plano cartesiano de matemática.",
+  "ref": "Ficha 14 · Introducción a los gráficos fractales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-1",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la idea principal en la que se basa el algoritmo de ordenamiento de Selección Directa que se presentó en clase? (Suponga que se desea ordenar el arreglo de menor a mayor)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Realizar varias pasadas sobre el arreglo, en cada pasada seleccionar el menor valor de los que aún no han sido ordenados, y colocarlo en su casilla definitiva."
+   },
+   {
+    "t": "p",
+    "s": "Realizar varias pasadas sobre el arreglo, en cada pasada comparar a cada elemento con el que le sigue inmediatamente, intercambiarlos si están desordenados y seguir haciendo pasadas en esta forma hasta que el arreglo quede ordenado."
+   },
+   {
+    "t": "p",
+    "s": "Realizar varias pasadas sobre el arreglo. En cada pasada seleccionar un elemento cualquiera x. Pasar a la derecha del arreglo todos los valores mayores a x. Pasar a la izquierda del arreglo todos los valores menores a x. Finalmente, aplicar la misma idea a cada una de las dos \"mitades\" así obtenidas y seguir así hasta que ya no pueda seguir obteniendo nuevas \"mitades\"."
+   },
+   {
+    "t": "p",
+    "s": "Realizar una sola pasada sobre el arreglo, en esa pasada comparar a cada elemento con el que le sigue e intercambiarlos si están invertidos."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Selección = en cada pasada se \"selecciona\" el menor de lo que queda y va a su lugar definitivo. La (b) describe Burbuja y la (c) describe Quicksort.",
+  "ref": "Ficha 16 · Selección Directa",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-2",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "La siguiente función implementa el algoritmo de ordenamiento por Selección Directa, tal como se analizó en clases para ordenar de menor a mayor un arreglo v con n componentes:"
+   },
+   {
+    "t": "code",
+    "s": "def selection_sort(v):\n    # ordenamiento por seleccion directa\n    n = len(v)\n    for i in range(n-1):\n        for j in range(i+1, n):\n            if v[i] > v[j]:\n                v[i], v[j] = v[j], v[i]"
+   },
+   {
+    "t": "p",
+    "s": "¿Qué efecto se produciría en la función anterior si la instrucción condicional if v[i] > v[j]: fuese reemplaza por if v[i] < v[j]:?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Provocará que el programa se interrumpa con un mensaje de error en la primera comparación."
+   },
+   {
+    "t": "p",
+    "s": "No causaría ningún efecto particular: el arreglo seguiría siendo ordenado de menor a mayor."
+   },
+   {
+    "t": "p",
+    "s": "El arreglo sería ordenado, pero ahora de mayor a menor."
+   },
+   {
+    "t": "p",
+    "s": "Provocaría que el arreglo permanezca siempre sin cambio alguno (no será nunca ordenado de forma alguna, ni se modificará nunca su contenido original)."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "El criterio de la comparación define el orden: con < se intercambia cuando el de la casilla i es menor, así que en v[i] queda el mayor y el arreglo termina de mayor a menor.",
+  "ref": "Ficha 16 · Selección Directa",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-3",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuántas comparaciones hace el algoritmo de Búsqueda Secuencial para encontrar un valor x en un arreglo de n componentes en el peor caso posible? (El peor caso es el que obliga a un algoritmo a hacer la máxima cantidad de trabajo. Obviamente, en el caso de la Búsqueda Secuencial ese peor caso se presenta si el valor buscado está exactamente en la última casilla, o bien, si el valr buscado no está en el arreglo)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "n^(2) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "n comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "log2(n)  comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Una sola comparación, siempre."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "En el peor caso hay que mirar todas las casillas: n comparaciones, o sea O(n).",
+  "ref": "Ficha 16 · Búsqueda secuencial",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-4",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Oportunamente se presentó en clases el algoritmo de búsqueda secuencial, el cual toma un arreglo, busca un valor x en el mismo casilla por casilla, y retorna el índice de la casilla que lo contiene (si x está en el arreglo) o retorna -1 si x no está en el arreglo. Suponga que propone la siguiente variante para el algoritmo de búsqueda secuencial:"
+   },
+   {
+    "t": "code",
+    "s": "def linear_search(v, x):\n    r = -1\n    for i in range(len(v)):\n        if x == v[i]:\n            r = i\n    return r"
+   },
+   {
+    "t": "p",
+    "s": "¿Hay algún inconveniente o problema con esta variante?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La variante propuesta funciona solamente si el valor x está en el arreglo (falla si x no está)."
+   },
+   {
+    "t": "p",
+    "s": "Hay un inconveniente: la variante propuesta encuentra el valor buscado (si existía) pero no corta el ciclo de búsqueda al encontrarlo con lo que siempre se hacen n comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta no funciona correctamente: sólo llega a analizar el contenido de la primera casilla."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta funciona correctamente."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "El resultado es correcto (retorna -1 si no está), pero sigue recorriendo después de encontrar a x: siempre hace n comparaciones. La versión de la ficha hace return i apenas lo encuentra.",
+  "ref": "Ficha 16 · Búsqueda secuencial",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-5",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Oportunamente se presentó en clases el algoritmo de búsqueda secuencial, el cual toma un arreglo, busca un valor x en el mismo casilla por casilla, y retorna el índice de la casilla que lo contiene (si x está en el arreglo) o retorna -1 si x no está en el arreglo. Suponga que propone la siguiente variante para el algoritmo de búsqueda secuencial:"
+   },
+   {
+    "t": "code",
+    "s": "def linear_search(v, x):\n    n = len(v)\n    for i in range(n):\n        if x == v[i]:\n            return i\n        else:\n            return -1"
+   },
+   {
+    "t": "p",
+    "s": "¿Funciona correctamente esta variante? Si no funciona, ¿cuál es el problema?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La variante propuesta no funciona correctamente: sólo llega a analizar el contenido de la primera casilla."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta provoca un error de intérprete: un if no puede tener una instrucción return en cada una de sus ramas."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta funciona correctamente."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta funciona solamente si el valor x está en el arreglo (falla si x no está)."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "En la primera vuelta, sea igual o no, se ejecuta un return y la función termina. El return -1 tiene que ir DESPUÉS del ciclo, no en el else.",
+  "ref": "Ficha 16 · Búsqueda secuencial",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-6",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿En cuáles de los siguientes casos es aplicable el algoritmo de búsqueda binaria en un arreglo? (Seleccione todas las respuestas que considere correctas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El arreglo en el cual se debe realizar la búsqueda está ordenado y permanecerá sin cambios."
+   },
+   {
+    "t": "p",
+    "s": "El arreglo en el cual se debe realizar la búsqueda está desordenado, se nos permite ordenarlo, luego podrá alterarse el contenido (quedando eventualmente desordenado) y debemos realizar varias búsquedas."
+   },
+   {
+    "t": "p",
+    "s": "El arreglo en el cual se debe realizar la búsqueda está desordenado y no se nos permite ordenarlo."
+   },
+   {
+    "t": "p",
+    "s": "El arreglo en el cual se debe realizar la búsqueda está desordenado, se nos permite ordenarlo, luego permanecerá sin cambios y debemos realizar muchas búsquedas."
+   }
+  ],
+  "correctas": [
+   0,
+   3
+  ],
+  "tuya": [
+   0,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "La búsqueda binaria exige que el arreglo esté ordenado al momento de cada búsqueda. Si hay que ordenarlo antes, conviene solo si después no cambia y se hacen muchas búsquedas.",
+  "ref": "Ficha 16 · Búsqueda binaria",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-7",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Oportunamente se presentó en clases el algoritmo de búsqueda binaria, el cual toma un arreglo ordenado, busca un valor x en el mismo, y retorna el índice de la casilla que lo contiene (si x está en el arreglo) o retorna -1 si x no está en el arreglo. Suponga que propone la siguiente variante para el algoritmo de búsqueda binaria:"
+   },
+   {
+    "t": "code",
+    "s": "def binary_search(v, x):\n    # busqueda binaria... asume arreglo ordenado...\n    izq, der = 0, len(v) - 1\n    while izq <= der:\n        c = (izq + der) // 2\n        if x == v[c]:\n            return c\n        else:\n            return -1\n        if x < v[c]:\n            der = c - 1\n        else:\n            izq = c + 1\n    return -1"
+   },
+   {
+    "t": "p",
+    "s": "¿Funciona correctamente esta variante? Si no funciona, ¿cuál es el problema?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La variante propuesta no funciona correctamente: sólo llega a analizar el contenido de la casilla del centro del arreglo."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta funciona solamente si el valor x está en el arreglo (falla si x no está)."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta provoca un error de intérprete y no llega a arrancar: el segundo if incluido dentro del ciclo nunca puede ejecutarse, ya que las dos ramas del if anterior terminan con una instrucción return."
+   },
+   {
+    "t": "p",
+    "s": "La variante propuesta funciona correctamente."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Mismo error que en la secuencial: en la primera vuelta siempre hay un return, así que solo se compara con la casilla central. El código inalcanzable no da error de intérprete en Python.",
+  "ref": "Ficha 16 · Búsqueda binaria",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-8",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Oportunamente se presentó en clases el algoritmo de búsqueda binaria, el cual toma un arreglo ordenado, busca un valor x en el mismo, y retorna el índice de la casilla que lo contiene (si x está en el arreglo) o retorna -1 si x no está en el arreglo. Mostramos el algoritmo para dar mejor contexto a la pregunta:"
+   },
+   {
+    "t": "code",
+    "s": "def binary_search(v, x):\n    # busqueda binaria... asume arreglo ordenado...\n    izq, der = 0, len(v) - 1\n    while izq <= der:\n        c = (izq + der) // 2\n        if x == v[c]:\n            return c\n        if x < v[c]:\n            der = c - 1\n        else:\n            izq = c + 1\n    return -1"
+   },
+   {
+    "t": "p",
+    "s": "¿Qué pasaría con la función anterior si el arreglo v contuviese cadenas de caracteres en cada casillero (en lugar de números), y el parámetro x contuviese también una cadena de caracteres?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La función mostrada funcionaría correctamente de todos modos."
+   },
+   {
+    "t": "p",
+    "s": "La función mostrada funciona solamente si el valor x está en el arreglo (falla si x no está, interrumpiendo el programa con un mensaje de error)."
+   },
+   {
+    "t": "p",
+    "s": "La función mostrada no provocaría que el programa se interrumpa, pero funcionaría en forma incorrecta y retornaría siempre -1 (nunca encontraría la cadena x buscada)."
+   },
+   {
+    "t": "p",
+    "s": "La función mostrada provocaría un error en tiempo de ejecución y se interrumpiría el programa al intentar determinar si x menor o mayor que v[i]."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "En Python las cadenas se pueden comparar con <, > y == (orden lexicográfico), así que el algoritmo funciona igual si el arreglo está ordenado.",
+  "ref": "Ficha 16 · Búsqueda binaria",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c16-9",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué pasaría con el algoritmo de Búsqueda Binaria si el valor buscado x estuviese repetido más de una vez en el arreglo?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El algoritmo funciona solamente si el valor x está en el arreglo (falla si x no está, interrumpiendo el programa con un mensaje de error)."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo no provocaría que el programa se interrumpa, pero funcionaría en forma incorrecta y retornaría siempre -1 (nunca encontraría el valor x buscado)."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo funcionaría correctamente de todos modos: retornaría el índice de la primera casilla encontrada que contenga a x."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo produciría un error en tiempo de ejecución y se interrumpiría el programa."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": true,
+  "explicacion": "Los repetidos no rompen nada: el algoritmo corta en la primera casilla central que coincida con x y retorna ese índice. Puede no ser la primera aparición en el arreglo, pero es una casilla válida que contiene a x. (Acá marcaste la (a)).",
+  "ref": "Ficha 16 · Búsqueda binaria",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c16-10",
+  "unidad": "F16",
+  "origen": [
+   "Tu cuestionario 16 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿En cuáles de los siguientes casos es aplicable el algoritmo de Fusión de Arreglos que se describió en las fichas de clases para producir un tercer arreglo ordenado? (Seleccione todas las respuestas que considere correctas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Los arreglos originales deben estar ordenados de menor a mayor si se quiere producir un tercer arreglo ordenado de menor a mayor."
+   },
+   {
+    "t": "p",
+    "s": "El proceso es aplicable sin importar si los dos arreglos originales están ordenados o no, ya que el algoritmo de fusión analizado primero ordena esos dos arreglos, y luego procede a la fusión."
+   },
+   {
+    "t": "p",
+    "s": "Los arreglos originales deben estar desordenados."
+   },
+   {
+    "t": "p",
+    "s": "Uno de los arreglos originales debe estar ordenado y el otro arreglo puede estar desordenado."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0,
+   1
+  ],
+  "erraste": true,
+  "explicacion": "La fusión (merge) NO ordena: asume que los dos arreglos ya vienen ordenados y los intercala comparando de a uno. Marcaste también la (b), que es falsa.",
+  "ref": "Ficha 16 · Fusión de arreglos ordenados",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c22-1",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la principal característica de todos los métodos de ordenamiento conocidos como métodos simples o directos?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Tienen muy mal rendimiento en tiempo de ejecución si el tamaño n del arreglo es pequeño, y un rendimiento aceptable si n es grande o muy grande."
+   },
+   {
+    "t": "p",
+    "s": "Tienen muy mal rendimiento en tiempo de ejecución si el tamaño n del arreglo es grande o muy grande, y un rendimiento aceptable si n es pequeño."
+   },
+   {
+    "t": "p",
+    "s": "Tienen muy mal rendimiento en tiempo de ejecución, cualquiera sea el tamaño n del arreglo."
+   },
+   {
+    "t": "p",
+    "s": "Tienen muy buen rendimiento en tiempo de ejecución, cualquiera sea el tamaño n del arreglo."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Son O(n²): con pocos datos andan bien, pero con n grande se vuelven muy lentos.",
+  "ref": "Ficha 22 · Clasificación tradicional",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-2",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes describe mejor la idea de funcionamiento en la que está basado el algoritmo conocido como ordenamento por Inserción Simple para ordenar un arreglo de n componentes?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Realizar n pasadas, de forma que en cada una se compare a cada elemento con el siguiente, logrando que en cada pasada los mayores vaya acomodándose al final del arreglo."
+   },
+   {
+    "t": "p",
+    "s": "Realizar n pasadas, de forma que en cada una se determine el menor de los elementos analizados, y llevar ese menor a la casilla pivot."
+   },
+   {
+    "t": "p",
+    "s": "Suponer que el arreglo tiene un subconjunto inicialmente ordenado que contiene sólo al primer elemento, luego realizar n pasadas, de forma que en cada una agregue el siguiente elemento al grupo que está ordenado."
+   },
+   {
+    "t": "p",
+    "s": "Reacomodar los n elementos del arreglo en forma aleatoria, controlar si quedó ordenado, y en caso de negativo, volver a reacomodarlos en forma aleatoria, continuando así hasta que en algún momento se obtenga un arreglo ordenado..."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Inserción: el primer elemento ya es un \"grupo ordenado\" y en cada pasada se inserta el siguiente en su lugar dentro de ese grupo (como ordenar cartas en la mano).",
+  "ref": "Ficha 22 · Algoritmos simples",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-3",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes describe mejor la idea de funcionamiento en la que está basado el algoritmo conocido como ordenamento por Intercambio Directo u Ordenamiento de Burbuja para ordenar de menor a mayor un arreglo de n componentes?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Suponer que el arreglo tiene un subconjunto inicialmente ordenado que contiene sólo al primer elemento, luego realizar n pasadas, de forma que en cada una agregue el siguiente elemento al grupo que está ordenado."
+   },
+   {
+    "t": "p",
+    "s": "Reacomodar los n elementos del arreglo en forma aleatoria, controlar si quedó ordenado, y en caso negativo, volver a reacomodarlos en forma aleatoria, continuando así hasta que en algún momento se obtenga un arreglo ordenado..."
+   },
+   {
+    "t": "p",
+    "s": "Realizar n pasadas, de forma que en cada una se compare a cada elemento con el siguiente, logrando que en cada pasada los mayores vayan acomodándose al final del arreglo."
+   },
+   {
+    "t": "p",
+    "s": "Realizar n pasadas, de forma que en cada una se determine el menor de los elementos analizados, y llevar ese menor a la casilla pivot."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Burbuja compara pares vecinos y los intercambia si están invertidos: en cada pasada el mayor \"sube\" hasta el final.",
+  "ref": "Ficha 22 · Algoritmos simples",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-4",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes describe mejor la idea de funcionamiento en la que está basado el algoritmo conocido como ordenamento por Selección Simple o Selección Directa para ordenar un arreglo de n componentes?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Realizar n pasadas, de forma que en cada una se determine el menor de los elementos analizados, y llevar ese menor a la casilla pivot."
+   },
+   {
+    "t": "p",
+    "s": "Suponer que el arreglo tiene un subconjunto inicialmente ordenado que contiene sólo al primer elemento, luego realizar n pasadas, de forma que en cada una agregue el siguiente elemento al grupo que está ordenado."
+   },
+   {
+    "t": "p",
+    "s": "Reacomodar los n elementos del arreglo en forma aleatoria, controlar si quedó ordenado, y en caso de negativo, volver a reacomodarlos en forma aleatoria, continuando así hasta que en algún momento se obtenga un arreglo ordenado..."
+   },
+   {
+    "t": "p",
+    "s": "Realizar n pasadas, de forma que en cada una se compare a cada elemento con el siguiente, logrando que en cada pasada los mayores vaya acomodándose al final del arreglo."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Selección: en cada pasada se busca el menor de los que quedan y se lo pone en la casilla pivot (la casilla i de esa pasada).",
+  "ref": "Ficha 22 · Algoritmos simples",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-5",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Por qué motivo el algoritmo Bubblesort para ordenamento de un arreglo usa una bandera de corte en la versión presentada en las fichas de clase?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La bandera de corte se usa para terminar el proceso apenas se detecte que en la pasada actual no hubo intercambios, para ahorrar tiempo."
+   },
+   {
+    "t": "p",
+    "s": "La bandera de corte se usa para garantizar que el arreglo quede ordenado."
+   },
+   {
+    "t": "p",
+    "s": "La bandera de corte se usa para determinar si el ordenamento debe hacerse de manor a mayor (bandera = True) o de mayor a menor (bandera = False)"
+   },
+   {
+    "t": "p",
+    "s": "No es cierto que la versión vista en clases use una bandera de corte."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Si en una pasada no hubo intercambios, el arreglo ya está ordenado y se corta (variable ordenado en bubble_sort()). Con un arreglo ya ordenado hace una sola pasada.",
+  "ref": "Ficha 22 · Algoritmos simples (bubble_sort)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-7",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son características correctas del algoritmo Shellsort? (Más de una puede ser cierta... marque TODAS las que considere válidas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El algoritmo Shellsort es complejo de analizar para determinar su rendimientos en forma matemática, ya que ese rendimiento depende fuertemente de la serie de incrementos decreciente que se haya seleccionado."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Shellsort consiste en una mejora del algoritmo de Inserción Directa (o Inserción Simple), consistente en armar subconjuntos ordenados con elementos a distancia h > 1 en las primeras fases, y terminar con h = 1 en la última."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Shellsort consiste en una mejora del algoritmo de Selección Directa, basada en buscar iterativamente el menor (o el mayor) entre los elementos que quedan en el vector, para llevarlo a su posición correcta, pero de forma que la b;usqueda del menor en cada vuelta se haga en tiempo logarítmico."
+   },
+   {
+    "t": "p",
+    "s": "Una muy buena serie de incrementos decrecientes a usar, es la serie h = {...16, 8, 4, 2, 1}"
+   }
+  ],
+  "correctas": [
+   0,
+   1
+  ],
+  "tuya": [
+   0,
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Shellsort = Inserción con saltos h. La (c) describe Heapsort. Las potencias de 2 son una mala serie (ver la pregunta siguiente).",
+  "ref": "Ficha 22 · El Algoritmo Shellsort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-8",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es el problema si en el algoritmo Shellsort se elige una serie de incrementos decrecientes de la forma { ..., 16, 8, 4, 2, 1} ?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Ningún problema: esa serie es tan buena como cualquier otra."
+   },
+   {
+    "t": "p",
+    "s": "El arreglo no quedará ordenado al final."
+   },
+   {
+    "t": "p",
+    "s": "Los subconjuntos analizados contendrán casi los mismos elementos cuando la distancia usada sea cada vez menor, sin garantías de lograr una buena organización del arreglo antes de la última pasada."
+   },
+   {
+    "t": "p",
+    "s": "No sólo no hay ningún problema, sino que esa serie es la mejor posible para el algoritmo Shellsort."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Con potencias de 2 los grupos se repiten (lo que está a distancia 8 también está a distancia 4 y 2), así que las fases no se complementan. La ficha usa h = 3h + 1 (1, 4, 13, 40...).",
+  "ref": "Ficha 22 · El Algoritmo Shellsort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c22-9",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Sabemos que en el algoritmo de Shell se termina haciendo una última pasada sobre el arreglo con incremento de compración h = 1 ¿Cuál de las siguientes es cierta respecto de esa última pasada con h = 1?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La pasada con h = 1 es obligatoria pero no es necesario que sea la última."
+   },
+   {
+    "t": "p",
+    "s": "Con h = 1 el algoritmo sólo controla si el arreglo está ya ordenado, y en caso de no estarlo relanza el proceso con otra sucesión de valores h."
+   },
+   {
+    "t": "p",
+    "s": "No es obligatorio que lo haga, pero favorece un ordenamiento más rápido."
+   },
+   {
+    "t": "p",
+    "s": "Con h = 1 el algoritmo se convierte en un ordenamiento por inserción simple, y sólo entonces garantiza que el arreglo quede ordenado."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": true,
+  "explicacion": "Con h = 1 Shellsort es exactamente Inserción Simple, que es lo que garantiza el orden final. Las fases anteriores solo dejan el arreglo \"casi ordenado\" para que esa última pasada sea rápida. (Marcaste la (c)).",
+  "ref": "Ficha 22 · El Algoritmo Shellsort",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c22-10",
+  "unidad": "F22",
+  "origen": [
+   "Tu cuestionario 22 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son características correctas del algoritmo Heapsort? (Más de una puede ser cierta... marque TODAS las que considere válidas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El algoritmo Heapsort utiliza una cantidad de memoria adicional igual al tamaño del arreglo, para armar el heap o grupo de ordenamiento con el que se ordena el vector."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Heapsort se basa en encontrar sucesivamente el menor (o el mayor) de entre los elementos que quedan, para llevar ese valor a su casillero final, pero de forma que la búsqueda del menor (o el mayor) en cada vuelta se haga en forma muy veloz."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Heapsort es muy eficiente en tiempo de ejecución, tanto para el caso promedio como para el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Heapsort arma el heap o grupo de ordenamiento con el que se ordena el vector, pero lo hace en el mismo vector, sin usar memoria extra."
+   }
+  ],
+  "correctas": [
+   1,
+   2,
+   3
+  ],
+  "tuya": [
+   1,
+   2,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Heapsort es una \"selección mejorada\": usa un heap armado dentro del mismo arreglo y es O(n·log(n)) tanto en el caso promedio como en el peor.",
+  "ref": "Ficha 22 · Algoritmos compuestos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-1",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Parcial 5 · 2021 (pregunta 1)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "completar",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Para cada uno de los algoritmos o procesos listados en la columna de la izquierda, seleccione la expresión de orden que mejor describe su tiempo de ejecución en el peor caso."
+   },
+   {
+    "t": "fila",
+    "s": "Dadas dos matrices de orden n*n, obtener la matriz producto aplicando el método tradicional.",
+    "slot": 0
+   },
+   {
+    "t": "fila",
+    "s": "Dado un arreglo v con n componentes, ordenarlo de menor a mayor mediante el algoritmo de selección directa.",
+    "slot": 1
+   },
+   {
+    "t": "fila",
+    "s": "Dado un arreglo v con n componentes, buscar un valor x aplicando búsqueda secuencial.",
+    "slot": 2
+   },
+   {
+    "t": "fila",
+    "s": "Dado un arreglo ya ordenado v con n componentes, buscar un valor x aplicando búsqueda binaria.",
+    "slot": 3
+   },
+   {
+    "t": "fila",
+    "s": "Dado un arreglo v con n componentes, acceder y cambiar el valor del casillero v[k] (con 0 <= k <= n-1).",
+    "slot": 4
+   }
+  ],
+  "banco": [
+   "O(1)",
+   "O(log(n))",
+   "O(n)",
+   "O(n^2) (léase: \"orden n al cuadrado\")",
+   "O(n^3) (léase: \"orden n al cubo\")"
+  ],
+  "respuestas": [
+   "O(n^3) (léase: \"orden n al cubo\")",
+   "O(n^2) (léase: \"orden n al cuadrado\")",
+   "O(n)",
+   "O(log(n))",
+   "O(1)"
+  ],
+  "reuse": true,
+  "tuya": [
+   "O(1)",
+   "O(n^3) (léase: \"orden n al cubo\")",
+   "O(n^3) (léase: \"orden n al cubo\")",
+   "O(n^2) (léase: \"orden n al cuadrado\")",
+   "O(log(n))"
+  ],
+  "erraste": true,
+  "explicacion": "Producto de matrices: tres ciclos anidados, O(n³). Selección directa: dos ciclos, O(n²). Secuencial: O(n). Binaria: O(log(n)). Acceso directo por índice: O(1). En tu intento las 5 quedaron mal: es de las que más se repiten (salió igual en el Parcial 5 de 2021).",
+  "ref": "Ficha 27 · Noción intuitiva de la notación Big O",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-2",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuántas comparaciones en el peor caso obliga a hacer una búsqueda secuencial en una lista ordenada (o en un arreglo ordenado) que contenga n valores?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Peor caso: O(1) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Peor caso: O(log(n)) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Peor caso: O(n) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Peor caso: O(n^(2)) comparaciones."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Que el arreglo esté ordenado no cambia la búsqueda secuencial: en el peor caso igual recorre las n casillas. Lo que aprovecha el orden es la búsqueda binaria.",
+  "ref": "Ficha 27 · Noción intuitiva de la notación Big O",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-3",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la diferencia entre el peor caso y el caso promedio en el análisis de algoritmos?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El peor caso es la configuración de datos de entrada más favorable para el algoritmo, mientras que el caso promedio describe una configuración de datos pensada para desfavorecer al algoritmo."
+   },
+   {
+    "t": "p",
+    "s": "El peor caso es la configuración de datos de entrada más favorable para el algoritmo, mientras que el caso promedio describe una configuración aleatoria de datos (no pensada ni para favorecer ni para desfavorecer al algoritmo)"
+   },
+   {
+    "t": "p",
+    "s": "El peor caso es la configuración de datos de entrada más desfavorable para el algoritmo, mientras que el caso promedio describe una configuración de datos pensada para favorecer al  algoritmo."
+   },
+   {
+    "t": "p",
+    "s": "El peor caso es la configuración de datos de entrada más desfavorable para el algoritmo, mientras que el caso promedio describe una configuración aleatoria de datos (no pensada ni para favorecer ni para desfavorecer al algoritmo)."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Peor caso = los datos que más trabajo le dan al algoritmo. Caso promedio = datos aleatorios, sin favorecerlo ni perjudicarlo.",
+  "ref": "Ficha 27 · Introducción y conceptos básicos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-4",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Parcial 5 · 2021 (pregunta 2)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de los siguientes son factores de eficiencia comunes a considerar en el análisis de algoritmos? (Más de una respuesta puede ser válida... marque todas las que considere correctas)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La complejidad aparente del código fuente."
+   },
+   {
+    "t": "p",
+    "s": "La calidad aparente de la interfaz de usuario."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución."
+   },
+   {
+    "t": "p",
+    "s": "El consumo de memoria."
+   }
+  ],
+  "correctas": [
+   0,
+   2,
+   3
+  ],
+  "tuya": [
+   0,
+   2,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Los tres factores de la cátedra: tiempo, memoria y complejidad aparente del código. Tiempo y memoria son los dos más usados.",
+  "ref": "Ficha 27 · Introducción y conceptos básicos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-5",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(1)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución es logarítmico: a medida que aumenta el número de datos, aumenta el tiempo pero en forma muy suave."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecucíón es constante, sin importar la cantidad de datos."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución siempre es de un segundo, sin importar la cantidad de datos."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": true,
+  "explicacion": "O(1) = tiempo constante: no depende de n (por ejemplo, v[k] = 5). No significa \"un segundo\", solo que no crece con los datos. (Marcaste la lineal, que es O(n)).",
+  "ref": "Ficha 27 · Funciones clásicas de orden de complejidad",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c27-6",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Parcial 5 · 2021 (pregunta 3)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(n^(2))?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El tiempo de ejecucíón es constante, sin importar la cantidad de datos."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción."
+   },
+   {
+    "t": "p",
+    "s": "A medida que aumenta el número de datos, aumenta el tiempo pero en forma muy suave: el conjunto de datos se divide en dos. se procesa una de las mitades, se desecha la otra y se repite el proceso hasta que no pueda volver a dividirse la mitad que haya quedado."
+   },
+   {
+    "t": "p",
+    "s": "El proceso normalmente consiste en dos ciclos (uno dentro del otro) de aproximadamente n iteraciones cada uno, de forma que las operaciones críticas se aplican un número cuadrático de veces."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": true,
+  "explicacion": "Cuadrático = dos ciclos anidados de unas n vueltas cada uno. La (c) describe O(log(n)). (Salió igual en el Parcial 5 de 2021).",
+  "ref": "Ficha 27 · Funciones clásicas de orden de complejidad",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-7",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Final · julio 2022 (pregunta 18)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(n)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El proceso normalmente consiste en dos ciclos (uno dentro del otro) de aproximadamente n iteraciones cada uno, de forma que las operaciones críticas se aplican un número cuadrático de veces."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecucíón es constante, sin importar la cantidad de datos."
+   },
+   {
+    "t": "p",
+    "s": "A medida que aumenta el número de datos, aumenta el tiempo pero en forma muy suave: el conjunto de datos se divide en dos. se procesa una de las mitades, se desecha la otra y se repite el proceso hasta que no pueda volver a dividirse la mitad que haya quedado."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Lineal: si se duplican los datos, se duplica el tiempo. Por ejemplo, un ciclo que recorre el arreglo una vez.",
+  "ref": "Ficha 27 · Funciones clásicas de orden de complejidad",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-8",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(log(n))?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción."
+   },
+   {
+    "t": "p",
+    "s": "El proceso normalmente consiste en dos ciclos (uno dentro del otro) de aproximadamente n iteraciones cada uno, de forma que las operaciones críticas se aplican un número cuadrático de veces."
+   },
+   {
+    "t": "p",
+    "s": "A medida que aumenta el número de datos, aumenta el tiempo pero en forma muy suave: el conjunto de datos se divide en dos. se procesa una de las mitades, se desecha la otra y se repite el proceso hasta que no pueda volver a dividirse la mitad que haya quedado."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecucíón es constante, sin importar la cantidad de datos."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Logarítmico = ir partiendo a la mitad y quedarse con una parte, como en la búsqueda binaria.",
+  "ref": "Ficha 27 · Funciones clásicas de orden de complejidad",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-9",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que dispone de cuatro algoritmos diferentes para resolver el mismo problema, y que se sabe que los tiempos de ejecución (en el peor caso) son, respectivamente: O(n*log(n)), O(n^(2)), O(n^(3)) y O(n). ¿Cuál de esos tres algorimos debería elegir, suponiendo que todos hacen el mismo consumo razonable de memoria?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El algoritmo cuyo tiempo de ejecución es O(n*log(n))"
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo cuyo tiempo de ejecución es O(n^(3))"
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo cuyo tiempo de ejecución es O(n)"
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo cuyo tiempo de ejecución es O(n^(2))"
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": true,
+  "explicacion": "Se elige el de menor orden de crecimiento. De menor a mayor: O(n) < O(n·log(n)) < O(n²) < O(n³). (Marcaste O(n²)).",
+  "ref": "Ficha 27 · Forma de crecimiento de las funciones clásicas",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c27-10",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Con qué nombre general se conoce en la Teoria de la Complejidad a un problema para el cual sólo se conocen algoritmos cuyo tiempo de ejecución es exponencial (o sea, problemas para los que todas las soluciones conocidas son algoritmos con tiempo O(2^(n))?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Problemas Inmanejables"
+   },
+   {
+    "t": "p",
+    "s": "Problemas Irresolubles"
+   },
+   {
+    "t": "p",
+    "s": "Problemas Imperdonables"
+   },
+   {
+    "t": "p",
+    "s": "Problemas Intratables"
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Se llaman problemas intratables: tienen solución, pero solo se conocen algoritmos exponenciales, inviables para n grande.",
+  "ref": "Ficha 27 · Forma de crecimiento de las funciones clásicas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-11",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "completar",
+  "partes": [
+   {
+    "t": "p",
+    "s": "En la columna de la izquierda se muestra el código fuente en Python de diversos procesos sencillos. Para cada uno de ellos, seleccione de la lista de la derecha la expresión en  notación Big O que mejor describa el tiempo de ejecución de cada proceso para el peor caso. (Aclaración: una expresión como n^2 debe entenderse como \"n al cuadrado\" o n^(2))."
+   },
+   {
+    "t": "fila",
+    "code": true,
+    "s": "n = int(input('N: '))\nac = 0\nfor i in range(n):\n    ac += i\nprint(ac)",
+    "slot": 0
+   },
+   {
+    "t": "fila",
+    "code": true,
+    "s": "n = int(input('N: '))\nac = 0\nfor i in range(n):\n    for j in range(i+1, n):\n        ac += i*j\nfor i in range(n):\n    for j in range(n):\n        for k in range(n):\n            ac += (i+j+k)\nprint(ac)",
+    "slot": 1
+   },
+   {
+    "t": "fila",
+    "code": true,
+    "s": "ac = 0\nfor i in range(10):\n    ac += i\nprint(ac)",
+    "slot": 2
+   },
+   {
+    "t": "fila",
+    "code": true,
+    "s": "n = int(input('N: '))\nac = 0\nfor i in range(n):\n    for j in range(i+1, n):\n        ac += i*j\nprint(ac)",
+    "slot": 3
+   }
+  ],
+  "banco": [
+   "O(1)",
+   "O(n)",
+   "O(n^2)",
+   "O(n^3)"
+  ],
+  "respuestas": [
+   "O(n)",
+   "O(n^3)",
+   "O(1)",
+   "O(n^2)"
+  ],
+  "reuse": true,
+  "tuya": [
+   "O(n)",
+   "O(n^2)",
+   "O(1)",
+   "O(n^3)"
+  ],
+  "erraste": true,
+  "explicacion": "1) Un ciclo de n vueltas: O(n). 2) Un bloque O(n²) seguido de uno O(n³): manda el término mayor, O(n³). 3) El ciclo da siempre 10 vueltas (no depende de n): O(1). 4) Dos ciclos anidados: O(n²). (Invertiste el 2 y el 4).",
+  "ref": "Ficha 27 · Algunas consideraciones prácticas",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c27-12",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Analice el siguiente esquema de una función en Python:"
+   },
+   {
+    "t": "code",
+    "s": "def procesar(n, m):\n    for i in range(n+1):\n        for j in range(m+1):\n            # ... acciones sencillas a realizar...\n            # ... suponga que no hay otro ciclo aquí...\n            # ... y que sólo aparecen operaciones de tiempo constante..."
+   },
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes expresiones de orden describe mejor el tiempo de ejecución de esta función en el peor caso?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "O(n*n)"
+   },
+   {
+    "t": "code",
+    "s": "O(n*m)"
+   },
+   {
+    "t": "code",
+    "s": "O(n)"
+   },
+   {
+    "t": "code",
+    "s": "O(m)"
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "El ciclo externo da n+1 vueltas y el interno m+1, así que el cuerpo se ejecuta (n+1)(m+1) veces: O(n·m). Como n y m son independientes, no se puede simplificar a n².",
+  "ref": "Ficha 27 · Algunas consideraciones prácticas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-13",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Parcial 5 · 2021 (pregunta 5)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Si se realiza un análisis preciso del ordenamiento por Selección Directa para un arreglo de n componentes, se llega a la conclusión que ese algoritmo hará n-1 pasadas, con n-1 comparaciones en la primera, n-2 en la segunda, y así sucesivamente reduciendo de a 1 la cantidad de comparaciones hasta hacer sólo una comparación en la última pasada. Por lo tanto, el algoritmo hará invariablemente una cantidad total de ½(n^(2) - n) comparaciones. Sabiendo esto, ¿cuáles de las siguientes expresiones son correctas para describir la cantidad de comparaciones que hará el algoritmo, usando distintos tipos de notaciones? (Más de una respuesta puede ser correcta. Marque TODAS las que considere correctas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Cantidad de comparaciones: O(n^(2))"
+   },
+   {
+    "t": "p",
+    "s": "Cantidad de comparaciones: o(n^(2))"
+   },
+   {
+    "t": "p",
+    "s": "Cantidad de comparaciones: Θ(n^(2))"
+   },
+   {
+    "t": "p",
+    "s": "Cantidad de comparaciones: Ω(n^(2))"
+   }
+  ],
+  "correctas": [
+   0,
+   2,
+   3
+  ],
+  "tuya": [
+   0,
+   2
+  ],
+  "erraste": true,
+  "explicacion": "½(n² - n) está acotada por arriba (O) y por abajo (Ω) por n², así que también es Θ(n²). La o minúscula exige ser estrictamente menor, y no lo es. (Te faltó marcar Ω; la respuesta oficial del Parcial 5 2021 incluye O, Ω y Θ).",
+  "ref": "Ficha 27 · Otras notaciones típicas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-14",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Final · julio 2022 (pregunta 20)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la principal característica de todos los métodos de ordenamiento conocidos como métodos simples o directos?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Son muy fáciles de programar."
+   },
+   {
+    "t": "p",
+    "s": "Son muy veloces para cualquier tamaño del arreglo a ordenar."
+   },
+   {
+    "t": "p",
+    "s": "Tienen un tiempo de ejecución de orden cuadrático en el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "Tienen un tiempo de ejecución de orden lineal en el peor caso."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Burbuja, Selección e Inserción son todos O(n²) en el peor caso. Que sean fáciles de programar es cierto, pero no es \"la\" característica que los define.",
+  "ref": "Ficha 22 / Ficha 27",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-15",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Parcial 5 · 2021 (pregunta 4)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son características correctas del algoritmo Shellsort? (Más de una puede ser cierta... marque TODAS las que considere válidas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El algoritmo Shellsort consiste en una mejora del algoritmo de Inserción Directa (o Inserción Simple), consistente en armar suconjuntos ordenados con elementos a distancia h > 1 en las primeras fases, y terminar con h = 1 en la última."
+   },
+   {
+    "t": "p",
+    "s": "En el caso promedio, el algoritmo Shellsort es tan eficiente como el Heapsort o el Quicksort, con tiempo de ejecución O(n*log(n))."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Shellsort es complejo de analizar para determinar su rendimientos en forma matemática. Se sabe que para la serie de incrementos decrecientes usada en la implementación vista en las clases de la asignatura, tiene un tiempo de ejecución para el peor caso de O(n^(1.5))."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Shellsort consiste en una mejora del algoritmo de Selección Directa, consistente en buscar iterativamente el menor (o el mayor) entre los elementos que quedan en el vector, para llevarlo a su posición correcta, pero de forma que la búsqueda del menor en cada vuelta se haga en tiempo logarítmico."
+   }
+  ],
+  "correctas": [
+   0,
+   2
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": true,
+  "explicacion": "Shellsort mejora a Inserción y, con la serie 3h+1 de la ficha, es O(n^1.5) en el peor caso: mejor que n², pero no llega a n·log(n). (Te faltó la (c); está confirmada en el Parcial 5 de 2021).",
+  "ref": "Ficha 22 · El Algoritmo Shellsort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-16",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué diferencia existe entre el conteo exhaustivo de operaciones críticas y el análisis asintótico del comportamiento de una función en el análisis de algoritmos?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Ninguna. Ambas se refieren a la misma técnica básica del análisis de algoritmos"
+   },
+   {
+    "t": "p",
+    "s": "El conteo exhaustivo busca determinar una expresión o fórmula que exprese de manera rigurosa la cantidad de operaciones críticas que lleva a cabo un algoritmo, mientras que el análisis asintótico busca determinar el comportamiento general de una función para valores muy grandes del tamaño del problema."
+   },
+   {
+    "t": "p",
+    "s": "El  análisis asintótico busca determinar una expresión o fórmula que exprese de manera rigurosa la cantidad de operaciones críticas que lleva a cabo un algoritmo, mientras que el conteo exhaustivo busca determinar el comportamiento general de una función para valores muy grandes del tamaño del problema."
+   },
+   {
+    "t": "p",
+    "s": "El conteo exhaustivo busca determinar una expresión o fórmula que exprese de manera rigurosa la cantidad de operaciones críticas que lleva a cabo un algoritmo, mientras que el análisis asintótico busca determinar una expresión o fórmula que exprese de manera rigurosa la cantidad de operaciones no críticas que lleva a cabo un algoritmo."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": true,
+  "explicacion": "Conteo exhaustivo = la fórmula exacta (por ejemplo ½(n² - n)). Análisis asintótico = cómo se comporta esa fórmula cuando n es muy grande (O(n²)). (Marcaste la (d)).",
+  "ref": "Ficha 27 · Introducción y conceptos básicos",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c27-17",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Final · julio 2022 (pregunta 3)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué se entiende, en el contexto del Análisis de Algoritmos, por un Orden de Complejidad?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Un conjunto o familia de funciones matemáticas que se comportan asintóticamente de la misma forma."
+   },
+   {
+    "t": "p",
+    "s": "Un conjunto o familia de algoritmos que resuelven el mismo problema."
+   },
+   {
+    "t": "p",
+    "s": "Un conjunto o familia de subrutinas con similares objetivos (equivalente al concepto de módulo)."
+   },
+   {
+    "t": "p",
+    "s": "Un conjunto de datos ordenados."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Un orden (por ejemplo O(n²)) agrupa a todas las funciones que crecen igual para n grande: n², 3n² + 5, ½(n² - n)...",
+  "ref": "Ficha 27 · Formalización de la notación Big O",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-18",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Si los algoritmos de ordenamiento simples tienen todos un tiempo de ejecución O(n^(2)) en el peor caso, entonces: ¿cómo explica que las mediciones efectivas de los tiempos de ejecución de cada uno sean diferentes frente al mismo arreglo?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La notación Big O rescata el término más significativo en la expresión que calcula el rendimiento, descartando constantes y otros términos que podrían no coincidir en los tres algoritmos."
+   },
+   {
+    "t": "p",
+    "s": "Los tiempos deben coincidir. Si hay diferencias, se debe a errores en los intrumentos de medición o a un planteo incorrecto del proceso de medición."
+   },
+   {
+    "t": "p",
+    "s": "La notación Big O no se debe usar para estimar el comportamiento en el peor caso, sino sólo para el caso medio."
+   },
+   {
+    "t": "p",
+    "s": "La notación Big O no se usa para medir tiempos sino para contar comparaciones u otro elemento de interés. Es un error, entonces, decir que los tiempos tienen \"orden n cuadrado\"."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "3n² y 0.5n² + 10n son ambas O(n²), pero en la práctica una es más rápida. Big O descarta constantes y términos menores.",
+  "ref": "Ficha 27 · Algunas consideraciones prácticas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c27-19",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Se tiene un algoritmo que realiza cierta cantidad de procesos sobre un conjunto de n datos y un minucioso análisis matemático ha determinado que la cantidad de procesos que el algoritmo realiza en el peor caso viene descripto por la función f(n) = 3n^(3) + 5n^(2) + 2n^(1.5) ¿Cuál de las siguientes expresiones representa mejor el orden del algoritmo para el peor caso?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "O(3n^(3) + 5n^(2) + 2n^(1.5))"
+   },
+   {
+    "t": "p",
+    "s": "O(n^(1.5))"
+   },
+   {
+    "t": "p",
+    "s": "O(n^(3) + n^(2))"
+   },
+   {
+    "t": "p",
+    "s": "O(n^(3))"
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": true,
+  "explicacion": "En Big O se queda solo el término que más crece y se descartan las constantes: 3n³ pasa a ser n³. La (a) no está mal matemáticamente, pero no es la forma correcta de expresar un orden. (Marcaste la (a)).",
+  "ref": "Ficha 27 · Formalización de la notación Big O",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c27-20",
+  "unidad": "F27",
+  "origen": [
+   "Tu cuestionario 27 · 2026",
+   "Parcial 5 · 2021 (pregunta 6)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son correctas en cuanto a los tiempos de ejecución de los algoritmos de ordenamiento clásicos? (Más de una puede ser cierta... marque TODAS las que considere válidas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Algoritmo Heap Sort: O(n*log(n)) tanto para el caso promedio como para el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "Algoritmos directos o simples:  O(n^(2)) en el peor caso para todos ellos."
+   },
+   {
+    "t": "p",
+    "s": "Algoritmo Quick Sort:  O(n*log(n)) en el caso promedio, pero O(n^(2)) en el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "Algoritmo Shell Sort: O(n^(2)) en el peor caso para la serie de incrementos decrecientes vista en clase."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   2
+  ],
+  "tuya": [
+   0,
+   1,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Para memorizar: simples O(n²), Shell O(n^1.5), Heap O(n·log(n)) siempre, Quick O(n·log(n)) en promedio pero O(n²) en el peor caso.",
+  "ref": "Ficha 27 · Ficha 22 · Ficha 31",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-1",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la diferencia entre la abstracción de datos y la abstracción funcional?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La abstracción de datos busca captar el conjunto de procesos relevante para el tipo abstracto que se quiere implementar, mientras que la funcional buscar determinar el conjunto de datos más relevante para implementar ese tipo."
+   },
+   {
+    "t": "p",
+    "s": "La abstracción de datos busca captar el conjunto de datos más relevante para representar un tipo abstracto, mientras que la funcional buscar determinar el conjunto de procesos relevante para esos datos."
+   },
+   {
+    "t": "p",
+    "s": "Ninguna. Son sólo dos formas de referirse al mecanismo de abstracción."
+   },
+   {
+    "t": "p",
+    "s": "No existe un mecanismo de abstracción de datos ni un mecanismo de abstracción funcional. Existe sólo un mecanismo de abstracción, sin dividir en asbtracción de datos y abstracción funcional."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Para diseñar un tipo abstracto se definen dos cosas: QUÉ datos lo representan (abstracción de datos) y QUÉ operaciones se hacen con ellos (abstracción funcional).",
+  "ref": "Ficha 28 · Tipos nativos y tipos abstractos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-2",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se quiere implementar un nuevo tipo de datos abstracto llamado Fecha, para permitir la manipulación de fechas en un programa en Python para gestión de eventos sociales (casamientos, fiestas de cumpleños, reuniones de egresados, etc.) ¿Cuál de las siguientes estrategias de abstracción sería la más adecuada?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Abstracción de datos:  una tupla con tres componentes para el año, el mes y el día.  Abstracción funcional:  funciones para buscar una fecha dada, reservar una fecha para un evento, liberar una fecha para un evento y modificar los datos de una fecha para un evento."
+   },
+   {
+    "t": "p",
+    "s": "Abstracción de datos:  un registro con campos para el año, el mes, el día, el nombre del cliente, el tipo de evento, el monto presupuestado y una proyección metereológica para ese día. Abstracción funcional:  funciones para buscar una fecha dada, reservar una fecha para un evento, liberar una fecha para un evento y modificar los datos de una fecha para un evento."
+   },
+   {
+    "t": "p",
+    "s": "Abstracción de datos:  un registro con tres campos para el año, el mes y el día.  Abstracción funcional:  funciones para buscar una fecha dada, reservar una fecha para un evento, liberar una fecha para un evento y modificar los datos de una fecha para un evento."
+   },
+   {
+    "t": "p",
+    "s": "Abstracción de datos:  una variable de tipo cadena de caracteres para representar toda la fecha (por ejemplo: '2015/08/31').  Abstracción funcional: funciones para mostrar la fecha en distintos colores, imprimir la fecha en forma de cartel anunciador, cambiar el número del mes por el nombre del mes."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Hay que quedarse con lo relevante: una fecha es año, mes y día (en un registro). Agregar cliente, monto o clima mezcla otras entidades, y las funciones de la (d) no sirven para el problema.",
+  "ref": "Ficha 28 · Tipos nativos y tipos abstractos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-3",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes expresiones describe la forma de trabajo general de una Pila?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "LIFO (Last In - First Out)"
+   },
+   {
+    "t": "p",
+    "s": "FIFO (First In - First Out)"
+   },
+   {
+    "t": "p",
+    "s": "OIFO (Ordered In - First Out)"
+   },
+   {
+    "t": "p",
+    "s": "OIRO (Ordered In - Random Out)"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Pila: el último en entrar es el primero en salir (como una pila de platos).",
+  "ref": "Ficha 28 · Pilas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-4",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes situaciones de programación es la principal aplicación de una Pila?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en orden aleatorio."
+   },
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en orden inverso al de su entrada."
+   },
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en orden de menor a mayor."
+   },
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en el mismo orden en el que ingresaron."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Al ser LIFO, lo que entra se recupera al revés: la pila sirve para invertir secuencias (por ejemplo, para el control de capicúas).",
+  "ref": "Ficha 28 · Pilas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-5",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se tiene una pila p con capacidad para almacenar números enteros y que las operaciones básicas pop(), peek() y push() están correctamente implementadas en el módulo stack.py presentado en clases. Suponga que se han insertado los siguientes valores: [8 - 6 - 5 - 3 - 7] (el número 8 es el valor del frente o tope de la Pila).  ¿Cuál de las siguientes secuencias de instrucciones permite retirar el valor 5 de la pila, pero dejando el 6 y 8 nuevamente arriba? (es decir: ¿cuál de las siguientes secuencias, dejaría la pila p en el estado [8 - 6 - 3 - 7]?)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "n1 = p.pop()\nn2 = p.pop()\nx = p.pop()\np.push(n2)\np.push(n1)"
+   },
+   {
+    "t": "code",
+    "s": "n1 = p.pop()\nn2 = p.pop()\nx = p.pop()"
+   },
+   {
+    "t": "code",
+    "s": "n1 = p.pop()\nn2 = p.pop()\nx = p.peek()\np.push(n2)\np.push(n1)"
+   },
+   {
+    "t": "code",
+    "s": "n1 = p.pop()\nn2 = p.pop()\nx = p.pop()\np.push(n1)\np.push(n2)"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Se sacan 8 (n1) y 6 (n2), se saca el 5 (x) y se vuelven a meter en orden inverso: primero el 6 (n2) y después el 8 (n1), para que el 8 quede arriba. La (c) usa peek, que no retira el 5, y la (d) deja el 6 arriba.",
+  "ref": "Ficha 28 · Pilas (stack.py)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-6",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se tiene una pila p en la cual se almacenaron ya una cierta cantidad de datos. ¿Cuál de las siguientes secuencias de instrucciones permite invertir la pila? (o sea: si la pila original p era: [3 - 4 - 6 - 7]  (con el 3 al frente) ¿cuál de las siguientes permitiría dejar la pila p en el estado [7 - 6 - 4 - 3] (con el 7 al frente)?) (Suponga que p2 y p3 también son pilas, inicialmente vacías y listas para usar)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p3.push(p2.pop())"
+   },
+   {
+    "t": "code",
+    "s": "while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p3.push(p2.pop())\nwhile not p3.is_empty():\n    p.push(p3.pop())"
+   },
+   {
+    "t": "code",
+    "s": "while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p3.push(p2.pop())\nwhile not p3.is_empty():\n    p2.push(p3.pop())"
+   },
+   {
+    "t": "code",
+    "s": "while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p.push(p2.pop())"
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Cada traspaso de una pila a otra invierte el orden. Para que p termine invertida hacen falta 3 traspasos (impar): p → p2 → p3 → p. La (d) hace 2, así que p vuelve a quedar igual que al principio.",
+  "ref": "Ficha 28 · Pilas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-7",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026",
+   "Final · julio 2022 (pregunta 19)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes expresiones describe la forma de trabajo general de una Cola?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "OIRO (Ordered In - Random Out)"
+   },
+   {
+    "t": "p",
+    "s": "OIFO (Ordered In - First Out)"
+   },
+   {
+    "t": "p",
+    "s": "LIFO (Last In - First Out)"
+   },
+   {
+    "t": "p",
+    "s": "FIFO (First In - First Out)"
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Cola: el primero en entrar es el primero en salir (como la fila del banco).",
+  "ref": "Ficha 28 · Colas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-8",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes situaciones de programación es la principal aplicación de una Cola?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en orden de menor a mayor."
+   },
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en orden inverso al de su entrada."
+   },
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en el mismo orden en el que ingresaron."
+   },
+   {
+    "t": "p",
+    "s": "Procesar una secuencia de datos en orden aleatorio."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Por ser FIFO, la cola mantiene el orden de llegada.",
+  "ref": "Ficha 28 · Colas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-9",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se tiene una cola c en la cual se almacenaron ya una cierta cantidad de datos. ¿Cuál de las siguientes secuencias de instrucciones permite invertir la cola? (o sea: si la cola original c era: [3 - 4 - 6 - 7]  (con el 3 al frente), ¿cuál de las siguientes permitiría dejar la cola c en el estado [7 - 6 - 4 - 3] (con el 7 al frente)?)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "# suponga que c2 y c3 son dos colas inicialmente vacías, y listas para usar\nwhile not c.is_empty():\n    c2.add(c2, c.remove())\nwhile not c2.is_empty():\n    c2.add(c2.remove())\nwhile not c3.is_empty():\n    c.add(c3.remove())"
+   },
+   {
+    "t": "code",
+    "s": "# suponga que c2 es OTRA cola vacía y lista para usar...\nwhile not c.is_empty():\n    c2.add(c.remove())\nwhile not c2.is_empty():\n    c.add(c2.remove())"
+   },
+   {
+    "t": "code",
+    "s": "# suponga que p1 y p1 son dos PILAS inicialmente vacías, y listas para usar\nwhile not c.is_empty():\n    p1.push(c.remove())\nwhile not p1.is_empty():\n    p2.push(p1.pop())\nwhile not p2.is_empty():\n    c.add(p2.pop())"
+   },
+   {
+    "t": "code",
+    "s": "# suponga que p es una PILA vacía y lista para usar...\nwhile not c.is_empty():\n    p.push(c.remove())\nwhile not p.is_empty():\n    c.add(p.pop())"
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Pasar los datos de una cola a otra cola NO invierte nada (FIFO conserva el orden). Para invertir hay que pasar por UNA pila: cola → pila → cola. La (c) usa dos pilas, que se cancelan entre sí.",
+  "ref": "Ficha 28 · Colas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c28-10",
+  "unidad": "F28",
+  "origen": [
+   "Tu cuestionario 28 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Una Cola de Prioridad es una cola en la cual los elementos se insertan en algún orden, pero tal que cuando se pide retirar un elemento se obtiene siempre el menor de los valores almacenados en la cola ¿Cuál de las siguientes estrategias podría ser una forma básica de implementar una Cola de Prioridad en las condiciones aquí expresadas?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Soporte: una variable de tipo list en Python. Inserción: ordenada de menor a mayor (mantener el arreglo siempre ordenado de menor a mayor: para insertar un valor x, recorrer el arreglo y al encontrar el primer mayor a x detener el ciclo y añadir allí a x con un corte de índices.  Eliminación: siempre el primer elemento."
+   },
+   {
+    "t": "p",
+    "s": "Soporte: una variable de tipo list en Python. Inserción: siempre al final. Eliminación: siempre el último elemento."
+   },
+   {
+    "t": "p",
+    "s": "Soporte: una variable de tipo list en Python. Inserción: ordenada de mayor a menor (mantener el arreglo siempre ordenado de mayor a menor: para insertar un nuevo valor x, recorrer el arreglo y al encontrar el primer menor, a x detener el ciclo y añadir allí a x con un corte de índices.  Eliminación: siempre el primer elemento."
+   },
+   {
+    "t": "p",
+    "s": "Soporte: una varable de tipo list en Python. Inserción: siempre al frente. Eliminación: siempre el primer elemento."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Si la lista se mantiene ordenada de menor a mayor, el menor siempre queda en la casilla 0 y se retira de ahí. La (c) dejaría al MAYOR adelante, y la (b) funcionaría como una pila.",
+  "ref": "Ficha 28 · Colas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-1",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Sabemos que en un árbol binario (sea o no de búsqueda) un nodo puede tener a lo sumo dos hijos. Por otra parte, un nodo tendrá un único nodo padre (salvo la raiz, que no tiene padre) ¿Qué parte de la definición de árbol binario es la que impide que un nodo pueda tener más de un padre?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La sección en la que se afirma que del nodo raiz se desprenden dos subconjuntos."
+   },
+   {
+    "t": "p",
+    "s": "La sección en la que se afirma que los dos subconjuntos que dependen del nodo raiz son conjuntos separados o mutuamente excluyentes."
+   },
+   {
+    "t": "p",
+    "s": "La sección en la que se afirma que el árbol puede estar vacío o puede contener un nodo designado como la raiz del árbol."
+   },
+   {
+    "t": "p",
+    "s": "La sección en la que se afirma que los dos subconjuntos que dependen del nodo raiz pueden estar vacíos."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "La regla a) de la definición: los dos subárboles tienen intersección vacía. Si un nodo tuviera dos padres, estaría en los dos subárboles a la vez.",
+  "ref": "Ficha 29 · Árboles binarios: definiciones y conceptos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-2",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes es CIERTA respecto de los árboles binarios de búsqueda?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Siempre tienen altura mínima."
+   },
+   {
+    "t": "p",
+    "s": "Siempre tienen altura máxima."
+   },
+   {
+    "t": "p",
+    "s": "Si el árbol tiene n nodos, el tiempo de búsqueda en el peor caso es O(log(n)) si la altura del árbol h es O(log(n))."
+   },
+   {
+    "t": "p",
+    "s": "Si el árbol tiene n nodos, el tiempo de búsqueda en el peor caso es O(n*log( n )) si la altura del árbol h es O(log(n))."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "La búsqueda baja un nivel por comparación, así que su costo es la altura h. Si h = log(n) (árbol balanceado), la búsqueda es O(log(n)). La altura depende del orden de inserción.",
+  "ref": "Ficha 29 · Árboles binarios de búsqueda",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-3",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuántas comparaciones por nivel se realizan en un árbol de búsqueda de n nodos cuando se busca una clave? (no importa si la búsqueda llega o no al último nivel del árbol: sólo queremos saber cuántas comparaciones se hacen en aquellos  niveles hasta los que llegue la búsqueda)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Comparaciones por nivel:  1 (una)"
+   },
+   {
+    "t": "p",
+    "s": "Comparaciones por nivel:  n^(2)"
+   },
+   {
+    "t": "p",
+    "s": "Comparaciones por nivel:  log(n)"
+   },
+   {
+    "t": "p",
+    "s": "Comparaciones por nivel:  n"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "En cada nivel se compara x con UN solo nodo y se decide si bajar a izquierda o a derecha.",
+  "ref": "Ficha 29 · Árboles binarios de búsqueda",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-4",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el método contains() que busca un objeto x en un árbol de búsqueda de n nodos, según se vió en las fichas de clase de la asignatura:"
+   },
+   {
+    "t": "code",
+    "s": "def contains(self, x):\n    if x is None:\n        return False\n    p = self.root\n    while p is not None:\n        if x == p.info:\n            return True\n        elif x < p.info:\n            p = p.left\n        else:\n            p = p.right\n    return False"
+   },
+   {
+    "t": "p",
+    "s": "Si el algoritmo de inserción mediante el cual se ha creado el árbol es el algoritmo simple visto en la ficha y en clases, sin control de altura o balance, ¿cuáles de las siguientes afirmaciones son correctas en relación al algoritmo implementado en el método contains()? (Más de una respuesta puede ser cierta. Marque todas las que considere correctas)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución del algoritmo mostrado es O(log(n)) en el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución del algoritmo mostrado es O(1) en el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución del algoritmo mostrado es O(n) en el peor caso."
+   },
+   {
+    "t": "p",
+    "s": "El tiempo de ejecución del algoritmo mostrado es O(log(n)) en el peor caso, pero sólo si el árbol tiene altura h = O(log(n)) = mínima."
+   }
+  ],
+  "correctas": [
+   2,
+   3
+  ],
+  "tuya": [
+   2,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Sin balanceo el árbol puede degenerar en una diagonal (por ejemplo, si se insertan los datos ordenados) y la búsqueda es O(n). Solo si la altura es mínima es O(log(n)).",
+  "ref": "Ficha 29 · Implementación (tree.py)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-5",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que desconoce la forma gráfica de un árbol binario (que no es necesariamente de búsqueda) con el que está trabajando, pero se le da la posibilidad de conocer una o dos secuencias de recorrido de ese árbol, en distintos órdenes. ¿Con cuáles de las siguientes secuencias de recorrido se garantiza que podrá volver a dibujar el árbol original, sin ambigüedades ni errores? (Piense un poco para responder, y en todo caso, haga algunos intentos dibujando un árbol y tratando de reconstruirlo a partir de sus secuencias de recorrido) (Observación: más de una respuesta puede ser correcta. Marque todas las que considere válidas). Recuerde: se supone que el árbol original es binario, pero NO NECESARIAMENTE de búsqueda."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Podrá volver a dibujar el árbol si conoce la secuencia de recorrido en postorden y la secuencia de recorrido en entreorden."
+   },
+   {
+    "t": "p",
+    "s": "Podrá volver a dibujar el árbol si conoce la secuencia de recorrido en preorden y la secuencia de recorrido en entreorden."
+   },
+   {
+    "t": "p",
+    "s": "Podrá volver a dibujar el árbol si sólo conoce la secuencia de recorrido en entre orden."
+   },
+   {
+    "t": "p",
+    "s": "Podrá volver a dibujar el árbol si conoce la secuencia de recorrido en preorden y la secuencia de recorrido en postorden."
+   }
+  ],
+  "correctas": [
+   0,
+   1
+  ],
+  "tuya": [
+   0,
+   1
+  ],
+  "erraste": false,
+  "explicacion": "El preorden (primero) o el postorden (último) te dicen quién es la raíz, y el entreorden te dice qué queda a su izquierda y qué a su derecha. Sin entreorden no se puede separar los subárboles.",
+  "ref": "Ficha 29 · Recorrido completo de árboles binarios",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-6",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿En qué condiciones el recorrido en preorden de un árbol binario de búsqueda visitará los nodos del árbol en secuencia ordenada de menor a mayor?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Sólo si el árbol es una diagonal con todos los hijos derechos nulos."
+   },
+   {
+    "t": "p",
+    "s": "Nunca."
+   },
+   {
+    "t": "p",
+    "s": "Siempre."
+   },
+   {
+    "t": "p",
+    "s": "Sólo si el árbol es una diagonal con todos los hijos izquierdos nulos."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Preorden = raíz, izquierdo, derecho. Si no hay hijos izquierdos, cada nodo es menor que todos los de abajo (que están a la derecha): sale ordenado. El que SIEMPRE sale ordenado es el entreorden.",
+  "ref": "Ficha 29 · Recorrido completo de árboles binarios",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-7",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué es lo peor que puede pasar con un árbol de búsqueda de n nodos si no se lo mantiene equilibrado (o balanceado) (o sea, intuitivamente, si los n nodos se distribuyen en más de log(n) niveles)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Que una búsqueda obligue a O(log(n)) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Que una búsqueda obligue a O(2^(n)) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Que una búsqueda obligue a O(n^(2)) comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Que una búsqueda obligue a O(n) comparaciones."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "El peor caso es que degenere en una lista (diagonal) de altura n: la búsqueda pasa a ser secuencial, O(n).",
+  "ref": "Ficha 29 · Consideraciones finales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-8",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Típicamente (y por diversas razones) en un árbol binario de búsqueda no se acepta la inserción de claves o valores repetidos. Pero existen estrategias simples que pueden usarse para permitir esa repetición de claves. Una de ellas es la de relajar la regla de inserción de forma que los menores sigan yendo a la izquierda, pero ahora los mayores o iguales vayan a la derecha. ¿Cuáles de las siguientes afirmaciones son ciertas si en un árbol binario de búsqueda se cambia la regla de inserción para aplicar la regla relajada citada más arriba? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Dos o más claves iguales podrán quedar separadas por dos o más niveles de distancia."
+   },
+   {
+    "t": "p",
+    "s": "Si solo se insertan claves que sean iguales a la que contiene la raíz, el árbol tendrá estructura de una diagonal con todos los enlaces derechos nulos."
+   },
+   {
+    "t": "p",
+    "s": "Si solo se insertan claves que sean iguales a la que contiene la raíz, el árbol tendrá estructura de una diagonal con todos los enlaces izquierdos nulos."
+   },
+   {
+    "t": "p",
+    "s": "Dos claves iguales quedarán siempre en el árbol una como hija derecha e inmediata de la otra."
+   }
+  ],
+  "correctas": [
+   0,
+   2
+  ],
+  "tuya": [
+   0,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Los iguales van a la derecha, así que una secuencia de iguales forma una diagonal hacia la derecha (izquierdos nulos). Además, entre dos iguales puede quedar otro nodo intermedio, por lo que no siempre son padre e hijo inmediato.",
+  "ref": "Ficha 29 · Árboles binarios de búsqueda",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-9",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la razón por la que es recomendable usar una pila como soporte al recorrer un árbol binario (y por lo tanto, cuál es la razón por la que es recomendable usar recursión para ese recorrido?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "No es necesario ni usar una pila ni usar recursión. El árbol puede recorrerse simplemente con un ciclo que comience en la raíz y luego se desplace vuelta tras vuelta hacia el hijo izquierdo, hasta llegar a un hijo izquierdo nulo, momento en el cual el ciclo debe detenerse y el árbol queda completamente recorrido."
+   },
+   {
+    "t": "p",
+    "s": "No hay ninguna razón para usar una pila o para usar recursión. Un ciclo y una referencia de persecución serían siempre suficientes para hacer el recorrido completo."
+   },
+   {
+    "t": "p",
+    "s": "En realidad, es mejor usa una cola en lugar de una pila. Una cola permite almacenar en orden FIFO las direcciones de los nodos que se acaban de visitar en el recorrido, y cuando se necesite regresar a ese nodo luego de procesar alguno de sus dos hijos, su dirección quedará en el frente de la cola y será accesible en forma directa."
+   },
+   {
+    "t": "p",
+    "s": "Porque una pila permite almacenar en orden LIFO las direcciones de los nodos que se acaban de visitar en el recorrido, y cuando se necesite regresar a ese nodo luego de procesar alguno de sus dos hijos, su dirección quedará en el tope de la pila y será accesible en forma directa."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Al terminar un subárbol hay que volver al ÚLTIMO nodo del que se bajó: eso es LIFO. La recursión usa el stack segment, que justamente es una pila.",
+  "ref": "Ficha 29 · Recorrido completo de árboles binarios",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c29-10",
+  "unidad": "F29",
+  "origen": [
+   "Tu cuestionario 29 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Sabemos que para que un árbol binario de búsqueda favorezca búsquedas rápidas, el árbol debería tener cierta estructura a la que hemos designado como balance o equilibrio. No hemos dado una definición formal y detalla del concepto de balance o equilibrio (ya que eso escapa al alcance de esta asignatura) en un árbol binario: solo hemos tomado una idea intuitiva y muy conceptual. En base a esa idea intuitiva, ¿cuál de las siguientes describe conceptualmente mejor lo que se entiende por un árbol balanceado o equilibrado?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Intuitivamente, un árbol binario está balanceado si tiene forma de zig-zag, con no más de un nodo en cada nivel del árbol."
+   },
+   {
+    "t": "p",
+    "s": "Intuitivamente, un árbol binario está balanceado si su altura es la mínima posible (o se acerca mucho a esa mínima) para la cantidad de nodos que tiene el árbol."
+   },
+   {
+    "t": "p",
+    "s": "Intuitivamente, un árbol binario está balanceado si tiene forma de diagonal (hacia la derecha o hacia la izquierda)."
+   },
+   {
+    "t": "p",
+    "s": "Intuitivamente, un árbol binario está balanceado si su altura es la máxima posible (o se acerca mucho a esa máxima) para la cantidad de nodos que tiene el árbol."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Balanceado = lo más \"bajo\" posible: altura cercana a log₂(n). El zig-zag y la diagonal son justamente los peores casos.",
+  "ref": "Ficha 29 · Consideraciones finales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-1",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes afirmaciones referidas a conceptos básicos generales sobre grafos son correctas? (Más de una puede ser correcta...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Un grafo puede tener nodos aislados: nodos que no tienen ningún arco incidente a él (ninguno de entrada y ninguno de salida)."
+   },
+   {
+    "t": "p",
+    "s": "Dos nodos a y b de un grafo (dirigido o no) pueden tener varios caminos de distinta longitud que los unan."
+   },
+   {
+    "t": "p",
+    "s": "Un grafo puede tener subgrafos no unidos entre sí por arcos que los conecten (o sea, un grafo puede tener dos o más componentes conexas)."
+   },
+   {
+    "t": "p",
+    "s": "Todo arco de un grafo, necesaria y obligatoriamente une dos nodos diferentes de ese grafo."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   2
+  ],
+  "tuya": [
+   0,
+   2
+  ],
+  "erraste": true,
+  "explicacion": "La ficha lo dice textual: \"nada impide que haya más de un camino (de la misma longitud o de longitudes diferentes) para unir los mismos dos vértices\". La (d) es falsa porque existen los auto ciclos (arco de un nodo a sí mismo). (Te faltó la (b)).",
+  "ref": "Ficha 30 · Definiciones y terminología básica",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c30-2",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes afirmaciones es FALSA respecto de los ciclos en un grafo?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Es válido que un ciclo conste de un único arco que permita vincular a un nodo consigo mismo."
+   },
+   {
+    "t": "p",
+    "s": "Los ciclos no están permitidos en un grafo."
+   },
+   {
+    "t": "p",
+    "s": "Un ciclo es un camino que parte de un nodo y lleva de vuelta al mismo nodo."
+   },
+   {
+    "t": "p",
+    "s": "Los ciclos pueden ser válidos o no, dependiendo del problema que se quiere resolver."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Los ciclos están permitidos (por eso existen los grafos cíclicos y acíclicos). Si convienen o no depende del problema.",
+  "ref": "Ficha 30 · Definiciones y terminología básica",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-3",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se desea modelar con un grafo la estructura del plan de estudios de una carrera universitaria. El equipo de trabajo ha decidido que los vértices del grafo representen asignaturas y los arcos representen restricciones de correlativas previas. Así, el arco (x, y) que parte de la asignatura x y llega a la y indica que para cursar y debe estar regularizada x. Lo anterior implica además que el grafo debe ser dirigido. El equipo de trabajo ha determinado además algunas restricciones obvias que deben controlarse y validarse en todo momento en el sistema de gestión del plan. Indique cuáles de las siguientes situaciones no serían aceptables en el grafo propuesto, y deberían ser evitadas por procesos de validación (aclaración: más de una puede ser seleccionada):"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Vértices a los que no llega ningún arco de entrada (aunque podrían tener arcos de salida)."
+   },
+   {
+    "t": "p",
+    "s": "La ocurrencia de ciclos en general en el grafo."
+   },
+   {
+    "t": "p",
+    "s": "La ocurrencia de auto ciclos en cualquiera de sus vértices."
+   },
+   {
+    "t": "p",
+    "s": "La ocurrencia de algún tipo de relación transitiva explícita, es decir, que existan al mismo tiempo los arcos (x, y), (y, z) y (x, z)."
+   },
+   {
+    "t": "p",
+    "s": "Vértices aislados, es decir, vértices a los que no llega ningún arco de entrada y de los cuales tampoco hay arcos de salida."
+   }
+  ],
+  "correctas": [
+   1,
+   2
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": true,
+  "explicacion": "Un ciclo implicaría que una materia es correlativa de sí misma (nunca se podría cursar), y el auto ciclo es el caso extremo. Las materias de primer año no tienen arcos de entrada y una materia sin correlativas puede estar aislada: ambas cosas son válidas. La transitiva explícita es redundante, pero no imposible. (Te faltó la (c)).",
+  "ref": "Ficha 30 · Definiciones y terminología básica (ciclos y auto ciclos)",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c30-4",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿En cuál de las siguientes situaciones no debería usar un grafo dirigido?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Para modelar un ”sociograma”: un gráfico que expresa en qué forma un grupo de personas se relacionan entre sí."
+   },
+   {
+    "t": "p",
+    "s": "Para modelar un plano de rutas entre localidades o ciudades."
+   },
+   {
+    "t": "p",
+    "s": "Para modelar un plan de estudios de una carrera universitaria."
+   },
+   {
+    "t": "p",
+    "s": "Para modelar un sistema de cañerías que transportan líquidos desde una fuente hasta un destino."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "tuya": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Si hay ruta de A a B, también la hay de B a A: el sentido no importa, así que se usa un grafo no dirigido (es el ejemplo de la ficha). El sociograma, el plan de estudios y las cañerías sí tienen sentido.",
+  "ref": "Ficha 30 · Tipos de grafos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-5",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿En cuáles de las siguientes situaciones sería ideal un grafo no dirigido? (Más de una puede ser correcta...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Para modelar un sistema de rutas aéreas entre distintos aeropuertos del mundo."
+   },
+   {
+    "t": "p",
+    "s": "Para modelar un plano de rutas entre localidades o ciudades."
+   },
+   {
+    "t": "p",
+    "s": "Para modelar un plan de estudios de una carrera universitaria."
+   },
+   {
+    "t": "p",
+    "s": "Para modelar un ”sociograma”: un gráfico que expresa en qué forma un grupo de personas se relacionan entre sí."
+   }
+  ],
+  "correctas": [
+   0,
+   1
+  ],
+  "tuya": [
+   0,
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Rutas aéreas y rutas terrestres se recorren en ambos sentidos. El plan de estudios y el sociograma necesitan sentido (dirigidos).",
+  "ref": "Ficha 30 · Tipos de grafos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-6",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes expresan afirmaciones ciertas cuando se quiere implementar un grafo ponderado en forma matricial simple? (Más de una puede ser correcta...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Si se almacena solo un entero para representar al arco y su peso, sería inviable representar arcos con pesos múltiples."
+   },
+   {
+    "t": "p",
+    "s": "Una manera recomendable de implementar un grafo ponderado en forma matricial, es hacer que cada casilla de matriz de adyacencias apunte a un objeto que represente a un arco, y guardar en ese objeto todos los atributos que sean necesarios para la representación del arco,"
+   },
+   {
+    "t": "p",
+    "s": "El problema no existe: no hay manera de representar grafos ponderados en forma matricial."
+   },
+   {
+    "t": "p",
+    "s": "Si se almacena directamente el peso del arco en cada casillero, un problema posible es el de la ambigüedad del cero: no sería posible distinguir si el cero es el peso de un arco, o el indicador de que el arco no existe."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   3
+  ],
+  "tuya": [
+   0,
+   1,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Guardar el peso directo trae dos problemas: no entran pesos múltiples y aparece la ambigüedad del 0. La solución es que cada casilla referencie a un objeto arco (o None si no hay arco).",
+  "ref": "Ficha 30 · Implementación matricial de grafos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-7",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Un grafo reflexivo es un grafo dirigido en el cual se cumple que todo vértice está relacionado consigo mismo (es decir, todo vértice tiene un auto ciclo). Suponga un grafo G dirigido y reflexivo con n vértices, implementado en forma matricial y asumiendo que la matriz de adyacencias almacena valores boolean en forma directa. ¿Qué se puede afirmar que es verdadero respecto de la matriz de adyacencias de G?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Todos los casilleros del triángulo superior de la matriz de adyacencia valen True."
+   },
+   {
+    "t": "p",
+    "s": "Todos los casilleros de la matriz de adyacencia valen True."
+   },
+   {
+    "t": "p",
+    "s": "Todos los casilleros de la diagonal principal de la matriz de adyacencia valen True, y sólo ellos pueden valer True."
+   },
+   {
+    "t": "p",
+    "s": "Todos los casilleros de la diagonal principal de la matriz de adyacencia valen True, pero no es obligatorio que sólo ellos puedan valer true."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "ady[i][i] es True para todo i (cada nodo con su auto ciclo). Puede haber otros arcos además, así que no son \"sólo ellos\".",
+  "ref": "Ficha 30 · Implementación matricial de grafos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-8",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Un grafo simétrico es un grafo dirigido en el cual se cumple que si existe el arco (x, y) entonces existe también el arco (y, x)  (es decir, toda vez que existe  un arco en un sentido, existe también el arco en sentido contrario). Suponga un grafo G dirigido y simétrico con n vértices, implementado en forma matricial y asumiendo que la matriz de adyacencias almacena valores boolean en forma directa. ¿Qué se puede afirmar que es verdadero respecto de la matriz de adyacencias de G?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Todos los casilleros de la diagonal principal de la matriz de adyacencia valen True."
+   },
+   {
+    "t": "p",
+    "s": "Todos los casilleros de la matriz son True o todos los casilleros son False."
+   },
+   {
+    "t": "p",
+    "s": "Todos los casilleros del triángulo inferior de la matriz de adyacencia valen True y los del triángulo superior valen False."
+   },
+   {
+    "t": "p",
+    "s": "La matriz es simétrica (o espejada) respecto de la diagonal principal: el valor en el casillero ady[x][y] siempre será igual al valor en ady[y][x]."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Simétrico ⇒ matriz espejada. De hecho, la ficha aclara que un grafo no dirigido no es otra cosa que un grafo dirigido simétrico (por eso add_arc() de ugraph marca [i1][i2] y [i2][i1]).",
+  "ref": "Ficha 30 · Tipos de grafos / ugraph.py",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-9",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Un grafo transitivo es un grafo dirigido en el cual se cumple que cada vez que existen los arcos (x, y) e (y, z) entonces existe también el arco (x, z). Suponga un grafo G dirigido y transitivo con n vértices, implementado en forma matricial y asumiendo que la matriz de adyacencias almacena valores boolean en forma directa. ¿Qué se puede afirmar que es verdadero respecto de la matriz de adyacencias de G?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Si los casilleros ady[x][y] y ady[y][z] son True, entonces el casillero ady[x][z] será también True."
+   },
+   {
+    "t": "p",
+    "s": "Si el casillero ady[y][z] es True entonces el casillero ady[x][z] será también True, sin importar el valor de ady[x][y]."
+   },
+   {
+    "t": "p",
+    "s": "Si los casilleros ady[x][y] y ady[y][z] son False, entonces el casillero ady[x][z] será True."
+   },
+   {
+    "t": "p",
+    "s": "Si el casillero ady[x][y] es True entonces el casillero ady[x][z] será también True, sin importar el valor de ady[y][z]."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Es la definición traducida a la matriz: hacen falta los DOS arcos (x, y) e (y, z) para garantizar (x, z).",
+  "ref": "Ficha 30 · Implementación matricial de grafos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c30-10",
+  "unidad": "F30",
+  "origen": [
+   "Tu cuestionario 30 · 2026"
+  ],
+  "mio": true,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes afirmaciones relativas a la idea arcos de entrada o de salida de un nodo son correctas? (Más de una puede ser correcta...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El Entre Grado de un nodo (o Grado de Entrada) en un grafo dirigido es la cantidad de arcos que tienen a ese nodo como nodo de llegada."
+   },
+   {
+    "t": "p",
+    "s": "El Grado de un nodo (tanto si el grafo es dirigido como si es no dirigido) es la cantidad de arcos incidentes a ese nodo (arcos que tienen al nodo como partida o como llegada)."
+   },
+   {
+    "t": "p",
+    "s": "El Fuera de Grado de un nodo (o Grado de Salida) en un grafo dirigido es la cantidad de arcos que tienen a ese nodo como nodo de partida."
+   },
+   {
+    "t": "p",
+    "s": "El Grado de un nodo (tanto si el grafo es dirigido como si es no dirigido) es la cantidad de arcos no incidentes a ese nodo (arcos que no tienen a ese nodo ni como partida ni como llegada)."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   2
+  ],
+  "tuya": [
+   0,
+   1,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Grado de entrada = arcos que llegan. Grado de salida = arcos que salen. Grado = todos los arcos incidentes al nodo.",
+  "ref": "Ficha 30 · Definiciones y terminología básica",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-3",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 11)",
+   "Final · julio 2022 (pregunta 8)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la mejora esencial que el algoritmo Quicksort realiza sobre el algoritmo Bubblesort o Burbuja?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "En las versiones analizadas en clases, Quicksort sólo usa un ciclo para recorrer el arreglo, mientras que Bubblesort usa dos."
+   },
+   {
+    "t": "p",
+    "s": "Quicksort primero determina qué tan desordenado está el arreglo, mientras que Bubblesort procede directamente a ordenarlo"
+   },
+   {
+    "t": "p",
+    "s": "Quicksort acelera el cambio de posición tanto de los elementos menores como de los mayores, mientras que Bubblesort solo acelera a los mayores (o a los menores, dependiendo de la forma de implementación)."
+   },
+   {
+    "t": "p",
+    "s": "Quicksort no implementa ninguna mejora sustancial sobre Bubblesort."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Quicksort recorre desde ambos extremos e intercambia elementos lejanos: mueve rápido tanto a los grandes como a los chicos. Burbuja solo \"empuja\" uno por pasada. (Sale seguido: también en el final de julio 2022).",
+  "ref": "Ficha 31 · El algoritmo Quicksort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-4",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 12)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de los siguientes esquemas simples de pseudocódigo representa a un algoritmo planteado mediante estrategia Divide y Vencerás, pero con tiempo de ejecución O(n*log(n))?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "proceso(partición):\n     adicional() [==> O(n)]\n     proceso(partición/2)\n     proceso(partición/2)"
+   },
+   {
+    "t": "code",
+    "s": "proceso(partición):\n     adicional() [==> O(n^(2))]\n     proceso(partición/2)\n     proceso(partición/2)"
+   },
+   {
+    "t": "code",
+    "s": "proceso(partición):\n     adicional() [==> O(n^(3))]\n     proceso(partición/2)\n     proceso(partición/2)"
+   },
+   {
+    "t": "code",
+    "s": "proceso(partición):\n     adicional() [==> O(1)]\n     proceso(partición/2)\n     proceso(partición/2)"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Partir en 2 mitades da log(n) niveles, y si en cada nivel el trabajo adicional total es O(n), queda n·log(n). Es el caso de Quicksort y Mergesort (la partición o la fusión es lineal).",
+  "ref": "Ficha 31 · La estrategia Divide y Vencerás",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-5",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 13)",
+   "Final · julio 2022 (pregunta 22)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes situaciones haría que el algoritmo Quicksort degenere en su peor caso en cuanto al tiempo de ejecución, de orden n^(2)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Que el arreglo esté ya ordenado, en la misma secuencia en que se lo quiere ordenar."
+   },
+   {
+    "t": "p",
+    "s": "El algoritmo Quicksort no tiene un peor caso  O(n^(2)). Su tiempo de ejecución siempre  es O(n*log(n))."
+   },
+   {
+    "t": "p",
+    "s": "Que el arreglo de entrada tenga sus elementos dispuestos de tal forma que cada vez que se seleccione el pivot en cada partición, resulte que ese pivot sea siempre el menor o el mayor de la partición que se está procesando."
+   },
+   {
+    "t": "p",
+    "s": "Que el arreglo esté ya ordenado, pero al revés."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "El peor caso es que el pivot sea siempre un extremo: cada partición deja de un lado n-1 elementos y del otro 0, y hay n niveles. Que esté ordenado provoca eso solo si el pivot es el primero o el último; la respuesta general es la (c).",
+  "ref": "Ficha 31 · El algoritmo Quicksort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-6",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 14)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes estrategias de obtención del pivot es la más recomendable para evitar que el algoritmo Quicksort se degrade  en su peor caso O(n^(2)) en cuanto a su tiempo de ejecución?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "En cada partición, usar como pivot al valor de la casilla central."
+   },
+   {
+    "t": "p",
+    "s": "En cada partición, usar como pivot al valor de la primera casilla."
+   },
+   {
+    "t": "p",
+    "s": "En cada partición, obtener el pivot por la mediana de tres (ya sea la mediana entre el primero, el último y el central; o bien la mediana entre tres elementos aleatorios la partición)."
+   },
+   {
+    "t": "p",
+    "s": "En cada partición, usar como pivot al valor de la última casilla."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "La mediana de tres hace muy improbable que el pivot sea el menor o el mayor de la partición.",
+  "ref": "Ficha 31 · Quicksort con mediana de tres",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-7",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 15)",
+   "Parcial 5 · 2021 (pregunta 12)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Por qué es considerada una mala idea tomar como pivot al primer elemento (o al último) de cada partición al implementar el algoritmo Quicksort?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Porque de esa forma aumenta el riesgo de caer en el peor caso, o aproximarse al peor caso, si el arreglo estuviese ya ordenado o casi ordenado."
+   },
+   {
+    "t": "p",
+    "s": "No es cierto que sea una mala idea. Ambas alternativas son tan buenas como cualquier otra."
+   },
+   {
+    "t": "p",
+    "s": "Porque de esa forma aumenta el riesgo de caer en el peor caso, o aproximarse al peor caso, si el tamaño n del arreglo fuese muy grande."
+   },
+   {
+    "t": "p",
+    "s": "Porque de esa forma aumenta el riesgo de caer en el peor caso, o aproximarse al peor caso, si el arreglo estuviese completamente desordenado."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Con un arreglo ordenado (algo muy común en la práctica), el primero es el menor y el último el mayor: justo el peor pivot posible.",
+  "ref": "Ficha 31 · El algoritmo Quicksort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-8",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 16)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere la función presentada en clases para calcular mediana entre el primero, el central y el último elemento de una partición del arreglo v delimitada por los elementos en las posiciones izq y der:"
+   },
+   {
+    "t": "code",
+    "s": "def get_pivot_m3(v, izq, der):\n    # calculo del pivot: mediana de tres...\n    central = int((izq + der) / 2)\n    if v[der] < v[izq]:\n        v[der], v[izq] = v[izq], v[der]\n    if v[central] < v[izq]:\n        v[central], v[izq] = v[izq], v[central]\n    if v[central] > v[der]:\n        v[central], v[der] = v[der], v[central]\n    return v[central]"
+   },
+   {
+    "t": "p",
+    "s": "El tamaño de la partición analizada es entonces n = der - izq + 1 elementos. ¿Cuál es el tiempo de ejecución de esta función, expresado en notación O y de acuerdo a ese valor de n?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "O(n)"
+   },
+   {
+    "t": "p",
+    "s": "O(n^(2))"
+   },
+   {
+    "t": "p",
+    "s": "O(1)"
+   },
+   {
+    "t": "p",
+    "s": "O(log(n))"
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "No tiene ciclos: siempre son 3 comparaciones como máximo, sin importar el tamaño de la partición. Es tiempo constante.",
+  "ref": "Ficha 31 · Quicksort con mediana de tres",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-9",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 17)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la cantidad de niveles del árbol de invocaciones recursivas que se genera al ejecutar el Quicksort para ordenar un arreglo de n elementos, en el caso promedio? (Es decir: ¿Cuál es la altura de ese árbol en el caso promedio?)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "Altura = n^(2)"
+   },
+   {
+    "t": "code",
+    "s": "Altura = n * log(n)"
+   },
+   {
+    "t": "code",
+    "s": "Altura = log(n)"
+   },
+   {
+    "t": "code",
+    "s": "Altura = n"
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "tuya": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "En promedio cada partición divide más o menos a la mitad, así que hay unos log(n) niveles.",
+  "ref": "Ficha 31 · El algoritmo Quicksort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c31-10",
+  "unidad": "F31",
+  "origen": [
+   "Tu cuestionario 31 · 2026",
+   "Cuestionario 27 · 2022 (pregunta 18)",
+   "Parcial 5 · 2021 (pregunta 14)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál es la cantidad de niveles del árbol de invocaciones recursivas que se genera al ejecutar el Quicksort para ordenar un arreglo de n elementos, en el peor caso? (Es decir: ¿Cuál es la altura de ese árbol en ese peor caso?)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "Altura = n"
+   },
+   {
+    "t": "code",
+    "s": "Altura = n^(2)"
+   },
+   {
+    "t": "code",
+    "s": "Altura = log(n)"
+   },
+   {
+    "t": "code",
+    "s": "Altura = n * log(n)"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "En el peor caso cada partición quita un solo elemento: hay n niveles. Por eso el tiempo es n niveles × O(n) = O(n²).",
+  "ref": "Ficha 31 · El algoritmo Quicksort",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-1",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 1)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes afirmaciones con correctas en relación a conceptos elementales del análisis de algoritmos? (Más de una respuesta puede ser válida, por lo que marque todas las que considere correctas)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Los dos factores de eficiencia más comúnmente utilizados en el análisis de algoritmos son el tiempo de ejecución de un algoritmo y el espacio de memoria que un algoritmo emplea."
+   },
+   {
+    "t": "p",
+    "s": "El análisis del peor caso es aquel en el cual se estudia el comportamiento de un algoritmo cuando debe procesar la configuración más desfavorable posible de los datos que recibe."
+   },
+   {
+    "t": "p",
+    "s": "La notación Big O se usa para expresar el rendimiento de un algoritmo en terminos de una función que imponga una cota inferior para ese algoritmo en cuanto al factor medido (tiempo o espacio de memoria)."
+   },
+   {
+    "t": "p",
+    "s": "El análisis del caso promedio es aquel en el cual se estudia el comportamiento de un algoritmo cuando debe procesar una configuración de datos que llegan en forma aleatoria."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   3
+  ],
+  "tuya": [
+   0,
+   1
+  ],
+  "erraste": true,
+  "explicacion": "Big O es cota SUPERIOR: la inferior es Ω (Omega). El caso promedio es justamente con datos aleatorios, así que la (d) también es cierta (te faltó).",
+  "ref": "Ficha 27 · Conceptos básicos / Otras notaciones",
+  "fuente": "apunte"
+ },
+ {
+  "id": "c32-2",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 2)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Dado un arreglo de n componentes... ¿qué significa decir que en el peor caso la cantidad de comparaciones que realiza el algoritmo de búsqueda secuencial es O(n)  (o sea: del orden de n)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Significa que en el peor caso el algoritmo hará n comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Significa que en el peor caso el algoritmo no hará ninguna comparación."
+   },
+   {
+    "t": "p",
+    "s": "Significa que en el peor caso el algoritmo hará siempre más de n comparaciones."
+   },
+   {
+    "t": "p",
+    "s": "Significa que en el peor caso el algoritmo siempre hará menos de n comparaciones."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "tuya": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "O(n) = del orden de n: en el peor caso, unas n comparaciones (una por casilla).",
+  "ref": "Ficha 27 · Noción intuitiva de la notación Big O",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-3",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 3)",
+   "Parcial 5 · 2021 (pregunta 18)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "completar",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Para cada uno de los algoritmos básicos y/o técnicas de procesamiento generales que se indican en la columna de la izquierda, seleccione la expresión en notación Big O que mejor expresa el tiempo de ejecución de ese algoritmo en el peor caso:"
+   },
+   {
+    "t": "fila",
+    "s": "Acceso directo a un casillero de un vector.",
+    "slot": 0
+   },
+   {
+    "t": "fila",
+    "s": "Búsqueda binaria en un arreglo ya ordenado.",
+    "slot": 1
+   },
+   {
+    "t": "fila",
+    "s": "Ordenamiento por selección directa.",
+    "slot": 2
+   },
+   {
+    "t": "fila",
+    "s": "Búsqueda secuencial en un arreglo (ordenado o desordenado).",
+    "slot": 3
+   },
+   {
+    "t": "fila",
+    "s": "Multiplicación de matrices cuadradas de tamaño n*n.",
+    "slot": 4
+   },
+   {
+    "t": "fila",
+    "s": "Ordenamiento rápido (Quicksort) (Considere aquí el tiempo para el caso promedio).",
+    "slot": 5
+   }
+  ],
+  "banco": [
+   "O(1)",
+   "O(log(n))",
+   "O(n)",
+   "O(n*log(n))",
+   "O(n^2) (n al cuadrado)",
+   "O(n^3) (n al cubo)"
+  ],
+  "respuestas": [
+   "O(1)",
+   "O(log(n))",
+   "O(n^2) (n al cuadrado)",
+   "O(n)",
+   "O(n^3) (n al cubo)",
+   "O(n*log(n))"
+  ],
+  "reuse": true,
+  "tuya": [
+   "O(n)",
+   "O(n^2) (n al cuadrado)",
+   "O(n^3) (n al cubo)",
+   "O(n^3) (n al cubo)",
+   "O(1)",
+   "O(n*log(n))"
+  ],
+  "erraste": true,
+  "explicacion": "Acceso directo O(1) · Binaria O(log n) · Selección O(n²) · Secuencial O(n) · Producto de matrices O(n³) · Quicksort promedio O(n log n). Solo acertaste el de Quicksort: repasala bien. (Confirmada en el Parcial 5 2021 y en el cuestionario 2022).",
+  "ref": "Ficha 27",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-4",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 4)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes afirmaciones son ciertas en referencia a las Estrategias de Resolución de Problemas que se citan? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La técnica de Programación Dinámica se basa en calcular los resultados de los subproblemas de menor orden o tamaño que pudieran aparecer, almacenar esos resultados en una tabla, y luego re-usarlos cuando vuelvan a ser requeridos en el cálculo del problema mayor."
+   },
+   {
+    "t": "p",
+    "s": "La estrategia de Fuerza Bruta se basa en aplicar ideas intuitivas y directas, simples de codificar, pero normalmente produce algoritmos de mal rendimiento en tiempo de ejecución y/o de espacio de memoria empleado."
+   },
+   {
+    "t": "p",
+    "s": "La estrategia de Backtracking es de base recursiva y permite implementar soluciones de prueba y error explorando las distintas soluciones y voviendo atrás si se detecta que un camino conduce a una solución incorrecta. cuando es aplicable, es más eficiente que la Fuerza Bruta, ya que permite eliminar caminos por deducción."
+   },
+   {
+    "t": "p",
+    "s": "El empleo de la Recursividad para resolver un problema no es recomendable en ningún caso, debido a la gran cantidad de recursos de memoria o de tiempo de ejecución que implica."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   2
+  ],
+  "tuya": [
+   0,
+   1,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Las tres primeras son las definiciones de la ficha. La recursión sí es recomendable en muchos casos (árboles, fractales, Divide y Vencerás).",
+  "ref": "Ficha 32 · Introducción",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-5",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 5)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes afirmaciones es falsa en relación a las Estrategias de Resolución de Problemas (o Estrategias de Planteo de Algoritmos)?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Un mismo problema podría ser resulto en base a dos o más estrategias de resolución diferentes, dando lugar a distintos algoritmos para ese mismo problema."
+   },
+   {
+    "t": "p",
+    "s": "Se trata de un conjunto de técnicas diversas que podrían ayudar a encontrar la solución a un problema, pero sin garantía de éxito, y aún si se llega a una solución, tampoco se garantiza que esa solución sea eficiente."
+   },
+   {
+    "t": "p",
+    "s": "Se trata de un conjunto de técnicas diversas que podrían ayudar a encontrar la solución a un problema, pero sin garantía de éxito."
+   },
+   {
+    "t": "p",
+    "s": "Son técnicas y recomendaciones para el planteo de problemas que garantizan que se encontrará una solución, empleando la estrategia correcta para cada problema que se enfrente."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Las estrategias son guías, no recetas infalibles: nunca garantizan encontrar una solución.",
+  "ref": "Ficha 32 · Introducción",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-6",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 6)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "completar",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Para problema general nombrado en la columna de la izquierda, seleccione la estrategia de planteo de algoritmos que se sabe haya resultado más útil para resolver ese problema, o bien la que sea que haya podido aplicarse para resolverlo aún sin llegar a una solución eficiente (considere a cada problema en su situación más general, y no casos particulares de cada uno):"
+   },
+   {
+    "t": "fila",
+    "s": "Problema del árbol de expansión mínimo de un grafo.",
+    "slot": 0
+   },
+   {
+    "t": "fila",
+    "s": "Ordenamiento rápido (Quicksort).",
+    "slot": 1
+   },
+   {
+    "t": "fila",
+    "s": "Problema de las Ocho Reinas",
+    "slot": 2
+   },
+   {
+    "t": "fila",
+    "s": "Problema del Viajante.",
+    "slot": 3
+   },
+   {
+    "t": "fila",
+    "s": "Problema de la alineación de secuencias.",
+    "slot": 4
+   },
+   {
+    "t": "fila",
+    "s": "Generación de gráficos fractales.",
+    "slot": 5
+   }
+  ],
+  "banco": [
+   "Algoritmo ávido",
+   "Divide y vencerás",
+   "Backtracking",
+   "Fuerza Bruta [O(n!)] / Programación Dinámica [O(n^2 * 2^n)]",
+   "Programación dinámica",
+   "Recursión"
+  ],
+  "respuestas": [
+   "Algoritmo ávido",
+   "Divide y vencerás",
+   "Backtracking",
+   "Fuerza Bruta [O(n!)] / Programación Dinámica [O(n^2 * 2^n)]",
+   "Programación dinámica",
+   "Recursión"
+  ],
+  "reuse": true,
+  "tuya": [
+   "Algoritmo ávido",
+   "Fuerza Bruta [O(n!)] / Programación Dinámica [O(n^2 * 2^n)]",
+   "Divide y vencerás",
+   "Backtracking",
+   "Recursión",
+   "Programación dinámica"
+  ],
+  "erraste": true,
+  "explicacion": "Árbol de expansión mínimo → ávido · Quicksort → Divide y Vencerás · 8 Reinas → Backtracking · Viajante → Fuerza Bruta / P. Dinámica (no hay solución eficiente) · Alineación de secuencias → P. Dinámica · Fractales → Recursión. Solo acertaste el primero: repasala bien (confirmada en el cuestionario 2022).",
+  "ref": "Ficha 32",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-7",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 7)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de los siguientes son conocidos algoritmos basados en la estrategia Divide y Vencerás? (Más de una respuesta puede ser correcta, por lo que marque todas las que considere válidas)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Algoritmo Mergesort para ordenamiento de arreglos."
+   },
+   {
+    "t": "p",
+    "s": "Algoritmo Shellsort para ordenamiento de arreglos."
+   },
+   {
+    "t": "p",
+    "s": "Algoritmo Quicksort para ordenamiento de arreglos."
+   },
+   {
+    "t": "p",
+    "s": "Algoritmo Heapsort para ordenamiento de arreglos."
+   }
+  ],
+  "correctas": [
+   0,
+   2
+  ],
+  "tuya": [
+   0,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Quicksort y Mergesort parten el arreglo y procesan cada parte recursivamente. Shellsort es una mejora de Inserción y Heapsort es una selección mejorada.",
+  "ref": "Ficha 31 · La estrategia Divide y Vencerás",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-8",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 8)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes resume en forma correcta la idea general de la estrategia Divide y Vencerás para resolución de problemas?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El conjunto de n datos se divide en subconjuntos de cualquier tamaño, sin importar si los tamaños de cada subconjunto coinciden entre sí. Luego se aplica recursión para procesar cada uno de esos subconjuntos. Finalmente se unen las partes que se acaban de procesar para lograr el resultado final."
+   },
+   {
+    "t": "p",
+    "s": "Se usa una tabla para almacenar los resultados de los subproblemas que se hayan calculado, y luego cuando algún subproblema vuelve a aparecer se toma su valor desde la tabla, para evitar pérdida de tiempo."
+   },
+   {
+    "t": "p",
+    "s": "Se aplica una regla simple que parece ser beneficiosa, sin volver atrás ni medir las consecuencias de aplicar esa regla, con la esperanza de lograr el resultado óptimo al final."
+   },
+   {
+    "t": "p",
+    "s": "El conjunto de n datos se divide en subconjuntos de aproximadamente el mismo tamaño (n/2, n/3, n/4, etc.). Luego se aplica recursión para procesar cada uno de esos subconjuntos. Finalmente se unen las partes que se acaban de procesar para lograr el resultado final."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "La clave son subconjuntos de tamaño PARECIDO: si están desbalanceados se pierde la eficiencia (como en el peor caso de Quicksort). La (b) es Programación Dinámica y la (c) es Ávido.",
+  "ref": "Ficha 31 · La estrategia Divide y Vencerás",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-9",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 9)",
+   "Parcial 5 · 2021 (pregunta 15)"
+  ],
+  "mio": true,
+  "veces": 3,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el problema del Cambio de Monedas analizado en clases, y la solución mediante un Algoritmo Ávido también presentada en clases ¿Cuáles de las siguientes afirmaciones son ciertas en relación al problema y al algoritmo citado? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Si el Problema de Cambio de Monedas no puede resolverse en forma óptima para un conjunto dado de monedas que incluya a la de 1 centavo, mediante el Algoritmo Ávido propuesto, entonces el problema no tiene solución."
+   },
+   {
+    "t": "p",
+    "s": "El Algoritmo Ávido sugerido para el problema del Cambio de Monedas funciona correctamente para cualquier conjunto de valores nominales de monedas, siempre y cuando ese conjunto incluya a la moneda de 1 centavo."
+   },
+   {
+    "t": "p",
+    "s": "El Algoritmo Ávido sugerido para el Problema del Cambio de Monedas falla si el valor x a cambiar tiene una moneda igual a x en el conjunto de valores nominales: en ese caso, el algoritmo provoca un error de runtime y se interrumpe."
+   },
+   {
+    "t": "p",
+    "s": "Sea cual sea el algoritmo que se emplee, es exigible que exista la moneda de 1 centavo, pues de otro modo no habrá solución posible para muchos valores de cambio."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "tuya": [
+   0,
+   3
+  ],
+  "erraste": true,
+  "explicacion": "Solo la (d). El ávido falla en sistemas no canónicos (por ejemplo con {1, 5, 10, 23, 50} y x = 30 da 4 monedas en vez de 3), pero el problema SÍ tiene solución con Programación Dinámica. Si hay una moneda igual a x, greedy_change() retorna 1 sin error. (Marcaste la (a), que es falsa).",
+  "ref": "Ficha 32 · Algoritmos Ávidos (avido.py)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-10",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 10)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el problema del Cambio de Monedas analizado en clases, y la solución mediante Programación Dinámica también presentada en clases ¿Cuáles de las siguientes afirmaciones son ciertas en relación al problema y al algoritmo citado? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "En el algoritmo basado en Programación Dinámica los valores de las monedas que sean mayores a x, son dejados de lado y la recurrencia de cálculo no se aplica sobre ellos."
+   },
+   {
+    "t": "p",
+    "s": "En el algoritmo basado en Programación Dinámica, el resultado final a retornar es el que haya quedado almacenado en la casilla x del arreglo prev que contiene los resultados intermedios (o sea, en prev[x])."
+   },
+   {
+    "t": "p",
+    "s": "En el algoritmo basado en Programación Dinámica, el resultado final a retornar es igual a la suma o acumulación de todos los valores almacenados en el arreglo prev donde se almacenaron los resultados intermedios."
+   },
+   {
+    "t": "p",
+    "s": "En el algoritmo basado en Programación Dinámica no es importante si el arreglo coins está ordenado o desordenado: funcionará correctamente de todas formas"
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   3
+  ],
+  "tuya": [
+   0,
+   3
+  ],
+  "erraste": true,
+  "explicacion": "En dinamic_change() se hace \"if coins[j] > v: continue\" (las monedas mayores se saltean), al final se retorna prev[x] y nunca se ordena coins. (Te faltó la (b); confirmada en el cuestionario 2022).",
+  "ref": "Ficha 32 · Programación Dinámica (dinamico.py)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-11",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 11)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el problema de las Ocho Reinas presentado en clases. ¿Cuáles de las siguientes afirmaciones son ciertas en relación a las diagonales del tablero en el cual deben colocarse la reinas, suponiendo que el tablero es el normal del ajedrez, de 8 * 8? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "En cada una de las diagonales que se orientan como la principal, es constante la resta entre el número de columna y el número de fila de cada uno de sus elementos."
+   },
+   {
+    "t": "p",
+    "s": "En cada una de las diagonales que se orientan como la contra-diagonal o diagonal inversa, es constante la suma entre el número de columna y el número de fila de cada uno de sus elementos."
+   },
+   {
+    "t": "p",
+    "s": "En general hay dos tipos de diagonales: las normales (orientadas en la misma forma que la diagonal principal) y las inversas (orientadas en la misma forma que la contra- diagonal o diagonal inversa)."
+   },
+   {
+    "t": "p",
+    "s": "La cantidad total de diagonales que contiene el tablero (sumando todas las diagonales de todos los tipos posibles) es 30."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "tuya": [
+   0,
+   1,
+   2
+  ],
+  "erraste": true,
+  "explicacion": "Son 15 normales (col - fil va de -7 a 7) + 15 inversas (col + fil va de 0 a 14) = 30. Las cuatro son ciertas (te faltó la (d); confirmada en el cuestionario 2022).",
+  "ref": "Ficha 32 · Problema de las Ocho Reinas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-12",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 12)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el problema de las Ocho Reinas presentado en clases. ¿Cuáles de las siguientes afirmaciones son ciertas en relación a las diagonales normales del tablero en el cual deben colocarse la reinas, suponiendo que el tablero es el normal del ajedrez, de 8 * 8? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Las diagonales normales pueden representarse con un arreglo qnd de 15 componentes, en el que cada diagonal cuyos elementos tengan el mismo valor (col + fil), se haga coincidir el casillero qnd[(col + fil)]."
+   },
+   {
+    "t": "p",
+    "s": "Las diagonales normales pueden representarse con un arreglo qnd de 15 componentes, en el que cada diagonal cuyos elementos tengan el mismo valor (col - fil), se haga coincidir el casillero qnd[(col - fil) + 7] (evitando de esta forma los índices negativos."
+   },
+   {
+    "t": "p",
+    "s": "El valor de la resta entre el número de columna y el número de fila de cada componente de una diagonal normal, es un número constante para cada diagonal, y los posibles valores están en el intervalo [-7..7]"
+   },
+   {
+    "t": "p",
+    "s": "El valor de la suma entre el número de columna y el número de fila de cada componente de una diagonal normal, es un número constante para cada diagonal, y los posibles valores están en el intervalo [0..14]"
+   }
+  ],
+  "correctas": [
+   1,
+   2
+  ],
+  "tuya": [
+   1,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Normales → resta (col - fil) ∈ [-7, 7]. Para usarla como índice se le suma 7: dn = (col - fil) + 7 ∈ [0, 14].",
+  "ref": "Ficha 32 · Problema de las Ocho Reinas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-13",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 13)"
+  ],
+  "mio": true,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el problema de las Ocho Reinas presentado en clases. ¿Cuáles de las siguientes afirmaciones son ciertas en relación a las diagonales inversas del tablero en el cual deben colocarse la reinas, suponiendo que el tablero es el normal del ajedrez, de 8 * 8? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Las diagonales inversas pueden representarse con un arreglo qid de 15 componentes, en el que cada diagonal cuyos elementos tengan el mismo valor (col + fil), se haga coincidir el casillero qid[(col + fil)]."
+   },
+   {
+    "t": "p",
+    "s": "El valor de la suma entre el número de columna y el número de fila de cada componente de una diagonal inversa, es un número constante para cada diagonal, y los posibles valores están en el intervalo [0..14]"
+   },
+   {
+    "t": "p",
+    "s": "El valor de la resta entre el número de columna y el número de fila de cada componente de una diagonal inversa, es un número constante para cada diagonal, y los posibles valores están en el intervalo [-7..7]"
+   },
+   {
+    "t": "p",
+    "s": "Las diagonales inversas pueden representarse con un arreglo qid de 15 componentes, en el que cada diagonal cuyos elementos tengan el mismo valor (col - fil), se haga coincidir el casillero qid[(col - fil) + 7]."
+   }
+  ],
+  "correctas": [
+   0,
+   1
+  ],
+  "tuya": [
+   0,
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Inversas → suma (col + fil) ∈ [0, 14], que ya sirve directo como índice: di = col + fil.",
+  "ref": "Ficha 32 · Problema de las Ocho Reinas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "c32-14",
+  "unidad": "F32",
+  "origen": [
+   "Tu cuestionario 32 · 2026",
+   "Cuestionario 28 · 2022 (pregunta 14)",
+   "Parcial 5 · 2021 (pregunta 17)",
+   "Final · julio 2022 (pregunta 9)"
+  ],
+  "mio": true,
+  "veces": 4,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere el problema de las Ocho Reinas presentado en clases. Se ha indicado que se puede usar un arreglo rc de componentes, en el cual el casillero rc[col] = fil indica que la reina de la columna col está ubicada en la fila fil. ¿Cuáles de las siguientes configuraciones para el arreglo rc representan soluciones incorrectas para el problema de las Ocho Reinas? (Más de una respuesta puede ser cierta, por lo que marque todas las que considere correctas...)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "rc = [4, 7, 3, 0, 2, 5, 1, 6]"
+   },
+   {
+    "t": "p",
+    "s": "rc = [5, 3, 6, 0, 7, 1, 4, 2]"
+   },
+   {
+    "t": "p",
+    "s": "rc = [3, 5, 7, 0, 5, 1, 2, 4]"
+   },
+   {
+    "t": "p",
+    "s": "rc = [2, 0, 7, 4, 5, 1, 6, 3]"
+   }
+  ],
+  "correctas": [
+   2,
+   3
+  ],
+  "tuya": [
+   2,
+   3
+  ],
+  "erraste": false,
+  "explicacion": "(c) tiene dos reinas en la fila 5 (columnas 1 y 4). (d): las columnas 3 y 4 tienen filas 4 y 5, así que col - fil = -1 en ambas: misma diagonal normal. Las otras dos son soluciones válidas.",
+  "ref": "Ficha 32 · Problema de las Ocho Reinas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "p21-8",
+  "unidad": "F14",
+  "origen": [
+   "Parcial 5 · 2021 (pregunta 8)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Dada la siguiente función recursiva del factorial:"
+   },
+   {
+    "t": "code",
+    "s": "def factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)"
+   },
+   {
+    "t": "p",
+    "s": "Seleccione cuál de las siguientes opciones es la correcta, si se le pasa como parámetro actual a esta función el valor -4."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Así como está planteada, si entra el -4 (o cualquier otro negativo) como parámetro, la condición de corte nunca es cierta y se producirá un error de stack overflow en algún momento"
+   },
+   {
+    "t": "p",
+    "s": "La función devuelve como resultado: 24."
+   },
+   {
+    "t": "p",
+    "s": "La función no tiene definido ningún caso base, que es aquel caso que se resuelve sin recursividad, y por lo tanto no está bien planteada."
+   },
+   {
+    "t": "p",
+    "s": "La función devuelve como resultado: -24."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Desde -4, restar 1 da -5, -6, ... y nunca llega a 0: recursión infinita y desborde de stack. Caso base sí tiene (n == 0), pero no contempla los negativos.",
+  "ref": "Ficha 14 · Programación recursiva",
+  "fuente": "oficial"
+ },
+ {
+  "id": "p21-9",
+  "unidad": "F14",
+  "origen": [
+   "Parcial 5 · 2021 (pregunta 9)",
+   "Parcial 5 · 2021 (pregunta 19)"
+  ],
+  "mio": false,
+  "veces": 2,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué elementos son necesarios para que una función recursiva se considere bien planteada?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La función debe tener al menos un ciclo en su bloque de acciones, y ese ciclo debe estar planteado de forma tal que nunca entre en un lazo infinito."
+   },
+   {
+    "t": "p",
+    "s": "La función debe tener al menos una invocación a si misma en su bloque de acciones, y después de esas invocaciones debe tener una o más condiciones de control que permitan interrumpir el proceso recursivo si se ha llegado a alcanzar alguna de las situaciones triviales o base del problema."
+   },
+   {
+    "t": "p",
+    "s": "La función deben tener al menos una invocación a si misma en su bloque de acciones."
+   },
+   {
+    "t": "p",
+    "s": "La función debe tener al menos una invocación a si misma en su bloque de acciones, y antes de esas invocaciones debe tener una o más condiciones de control que permitan interrumpir el proceso recursivo si se ha llegado a alcanzar alguna de las situaciones triviales o base del problema."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Llamada a sí misma + condición de corte ANTES de la llamada. Si el control va después, la llamada se ejecuta primero y nunca se corta (como en la pregunta del factorial mal ordenado). Salió 2 veces en el mismo parcial.",
+  "ref": "Ficha 14 · Programación recursiva",
+  "fuente": "oficial"
+ },
+ {
+  "id": "p21-11",
+  "unidad": "F32",
+  "origen": [
+   "Parcial 5 · 2021 (pregunta 11)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere la siguiente función (vista en clases) basada en backtracking para resolución del Problema de las Ocho Reinas, e indique cuál de las opciones que se muestran es correcta en relación al corte de la recursión de la función:"
+   },
+   {
+    "t": "code",
+    "s": "def intend(col):\n    global rc, qr, qid, qnd \n    fil, res = -1, False\n    while not res and fil != 7: \n        res = False\n        fil += 1\n        di = col + fil\n        dn = (col - fil) + 7\n        if qr[fil] and qid[di] and qnd[dn]: \n            rc[col] = fil\n            qr[fil] = qid[di] = qnd[dn] = False \n            if col < 7:\n                res = intend(col + 1) \n                if not res: \n                    qr[fil] = qid[di] = qnd[dn] = True \n                    rc[col] = -1\n            else:\n                res = True \n    return res"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La recursión corta cuando res es True o fil es 7."
+   },
+   {
+    "t": "p",
+    "s": "La recursión corta cuando res es True y fil es 7."
+   },
+   {
+    "t": "p",
+    "s": "La recursión corta cuando res es False y fil es distinto 7."
+   },
+   {
+    "t": "p",
+    "s": "La recursión corta solo cuando se terminan de recorrer todas las columnas."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "El ciclo sigue mientras (not res and fil != 7). Por De Morgan, corta cuando res es True (se ubicó la reina) O cuando fil == 7 (se probaron todas las filas).",
+  "ref": "Ficha 32 · Backtracking: Ocho Reinas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "p21-13",
+  "unidad": "F14",
+  "origen": [
+   "Parcial 5 · 2021 (pregunta 13)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes afirmaciones son correcta respecto de las características de la recursividad? (Más de una puede ser cierta, por lo que  marque todas las que considere válidas):"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La recursividad puede ocupar más memoria que un algoritmo iterativo equivalente."
+   },
+   {
+    "t": "p",
+    "s": "La recursividad utiliza memoria de stack."
+   },
+   {
+    "t": "p",
+    "s": "La recursividad siempre ocupa más memoria que el algoritmo iterativo equivalente."
+   },
+   {
+    "t": "p",
+    "s": "La recursividad utiliza memoria ROM."
+   }
+  ],
+  "correctas": [
+   0,
+   1
+  ],
+  "erraste": false,
+  "explicacion": "PUEDE ocupar más memoria (no siempre: muchas veces el consumo es del mismo orden). Usa el stack segment porque son llamadas a funciones.",
+  "ref": "Ficha 14 · Consideraciones generales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "p21-16",
+  "unidad": "F32",
+  "origen": [
+   "Parcial 5 · 2021 (pregunta 16)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Considere la siguiente función (vista en clases) basada en backtracking para resolución del Problema de las Ocho Reinas, e indique cuál de las opciones que se muestran es correcta:"
+   },
+   {
+    "t": "code",
+    "s": "def intend(col):\n    global rc, qr, qid, qnd \n    fil, res = -1, False\n    while not res and fil != 7: \n        res = False\n        fil += 1\n        di = col + fil\n        dn = (col - fil) + 7\n        if qr[fil] and qid[di] and qnd[dn]: \n            rc[col] = fil\n            qr[fil] = qid[di] = qnd[dn] = False \n            if col < 7:\n                res = intend(col + 1) \n                if not res: \n                    qr[fil] = qid[di] = qnd[dn] = True \n                    rc[col] = -1\n            else:\n                res = True \n    return res"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "La función es correcta y funciona sin problemas."
+   },
+   {
+    "t": "p",
+    "s": "La función no es correcta porque no debe asignarse a rc[col] el valor de -1."
+   },
+   {
+    "t": "p",
+    "s": "La función no es correcta porque qr debe señalar las columnas disponibles y no las filas."
+   },
+   {
+    "t": "p",
+    "s": "La función no es correcta porque la diagonal normal debe almacenar valores (columna + fila)."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Es la función de la ficha. rc[col] = -1 deshace la jugada (vuelta atrás), qr marca filas libres (cada columna ya tiene su reina) y la normal usa la resta + 7.",
+  "ref": "Ficha 32 · Backtracking: Ocho Reinas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "p21-20",
+  "unidad": "F32",
+  "origen": [
+   "Parcial 5 · 2021 (pregunta 20)",
+   "Final · julio 2022 (pregunta 25)"
+  ],
+  "mio": false,
+  "veces": 2,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son ciertas respecto de la estrategia de resolución de problemas conocida como Algoritmos Ávidos?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Se trata de un planteo basado en identificar una regla local que intuitivamente parece correcta, y aplicarla una y otra vez sin volver atrás ni analizar caminos alternativos, hasta llegar a la solución del problema global."
+   },
+   {
+    "t": "p",
+    "s": "Normalmente, una ventaja de intentar aplicar un algoritmo ávido es que si bien la validez de la regla local debe ser demostrada formalmente, eso es comúnmente fácil de hacer."
+   },
+   {
+    "t": "p",
+    "s": "Normalmente, una ventaja de un algoritmo ávido es que, si la regla local aplicada es correcta, suele ser sencillo de plantear y de comprender, además de veloz para ejecutar."
+   },
+   {
+    "t": "p",
+    "s": "Se trata de un planteo basado en explorar y analizar cada camino posible para resolver un problema, de forma que si detecta que algún camino conduce a una solución incorrecta, se abandone ese camnio y se regrese para explorar otros posibles, hasta dar con la solución correcta."
+   }
+  ],
+  "correctas": [
+   0,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Ávido = regla local sin volver atrás, simple y rápido. Lo DIFÍCIL es demostrar que la regla es correcta (por eso la (b) es falsa). La (d) es Backtracking. Salió también en el final de julio 2022.",
+  "ref": "Ficha 32 · Algoritmos Ávidos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-1",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 1)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Cuál de las siguientes cabeceras de ciclo for en Python, producirá un esquema de exactamente n repeticiones, suponiendo que la variable n tiene un valor entero mayor a cero previamente asignado?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "for i in range(0, n//2):"
+   },
+   {
+    "t": "code",
+    "s": "for i in range(1, n):"
+   },
+   {
+    "t": "code",
+    "s": "for i in range(n+1):"
+   },
+   {
+    "t": "code",
+    "s": "for i in range(n, 0, -1):"
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "range(n, 0, -1) genera n, n-1, ..., 1: son n valores. range(1, n) da n-1 vueltas (de 1 a n-1), range(n+1) da n+1 y range(0, n//2) da la mitad.",
+  "ref": "Repaso: ciclo for y range()",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-2",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 2)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se quiere cargar por teclado el valor una temperatura, validando que la misma esté entre -70 grados y 50 grados, y se plantea un ciclo while forzado a operar en forma [1, N], como muestra el esquema, para hacerlo:"
+   },
+   {
+    "t": "code",
+    "s": "__author__ = 'Catedra de AED'\n\nt = 51\nwhile ?????? :\n    t = int(input('Cargue temperatura (entre -70 y 50, por favor): '))"
+   },
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes debería ser la condición a incluir en ese ciclo while (en el lugar donde figuran los signos de pregunta de color rojo) para que el valor vuelva a cargarse en caso de haber sido mal ingresado?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "t < -70 and t > 50"
+   },
+   {
+    "t": "code",
+    "s": "t >= -70 and t <= 50"
+   },
+   {
+    "t": "code",
+    "s": "t < -70 or t > 50"
+   },
+   {
+    "t": "code",
+    "s": "t >= -70 or t <= 50"
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "El ciclo tiene que repetirse mientras el dato sea INVÁLIDO, o sea, si está fuera del rango por abajo O por arriba. Con and nunca sería verdadera (no puede ser < -70 y > 50 a la vez). El valor inicial 51 fuerza la primera vuelta.",
+  "ref": "Repaso: validación con while",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-4",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 4)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "varias",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles de las siguientes son características propias del método readlines() (con una s al final) contenido en cualquier variable file object usada para manipular un archivo de texto en Python? (Más de una respuesta puede ser válida, por lo que marque todas las que considere correctas)."
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Si m es el file object que representa un archivo de texto, la invocación v = m.readlines() lee el contenido completo del archivo y lo retorna como una lista o arreglo de cadenas de caracteres, que contiene un elemento por cada línea de texto que el archivo tenía, asignando ese arreglo en este caso en la variable v. Cada una de las cadenas almacenadas en el arreglo v conservará el caracter de salto de línea que hubiese tenido en el archivo."
+   },
+   {
+    "t": "p",
+    "s": "Si m es el file object que representa un archivo de texto, la invocación v = m.readlines() lee el contenido completo del archivo y lo retorna como una lista o arreglo de cadenas de caracteres, que contiene un elemento por cada línea de texto que el archivo tenía, asignando ese arreglo en este caso en la variable v."
+   },
+   {
+    "t": "p",
+    "s": "Si m es el file object que representa un archivo de texto y n es un número entero mayor a 0, la invocación v = m.readlines(n) lee hasta n bytes del archivo y los retorna como una lista o arreglo de cadenas de caracteres, que contiene un elemento por cada línea de texto que haya logrado leer hasta completar n bytes, asignando ese arreglo en este caso en la variable v."
+   },
+   {
+    "t": "p",
+    "s": "Si m es el file object que representa un archivo de texto, la invocación v = m.readlines() lee el contenido completo del archivo y lo retorna como una lista o arreglo de cadenas de caracteres, que contiene un elemento por cada línea de texto que el archivo tenía, asignando ese arreglo en este caso en la variable v. Ninguna de las cadenas almacenadas en el arreglo v conservará el caracter de salto de línea que hubiese tenido en el archivo."
+   }
+  ],
+  "correctas": [
+   0,
+   1,
+   2
+  ],
+  "erraste": false,
+  "explicacion": "readlines() conserva el \"\\n\" al final de cada línea (para sacarlo se usa strip o un corte). Con un parámetro n lee aproximadamente hasta n bytes.",
+  "ref": "Repaso: archivos de texto",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-5",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 5)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Analice el siguiente script en Python:"
+   },
+   {
+    "t": "code",
+    "s": "n = 5\na = n * [0]\nfor i in range(n):\n    a[i] = i + 1\n\nv = n * [0]\nfor i in range(n):\n    v[a[i]] = a[i]"
+   },
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguentes es correcta en relación al script mostrado?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Todos las casillas del arreglo a se convierten a float y se vuelven a asignar en el mismo arreglo a."
+   },
+   {
+    "t": "p",
+    "s": "Tanto el arreglo a como el v quedan con todos sus casilleros valiendo 0."
+   },
+   {
+    "t": "p",
+    "s": "El arreglo v queda valiendo los mismos valores que el arreglo a, pero convertidos al tipo float."
+   },
+   {
+    "t": "p",
+    "s": "El script lanza un error y se interrumpe por intentar acceder a una casilla fuera de rango en el arreglo v."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "a queda [1, 2, 3, 4, 5]. En la última vuelta se hace v[a[4]] = v[5], pero v tiene índices de 0 a 4: IndexError.",
+  "ref": "Repaso: arreglos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-6",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 6)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué efecto produce la ejecución del siguiente script, tal y como se muestra (exactamente con los valores 3 y 0 indicados como parámetro al invocar a la función calcular())?"
+   },
+   {
+    "t": "code",
+    "s": "__author__ = 'Catedra de AED'\n\n\ndef calcular(a, b):\n    if b != 0:\n        c = a // b\n        r = a % b\n        return c, r\n\n\n# script principal\na, b = calcular(3, 0)\nprint('Cociente:', a, 'Resto:', b)"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Ejecuta sin problemas. Muestra el mensaje \"None\""
+   },
+   {
+    "t": "p",
+    "s": "Ejecuta sin problemas. Muestra el mensaje \"Cociente: 0 Resto: 0\""
+   },
+   {
+    "t": "p",
+    "s": "Ejecuta sin problemas. Muestra el mensaje \"Cociente: None Resto: None\""
+   },
+   {
+    "t": "p",
+    "s": "Se produce un error al intentar ejecutar la instrución a, b = calcular(3, 0)."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Con b = 0 no entra al if y la función termina sin return, así que retorna UN solo None. No se puede desempaquetar un None en dos variables: error.",
+  "ref": "Repaso: funciones y retorno de tuplas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-7",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 7)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuáles son los motivos por los cuales una persona que sabe resolver un problema, querría programar y usar una computadora para resolverlo?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Porque al programar una computadora, tendrá la garantía de una solución correcta."
+   },
+   {
+    "t": "p",
+    "s": "Porque sólo programando una computadora obtendrá soluciones numéricamente precisas y sin errores ni pérdida de precisión por valores decimales."
+   },
+   {
+    "t": "p",
+    "s": "Porque al programar una computadora para resolver el problema, ganará tiempo y ahorrará esfuerzo en el futuro: la computadora puede obtener las soluciones muy rápidamente, y con precisión."
+   },
+   {
+    "t": "p",
+    "s": "No hay motivos para que lo haga: Si sabe resolver el problema, no necesita una computadora y no hay motivo para usarla."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "La computadora no garantiza que la solución sea correcta (si el algoritmo está mal, el resultado está mal): lo que aporta es velocidad y precisión.",
+  "ref": "Repaso: fundamentos",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-10",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 10)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes expone correctamente la estrategia general que debe llevar a cabo un proceso de listado completo de los registros de un archivo, suponiendo que los registros contienen un campo de marcado lógico para gestionar eventuales bajas lógica?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "1) Abrir el archivo m en modo 'rb'. 2) Usar un ciclo para leer uno por uno los registros del archivo. 3) En cada vuelta del ciclo, si el registro leído está marcado como no válido (activo = False), mostrar su contenido; en caso contrario ignorarlo (no mostrar su contenido)."
+   },
+   {
+    "t": "p",
+    "s": "1) Abrir el archivo m en modo 'rb'. 2) Usar un ciclo para leer uno por uno los registros del archivo. 3) En cada vuelta del ciclo, si el registro leído está marcado como válido (activo = True), mostrar su contenido; en caso contrario ignorarlo (no mostrar su contenido)."
+   },
+   {
+    "t": "p",
+    "s": "1) Abrir el archivo m en modo 'ab'. 2) Usar un ciclo para leer uno por uno los registros del archivo. 3) En cada vuelta del ciclo, si el registro leído está marcado como válido (activo = True), mostrar su contenido; en caso contrario ignorarlo (no mostrar su contenido)."
+   },
+   {
+    "t": "p",
+    "s": "1) Abrir el archivo m en modo 'rb'. 2) Usar un ciclo para leer uno por uno los registros del archivo. 3) En cada vuelta del ciclo, si el registro leído está marcado como válido (activo = True), mostrar su contenido; en caso contrario no mostrar su contenido y detener el ciclo."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Para leer se abre en 'rb' ('ab' es para agregar al final). Se muestran solo los activos y los dados de baja se saltean, SIN cortar el ciclo.",
+  "ref": "Repaso: archivos binarios y bajas lógicas",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-11",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 11)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Por qué motivo debe indentarse (encolumnarse hacia la derecha) correctamente cada rama de una instrucción condicional en Python?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Para que Python pueda reconocer qué instrucciones pertenecen a cada rama."
+   },
+   {
+    "t": "p",
+    "s": "No es cierto que se deba indentar cada rama. La indentación sólo se sugiere por razones de claridad."
+   },
+   {
+    "t": "p",
+    "s": "Para que Python pueda reconocer qué instrucciones pertenecen a cada rama. Pero aún así, la indentación sólo es obligatoria en las ramas que tengan más de una instrucción."
+   },
+   {
+    "t": "p",
+    "s": "Para que Python pueda reconocer qué instrucciones pertenecen a cada rama. Pero aún así, la indentación sólo es obligatoria en las ramas que tengan una y sólo una instrucción."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "En Python la indentación ES la sintaxis de los bloques: siempre es obligatoria.",
+  "ref": "Repaso: estructuras condicionales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-12",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 12)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes funciones creará una tupla conteniendo exclusivamente los números pares divisibles por 3 y por 7 al mismo tiempo, del intervalo [0, n]?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "code",
+    "s": "def prueba(n):\n    r = ()\n    for i in range(1, n+1, 21):\n        r += i,\n    return r"
+   },
+   {
+    "t": "code",
+    "s": "def prueba(n):\n    r = ()\n    for i in range(0, n+1, 42):\n        r += i,\n    return r"
+   },
+   {
+    "t": "code",
+    "s": "def prueba(n):\n    r = ()\n    for i in range(2, 3*(n+1), 7):\n        r += i,\n    return r"
+   },
+   {
+    "t": "code",
+    "s": "def prueba(n):\n    r = ()\n    for i in range(0, n+1, 21):\n        r += i,\n    return r"
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "Para ser par y divisible por 3 y por 7 tiene que ser múltiplo de 2·3·7 = 42: 0, 42, 84, ... La (d) incluiría impares como 21 y 63.",
+  "ref": "Repaso: tuplas y range()",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-13",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 13)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "completar",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Para cada una de las descripciones de modos de apertura de un archivo que se indican en la columna de la izquieda, seleccione la cadena de caracteres usada en Python en la función open() para activar ese modo:"
+   },
+   {
+    "t": "fila",
+    "s": "Archivo de texto. Sólo lectura. El archivo debe existir.",
+    "slot": 0
+   },
+   {
+    "t": "fila",
+    "s": "Archivo de texto. Lectura y grabación, ambas donde apunte el file pointer. El archivo debe existir.",
+    "slot": 1
+   },
+   {
+    "t": "fila",
+    "s": "Archivo binario. Grabación al final, lectura en donde apunte el file pointer. El archivo se crea si no existe. Se preserva su contenido si existe.",
+    "slot": 2
+   },
+   {
+    "t": "fila",
+    "s": "Archivo binario. Sólo grabación al final. El archivo se crea si no existe. Se preserva si existe.",
+    "slot": 3
+   },
+   {
+    "t": "fila",
+    "s": "Archivo binario. Sólo lectura. El archivo debe existir.",
+    "slot": 4
+   },
+   {
+    "t": "fila",
+    "s": "Archivo binario. Sólo grabación, en donde apunte el file pointer. El archivo se crea si no existe. Se pierde su contenido si existe.",
+    "slot": 5
+   }
+  ],
+  "banco": [
+   "rt",
+   "r+t",
+   "a+b",
+   "ab",
+   "rb",
+   "wb",
+   "w+b"
+  ],
+  "respuestas": [
+   "rt",
+   "r+t",
+   "a+b",
+   "ab",
+   "rb",
+   "wb"
+  ],
+  "reuse": true,
+  "erraste": false,
+  "explicacion": "r = leer (debe existir) · w = grabar desde cero (borra lo que había) · a = agregar al final (preserva) · + = suma la otra operación · t/b = texto o binario. El error típico es confundir wb con w+b (w+b también permite leer).",
+  "ref": "Repaso: archivos (modos de apertura)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-14",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 14)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "¿Qué hace el siguiente programa en Python?"
+   },
+   {
+    "t": "code",
+    "s": "__author__ = 'Cátedra de AED'\n\n\ndef comparar():\n    if a > p:\n        print('El valor', a, 'es mayor...' )\n    if b > p:\n        print('El valor', b, 'es mayor...')\n    if c > p:\n        print('El valor', c, 'es mayor...')\n\n\ndef promedio():\n    global p\n    p = (a + b + c) / 3\n\n\na = int(input('A: '))\nb = int(input('B: '))\nc = int(input('C: '))\npromedio()\ncomparar()\nprint('Programa terminado...')"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Lanza error de intérprete: las variables a, b, c y p están definidas incorrectamente (debieron definirse todas en el script principal, debajo de las funciones)."
+   },
+   {
+    "t": "p",
+    "s": "Calcula el promedio de los valores de a, b y c, y luego muestra sólo los valores de de las variables que sean mayores al promedio."
+   },
+   {
+    "t": "p",
+    "s": "Muestra los valores de a, b, c, y también el promedio de los valores de esas tres variables."
+   },
+   {
+    "t": "p",
+    "s": "Calcula el promedio de los valores de a, b y c, y luego muestra los valores de todas las variables."
+   }
+  ],
+  "correctas": [
+   1
+  ],
+  "erraste": false,
+  "explicacion": "a, b y c son globales (se crean en el script principal) y p se crea como global dentro de promedio(). comparar() solo las lee, así que funciona y muestra únicamente las que superan el promedio.",
+  "ref": "Repaso: funciones y variables globales",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-15",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 15)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Se presenta la situación problemática de tener que elegir una estructura de datos que permita almacenar/representar la información referida a las ventas realizadas por un comercio en cada mes de los últimos 10 años, de forma que luego pueda accederse a los datos de un año/mes con rapidez. Por ejemplo:\nAño: 2010 - Mes: 1 - Cantidad Vendida: 98 productos - Monto: $25600\nDe acuerdo a este requerimiento la estructura de datos más adecuada es:"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Diez arreglos unidimensionales de registros (un arreglo por cada año), en los que cada registro tiene los campos: mes, cantidad vendida (en ese mes y año) y monto (en ese mes y año)."
+   },
+   {
+    "t": "p",
+    "s": "Un arreglo unidimensional de registros, donde cada registro tiene los campos: año, mes, cantidad vendida (en ese mes y año) y monto (en ese mes y año)."
+   },
+   {
+    "t": "p",
+    "s": "Tres arreglos paralelos de 12 componentes cada uno, llamados: años, cantidades, montos. Donde cada índice de los vectores paralelos represente un mes del año."
+   },
+   {
+    "t": "p",
+    "s": "Un arreglo bidimensional de registros, donde cada fila represente un año (10 filas), cada columna represente un mes (12 columnas), y cada componente de la matriz sea un registro con los campos: cantidad vendida y monto."
+   }
+  ],
+  "correctas": [
+   3
+  ],
+  "erraste": false,
+  "explicacion": "Año y mes son dos \"coordenadas\", así que una matriz de 10×12 permite acceso directo con ventas[año][mes], sin buscar.",
+  "ref": "Repaso: arreglos bidimensionales y registros",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-17",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 17)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Si se desea implementar una aplicación ABM sobre un archivos de registros, con la intención de poder hacer seeking y ubicar el file pointer en forma directa en el byte donde comienza cada registro, ¿cuál de las siguientes opciones indica los principales problemas que se deben enfrentar?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "El manejo de registros con campos de tipo cadena de caracteres de longitud variable, y en general, registros de tamaño no uniforme grabados en el archivo."
+   },
+   {
+    "t": "p",
+    "s": "El manejo de registros de tamaño uniforme grabados en el archivo."
+   },
+   {
+    "t": "p",
+    "s": "El manejo de registros que sólo contengan campos de tipo cadena de caracteres, pero todas con la misma cantidad de caracteres."
+   },
+   {
+    "t": "p",
+    "s": "El manejo de registros que sólo contengan campos numéricos de tipo flotante."
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "Para calcular dónde arranca el registro i (i × tamaño) todos tienen que medir lo mismo. Las cadenas de largo variable rompen eso: hay que ajustarlas a un largo fijo.",
+  "ref": "Repaso: archivos de registros (acceso directo)",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-23",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 23)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que la clase Insumo está convenientemente declarada para representar los insumos que se usan en la fabricación de una pieza. Asuma que también se ha definido un vector pieza de referencias a registros de tipo Insumo y que ese vector fue creado con n casilleros valiendo None. El programa mostrado en la Ficha 18 (problema 48) prevé que el arreglo será cargado luego con registros de ese tipo Insumo, entrando en la opción 1 del menú. Más abajo mostramos una variante de la función opcion3() para calcular el monto total insumido para fabricar la pieza completa, la cual a su vez invoca a la función total_value() (que se ha dejado sin cambios) ¿Qué puede decirse respecto de la forma en que afecta al programa este replanteo de la función opcion3()?"
+   },
+   {
+    "t": "code",
+    "s": "def total_value(pieza):\n    tv = 0\n    for insumo in pieza:\n        monto = insumo.valor * insumo.cantidad\n        tv += monto\n    return tv\n\n\ndef opcion3(pieza):\n    print('Monto total en insumos para la pieza:', total_value(pieza))"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Si el vector pieza no hubiese sido efectivamente cargado antes, la función opcion3() invocará a total_value() enviándole un vector con todos sus casilleros valiendo None, y el ciclo iterador simplemente dejará el valor None en el acumulador tv. La función terminará en ese caso retornarndo None."
+   },
+   {
+    "t": "p",
+    "s": "Si el vector pieza no hubiese sido efectivamente cargado antes, la función opcion3() invocará a total_value() enviándole un vector con todos sus casilleros valiendo None, y el ciclo iterador automáticamente cambiará el None de cada casillero por un registro de tipo Insumo inicializado con valores cero. Por lo tanto en ese caso la función retornará el valor final 0."
+   },
+   {
+    "t": "p",
+    "s": "Si el vector pieza no hubiese sido efectivamente cargado antes, la función opcion3() invocará a total_value() enviándole un vector con todos sus casilleros valiendo None, y el ciclo iterador provocará un error y se interrumpirá ya que no existe en ese caso ningún campo llamado valor o cantidad. El programa se interrumpirá con un mensaje de error."
+   },
+   {
+    "t": "p",
+    "s": "El programa funcionará correctamente de todos modos. Si cada casillero del vector valiese None, el ciclo iterador de la función total_value() terminará sin hacer nada y la función retornará 0."
+   }
+  ],
+  "correctas": [
+   2
+  ],
+  "erraste": false,
+  "explicacion": "Si pieza nunca se cargó, cada casillero vale None. Al hacer insumo.valor sobre None, Python lanza un error (AttributeError: None no tiene el campo valor) y el programa se interrumpe. El ciclo for no \"salta\" los None ni los convierte en registros.",
+  "ref": "Repaso: arreglos de registros",
+  "fuente": "oficial"
+ },
+ {
+  "id": "fj-24",
+  "unidad": "GEN",
+  "origen": [
+   "Final · julio 2022 (pregunta 24)"
+  ],
+  "mio": false,
+  "veces": 1,
+  "tipo": "una",
+  "partes": [
+   {
+    "t": "p",
+    "s": "Suponga que se desea cargar por teclado un número, pero validando que no sea negativo. Se proponen los siguientes dos scripts para ello:"
+   },
+   {
+    "t": "p",
+    "s": "Script 1.)"
+   },
+   {
+    "t": "code",
+    "s": "n = -1\nwhile n < 0:\n    n = int(input('Ingrese un número no negativo: '))\n    if n < 0:\n        print('Se pidió no negativo... cargue otra vez...')\n    else:\n        print('El dato cargado fue validado en forma correcta...')"
+   },
+   {
+    "t": "p",
+    "s": "Script 2.)"
+   },
+   {
+    "t": "code",
+    "s": "n = -1\nwhile n < 0:\n    n = int(input('Ingrese un número no negativo: '))\n    if n < 0:\n        print('Se pidió no negativo... cargue otra vez...')\nelse:\n    print('El dato cargado fue validado en forma correcta...')"
+   },
+   {
+    "t": "p",
+    "s": "¿Cuál de las siguientes afirmaciones es correcta en relación a estos dos scripts?"
+   }
+  ],
+  "opciones": [
+   {
+    "t": "p",
+    "s": "Ambos son correctos. En la situación planteada, ambos hacen exactamente lo mismo."
+   },
+   {
+    "t": "p",
+    "s": "Ambos son incorrectos."
+   },
+   {
+    "t": "p",
+    "s": "El script 1 es incorrecto (mostrará el mensaje \"El dato cargado fue validado en forma correcta...\" muchas veces) y el segundo es correcto."
+   },
+   {
+    "t": "p",
+    "s": "El script 1 es correcto, pero el segundo no lo es (nunca mostrará el mensaje \"El dato cargado fue validado en forma correcta...\")"
+   }
+  ],
+  "correctas": [
+   0
+  ],
+  "erraste": false,
+  "explicacion": "En el 1, el else del if se ejecuta una sola vez, cuando entra un dato válido (y el ciclo termina). En el 2, el else del WHILE se ejecuta cuando la condición se vuelve falsa (sin break): también una sola vez.",
+  "ref": "Repaso: ciclo while con else",
+  "fuente": "oficial"
+ }
+]
