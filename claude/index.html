@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preguntero P5 · AED 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --sunk:#f0f2f5; --ink:#1a1e23; --ink-2:#434b55; --muted:#5f6873; --line:#dcdfe4; --line-2:#c9ced5;
+  --accent:#1d4aa8; --accent-hover:#173d8c; --accent-ink:#ffffff; --accent-soft:#e7edf9; --accent-line:#b9c8ea;
+  --ok:#1b6e43; --ok-soft:#e5f2ea; --ok-line:#a9d3b9;
+  --bad:#a52a22; --bad-soft:#f9e9e7; --bad-line:#e5b3ae;
+  --warn:#7a5200; --warn-soft:#fbf2df; --warn-line:#e6cf9c;
+  --code:#f3f4f7; --code-ink:#22272e;
+  --radius:6px; --shadow:0 1px 2px rgba(20,28,40,.06), 0 6px 18px -8px rgba(20,28,40,.14);
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{ 
+  --bg:#111317; --panel:#191c21; --sunk:#14171b; --ink:#e6e9ed; --ink-2:#bcc3cb; --muted:#9aa3ad; --line:#2a2f36; --line-2:#363c44;
+  --accent:#86a8f5; --accent-hover:#a3bdf8; --accent-ink:#0c1324; --accent-soft:#1b2538; --accent-line:#33466e;
+  --ok:#6fd19c; --ok-soft:#13261c; --ok-line:#285a3d;
+  --bad:#f39a90; --bad-soft:#2c1715; --bad-line:#683330;
+  --warn:#e4b75f; --warn-soft:#2a2314; --warn-line:#5d4a22;
+  --code:#14171b; --code-ink:#dfe4ea;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 22px -10px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){ 
+  --bg:#111317; --panel:#191c21; --sunk:#14171b; --ink:#e6e9ed; --ink-2:#bcc3cb; --muted:#9aa3ad; --line:#2a2f36; --line-2:#363c44;
+  --accent:#86a8f5; --accent-hover:#a3bdf8; --accent-ink:#0c1324; --accent-soft:#1b2538; --accent-line:#33466e;
+  --ok:#6fd19c; --ok-soft:#13261c; --ok-line:#285a3d;
+  --bad:#f39a90; --bad-soft:#2c1715; --bad-line:#683330;
+  --warn:#e4b75f; --warn-soft:#2a2314; --warn-line:#5d4a22;
+  --code:#14171b; --code-ink:#dfe4ea;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 22px -10px rgba(0,0,0,.6);
+  color-scheme:dark;
+}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--accent-soft);color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed}
+* {scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1200px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.brand b{font-size:19px;letter-spacing:-.01em;color:var(--accent);font-weight:750}
+.brand span{font-size:14px;color:var(--muted)}
+.tabs{display:flex;gap:4px;height:100%}
+.tab{background:none;border:0;padding:0 12px;height:100%;color:var(--ink-2);font-size:15px;font-weight:550;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:8px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.count{font-size:12px;font-weight:650;min-width:20px;height:20px;padding:0 6px;border-radius:10px;display:inline-grid;place-items:center;background:var(--sunk);color:var(--muted);font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"] .count{background:var(--accent-soft);color:var(--accent)}
+.count.bad{background:var(--bad-soft);color:var(--bad)}
+.spacer{flex:1}
+.iconbtn{width:36px;height:36px;border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;color:var(--ink-2)}
+.iconbtn:hover{border-color:var(--line-2);color:var(--ink)}
+.iconbtn svg{width:18px;height:18px}
+
+main{max-width:1200px;margin:0 auto;padding:28px 24px 64px}
+.view[hidden]{display:none}
+
+/* practice layout */
+.practice{display:grid;grid-template-columns:288px minmax(0,1fr);gap:32px;align-items:start}
+aside{position:sticky;top:84px;display:flex;flex-direction:column;gap:24px}
+.side-h{font-size:14px;font-weight:650;color:var(--ink-2);margin:0 0 8px}
+.units{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);overflow:hidden}
+.unit{display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:11px 14px 12px;position:relative}
+.unit:first-child{border-top:0}
+.unit:hover{background:var(--sunk)}
+.unit[aria-pressed="true"]{background:var(--accent-soft)}
+.unit[aria-pressed="true"] .nm{color:var(--accent)}
+.unit .nm{font-size:14.5px;font-weight:600;line-height:1.3}
+.unit .nm small{display:block;font-size:12.5px;font-weight:450;color:var(--muted);margin-top:2px}
+.unit .num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;align-self:start;padding-top:1px}
+.bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--sunk);overflow:hidden;margin-top:8px;display:flex}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--ok)} .bar .r{background:var(--bad)}
+.unit[aria-pressed="true"] .bar{background:color-mix(in srgb,var(--panel) 60%,transparent)}
+
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:13.5px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--line-2);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip .n{font-variant-numeric:tabular-nums;opacity:.75;font-size:12px}
+.side-note{font-size:13px;color:var(--muted);margin:0}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);font-size:13px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2);align-self:flex-start}
+.linkbtn:hover{color:var(--bad);text-decoration-color:currentColor}
+
+
+.filters{display:contents}
+.filt-sum{display:none}
+.tab .short{display:none}
+/* question */
+.qhead{display:flex;align-items:center;gap:12px;margin:0 0 12px;min-height:36px}
+.qpos{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.qpos b{color:var(--ink);font-weight:650}
+.nav{display:flex;gap:6px;margin-left:auto}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:26px 30px 28px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:16px}
+.tag{font-size:12.5px;font-weight:600;border-radius:4px;padding:3px 8px;background:var(--sunk);color:var(--ink-2);border:1px solid var(--line);white-space:nowrap}
+.tag.unit-t{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent)}
+.tag.real{background:var(--panel);border-color:var(--ink-2);color:var(--ink)}
+.tag.warn-t{background:var(--warn-soft);border-color:var(--warn-line);color:var(--warn)}
+.qid{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-right:4px;font-weight:600}
+.qtext{font-size:17.5px;line-height:1.55;margin:0 0 6px;max-width:72ch;text-wrap:pretty}
+.qtype{font-size:13.5px;color:var(--muted);margin:14px 0 10px}
+pre{font:13.5px/1.55 var(--mono);background:var(--code);color:var(--code-ink);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin:12px 0 4px;overflow-x:auto;tab-size:4}
+.opts{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;border:0}
+.opt{display:grid;grid-template-columns:22px 22px minmax(0,1fr) 22px;gap:10px;align-items:start;border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;cursor:pointer;background:var(--panel);transition:border-color .12s,background-color .12s}
+.opt:hover{border-color:var(--line-2);background:var(--sunk)}
+.opt input{margin:3px 0 0;width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.opt .l{font-weight:650;color:var(--muted);font-size:14.5px;padding-top:1px}
+.opt .t{font-size:15.5px;line-height:1.5}
+.opt .t pre{margin:0;padding:8px 10px;font-size:13px}
+.opt .ic{width:20px;height:20px;padding-top:2px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.ok{border-color:var(--ok-line);background:var(--ok-soft)}
+.opt.ok .ic{color:var(--ok)}
+.opt.bad{border-color:var(--bad-line);background:var(--bad-soft)}
+.opt.bad .ic{color:var(--bad)}
+.opt.miss{border-color:var(--ok-line);border-style:dashed}
+.opt.miss .ic{color:var(--ok)}
+.miss-note{display:block;font-size:13px;color:var(--ok);font-weight:600;margin-top:4px}
+.locked .opt{cursor:default}
+.locked .opt,.locked select{pointer-events:none}
+.locked .act-pre{display:none}
+.locked .opt:hover{background:inherit}
+
+.match{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:-8px}
+.match td{vertical-align:middle;padding:0}
+.match .row-t{border:1px solid var(--line);border-right:0;border-radius:var(--radius) 0 0 var(--radius);padding:10px 14px;font-size:15px;background:var(--panel)}
+.match .row-t pre{margin:0;padding:6px 8px;font-size:12.5px}
+.match .row-s{border:1px solid var(--line);border-radius:0 var(--radius) var(--radius) 0;padding:8px 10px;width:44%;background:var(--sunk)}
+.match select{width:100%;font:inherit;font-size:14.5px;padding:7px 8px;border:1px solid var(--line-2);border-radius:5px;background:var(--panel);color:var(--ink)}
+.match tr.ok .row-t,.match tr.ok .row-s{border-color:var(--ok-line);background:var(--ok-soft)}
+.match tr.bad .row-t,.match tr.bad .row-s{border-color:var(--bad-line);background:var(--bad-soft)}
+.fix{display:block;font-size:13px;color:var(--ok);margin-top:5px;font-weight:600}
+
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px}
+.btn{border:1px solid var(--line-2);background:var(--panel);border-radius:var(--radius);padding:9px 16px;font-size:15px;font-weight:600;color:var(--ink)}
+.btn:hover{background:var(--sunk)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.primary:disabled{opacity:.45}
+.btn.ghost{border-color:transparent;background:none;color:var(--muted);font-weight:550}
+.btn.ghost:hover{color:var(--ink);background:var(--sunk)}
+.kbd{font-size:12.5px;color:var(--muted);margin-left:auto}
+.kbd kbd{font:12px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--sunk)}
+
+.result{margin-top:22px;border-top:1px solid var(--line);padding-top:20px;animation:rise .28s cubic-bezier(.16,1,.3,1)}
+@keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.verdict{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;margin:0 0 10px}
+.verdict svg{width:20px;height:20px}
+.verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)} .verdict.part{color:var(--warn)} .verdict.seen{color:var(--muted)}
+.verdict small{font-weight:500;color:var(--muted);font-size:14px}
+.why{font-size:15.5px;line-height:1.6;margin:0;max-width:72ch;color:var(--ink)}
+.ref{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.ref b{color:var(--ink-2);font-weight:600}
+.warnbox{margin-top:16px;background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:var(--radius);padding:12px 14px}
+.warnbox h4{margin:0 0 4px;font-size:13.5px;font-weight:700;color:var(--warn);display:flex;align-items:center;gap:6px}
+.warnbox h4 svg{width:14px;height:14px}
+.warnbox p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink)}
+
+.map{margin-top:26px}
+.map-h{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.map-h .side-h{margin:0}
+.legend{display:flex;gap:14px;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:0}
+.cells{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:6px}
+.cell{height:32px;border-radius:5px;border:1px solid var(--line);background:var(--panel);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink-2);font-weight:600}
+.cell:hover{border-color:var(--line-2)}
+.cell.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
+.cell.bad{background:var(--bad-soft);border-color:var(--bad-line);color:var(--bad)}
+.cell.cur{outline:2px solid var(--accent);outline-offset:1px}
+.empty{border:1px dashed var(--line-2);border-radius:8px;padding:40px 24px;text-align:center;color:var(--muted)}
+.empty p{margin:0 0 14px}
+
+
+/* machete sheets: one color per unit */
+:root{--u4:#2f55d4;--u4t:#e4eafb;--u2:#0b7568;--u2t:#ddf1ed;--u3:#b85412;--u3t:#fbeadc;--u5:#6a3dc9;--u5t:#ece6fb;--u1:#b8195a;--u1t:#fae3ec;--sheet-ink:#15181c;--disp:"Barlow Condensed","Arial Narrow",sans-serif}
+:root[data-theme="dark"]{--u4:#7f9cf5;--u4t:#18213b;--u2:#4fc4b3;--u2t:#102a26;--u3:#f0955a;--u3t:#2c1d12;--u5:#a98cf3;--u5t:#211a37;--u1:#f07aa8;--u1t:#2e1520;--sheet-ink:#e6e9ed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--u4:#7f9cf5;--u4t:#18213b;--u2:#4fc4b3;--u2t:#102a26;--u3:#f0955a;--u3t:#2c1d12;--u5:#a98cf3;--u5t:#211a37;--u1:#f07aa8;--u1t:#2e1520;--sheet-ink:#e6e9ed}}
+.mpick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.mpick button{border:2px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px 6px 10px;font-size:14px;font-weight:600;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px}
+.mpick button i{width:12px;height:12px;border-radius:50%;background:var(--uc)}
+.mpick button[aria-pressed="true"]{border-color:var(--uc);color:var(--ink);background:var(--ut)}
+.mpick button small{font-weight:500;color:var(--muted)}
+.sheet{background:var(--ut);border-radius:18px;padding:clamp(16px,2.6vw,32px)}
+.sheet-h{display:flex;flex-wrap:wrap;align-items:end;gap:6px 18px;margin:0 0 20px}
+.sheet-h h2{font:700 clamp(30px,4vw,44px)/1 var(--disp);text-transform:uppercase;letter-spacing:.005em;margin:0;color:var(--sheet-ink)}
+.sheet-h p{margin:0;color:var(--ink-2);font-size:14.5px;font-weight:500}
+.ess{background:var(--uc);color:#fff;border-radius:14px;padding:18px 22px 20px;margin:0 0 22px}
+:root[data-theme="dark"] .ess{color:#0d1014}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ess{color:#0d1014}}
+.ess h3{font:700 24px/1 var(--disp);text-transform:uppercase;margin:0 0 12px;letter-spacing:.01em}
+.ess ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px}
+.ess li{font-size:15px;line-height:1.5;padding-left:18px;position:relative}
+.ess li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.8}
+.ess strong{font-weight:750}
+.blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 22px}
+.blk{background:var(--panel);border:2px solid var(--sheet-ink);border-radius:16px;padding:18px 22px 20px;box-shadow:6px 6px 0 var(--uc)}
+.blk-h{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+.blk-h b{font:700 40px/.9 var(--disp);color:var(--sheet-ink)}
+.blk-h h3{font:700 25px/1 var(--disp);text-transform:uppercase;margin:0;letter-spacing:.01em;color:var(--sheet-ink)}
+.blk-h span{margin-left:auto;font-size:12.5px;font-weight:600;color:var(--uc);white-space:nowrap;font-variant-numeric:tabular-nums}
+.blk ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.blk li{font-size:15px;line-height:1.5;padding-left:16px;position:relative;color:var(--ink)}
+.blk li::before{content:"";position:absolute;left:1px;top:.6em;width:6px;height:6px;border-radius:1px;background:var(--uc)}
+.blk strong{font-weight:700}
+.blk code,.ess code{font:13px var(--mono);background:var(--sunk);border:1px solid var(--line);border-radius:4px;padding:0 4px;white-space:nowrap}
+.ess code{background:rgba(255,255,255,.18);border-color:transparent;color:inherit}
+.sheet-empty{background:var(--panel);border:2px dashed color-mix(in srgb,var(--uc) 55%,transparent);border-radius:16px;padding:22px 24px;color:var(--ink-2);font-size:15px}
+@media (max-width:760px){.blocks,.ess ul{grid-template-columns:1fr}.blk{box-shadow:4px 4px 0 var(--uc);padding:16px 16px 18px;margin-right:4px}
+  .blk-h{flex-wrap:wrap;row-gap:4px}.blk-h span{margin-left:0;flex-basis:100%;order:3}.blk-h h3{font-size:23px}
+  .blk code,.ess code{white-space:normal;overflow-wrap:anywhere}
+  .mpick button{font-size:13px;padding:5px 12px 5px 9px}.mpick button small{display:none}
+  .sheet{padding:14px 12px 18px;border-radius:14px}.ess{padding:16px 16px 18px}}
+.blocks>*,.sheet{min-width:0}
+
+/* errores */
+.page-h{display:flex;align-items:end;gap:16px;margin:0 0 20px;flex-wrap:wrap}
+.page-h h1{font-size:26px;letter-spacing:-.015em;margin:0;line-height:1.2}
+.page-h p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:70ch}
+.page-h .btn{margin-left:auto}
+.elist{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+.elist li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 18px;border-top:1px solid var(--line)}
+.elist li:first-child{border-top:0}
+.elist .id{font-weight:650;color:var(--bad);font-variant-numeric:tabular-nums}
+.elist .q{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.elist .q small{display:block;color:var(--muted);font-size:13px}
+
+/* machete */
+.mgrid{display:grid;gap:14px;max-width:860px}
+.msec{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px}
+.msec h2{margin:0;font-size:18px;display:flex;gap:10px;align-items:baseline}
+.msec h2 small{font-size:13.5px;color:var(--muted);font-weight:500}
+.msec .pend{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+
+@media (max-width:900px){
+  .practice{grid-template-columns:1fr}
+  .filters{display:block;order:-1;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+  .filt-sum{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;font-weight:650;font-size:15px;list-style:none}
+  .filt-sum::-webkit-details-marker{display:none}
+  .filt-sum::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .filters[open] .filt-sum::after{transform:rotate(-135deg)}
+  .filt-desc{font-weight:500;color:var(--muted);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  aside{position:static;padding:4px 16px 18px}
+  .units{display:grid;grid-template-columns:1fr 1fr}
+  .unit{border-top:1px solid var(--line);border-left:1px solid var(--line)}
+}
+@media (max-width:640px){
+  .top-in{gap:12px;padding:0 14px;height:auto;min-height:56px;flex-wrap:wrap;padding-top:8px}
+  .brand span{display:none}
+  .tabs{order:3;width:100%;height:44px}
+  .tab{flex:1;justify-content:center;padding:0 6px;font-size:14px}
+  .tab .full{display:none}.tab .short{display:inline}
+  main{padding:16px 10px 48px}
+  .units{grid-template-columns:1fr}
+  .card{padding:16px 12px 18px}
+  .qtext{font-size:16.5px}
+  .opt{grid-template-columns:18px 16px minmax(0,1fr);gap:8px;padding:10px 34px 10px 12px;position:relative}
+  .opt .ic{position:absolute;top:10px;right:10px}
+  .map-h{flex-direction:column;align-items:flex-start;gap:6px}
+  .legend{flex-wrap:wrap;gap:4px 12px}.legend>*{white-space:nowrap}
+  .match,.match tbody,.match tr,.match td{display:block;width:100%}
+  .match .row-t{border-right:1px solid var(--line);border-bottom:0;border-radius:var(--radius) var(--radius) 0 0}
+  .match .row-s{width:100%;border-radius:0 0 var(--radius) var(--radius);margin-bottom:8px}
+  .kbd{display:none}
+  .elist li{grid-template-columns:44px minmax(0,1fr);}
+  .elist li .btn{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>AED</b><span>Preguntero del Parcial 5 · 2026</span></div>
+    <nav class="tabs" role="tablist" aria-label="Secciones">
+      <button class="tab" role="tab" data-view="practica" aria-selected="true"><span class="full">Práctica de preguntas</span><span class="short">Práctica</span></button>
+      <button class="tab" role="tab" data-view="machete" aria-selected="false">Machete</button>
+      <button class="tab" role="tab" data-view="errores" aria-selected="false">Mis errores <span class="count" id="errCount">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="view" id="v-practica">
+    <div class="practice">
+      <details class="filters" id="filters" open>
+      <summary class="filt-sum"><span>Filtros</span><span class="filt-desc" id="filtDesc"></span></summary>
+      <aside aria-label="Filtros">
+        <div>
+          <h2 class="side-h">Unidades por prioridad</h2>
+          <div class="units" id="units"></div>
+        </div>
+        <div>
+          <h2 class="side-h">De dónde viene</h2>
+          <div class="seg" id="srcSeg"></div>
+        </div>
+        <div>
+          <h2 class="side-h">Mostrar</h2>
+          <div class="seg" id="showSeg"></div>
+        </div>
+        <div>
+          <h2 class="side-h">Orden</h2>
+          <div class="seg" id="ordSeg"></div>
+        </div>
+        <div id="resetWrap"><button class="linkbtn" id="resetBtn">Borrar mi progreso</button></div>
+      </aside>
+      </details>
+      <div>
+        <div class="qhead">
+          <div class="qpos" id="qpos"></div>
+          <div class="nav">
+            <button class="iconbtn" id="prevBtn" aria-label="Pregunta anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+            <button class="iconbtn" id="nextBtn" aria-label="Pregunta siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
+          </div>
+        </div>
+        <div id="cardWrap"></div>
+        <div class="map">
+          <div class="map-h"><h2 class="side-h">Preguntas del filtro</h2>
+            <div class="legend"><span><i style="background:var(--ok)"></i>bien</span><span><i style="background:var(--bad)"></i>mal o parcial</span><span><i style="background:var(--line-2)"></i>sin responder</span></div></div>
+          <div class="cells" id="cells"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-machete" hidden>
+    <div class="page-h"><div><h1>Machete</h1><p>Lo esencial de cada unidad y su machete completo. El machete se completa a medida que estudiemos cada unidad.</p></div></div>
+    <div class="mpick" id="mpick" role="group" aria-label="Unidad"></div>
+    <div id="mgrid"></div>
+  </section>
+
+  <section class="view" id="v-errores" hidden>
+    <div class="page-h"><div><h1>Mis errores</h1><p>Las preguntas cuya última respuesta estuvo mal o fue parcial. Cuando la respondas bien, sale de la lista.</p></div>
+      <button class="btn primary" id="practErr">Practicar mis errores</button></div>
+    <div id="elistWrap"></div>
+  </section>
+</main>
+
+<script>
+const Q = [];
+// ───────────── UNIDAD 1 · RECURSIVIDAD (F14) ─────────────
+Q.push(
+{id:"1.1",u:1,src:["Cuest. 14","Daypo","P5 2021","P5 2022","Final 2022"],t:"single",
+q:"Suponga que se quiere plantear una definición recursiva del concepto de bosque. ¿Cuál de las siguientes propuestas generales es correcta y constituye la mejor definición?",
+o:["Un bosque es un conjunto de árboles que puede estar vacío, o puede contener uno o más árboles agrupados con otro bosque.",
+"Un bosque es un bosque.",
+"Un bosque es un conjunto de árboles que puede estar vacío, o puede contener n árboles (con n > 0).",
+"Un bosque es un conjunto que puede contener uno o más árboles agrupados con otro bosque."],a:[0],
+w:"Una definición recursiva bien planteada necesita dos cosas: un caso base que corte (\"puede estar vacío\") y un paso recursivo que agregue conocimiento (\"árboles + otro bosque\"). La opción d es recursiva pero no tiene caso base: regresión infinita. La c no es recursiva. La b no agrega nada.",
+r:"Ficha 14 · Definiciones recursivas"},
+
+{id:"1.2",u:1,src:["Cuest. 14","Daypo","P5 2022"],t:"single",
+q:"El cálculo de aⁿ (a > 0, n ≥ 0, y a⁰ = 1) es multiplicar n veces el número a por sí mismo. Por caso, 5³ = 5 · 5 · 5 = 125. Todas las opciones tienen el caso base potencia(a, n) = 1 si n == 0. ¿Cuál es el paso recursivo matemáticamente correcto (para n > 0)?",
+o:["a * potencia(a-1, n)","a * potencia(a, n)","a + potencia(a, n-1)","a * potencia(a, n-1)"],a:[3],
+w:"aⁿ = a · aⁿ⁻¹. El que se achica hacia el caso base es n, no a. Ejemplo: 5³ = 5 · 5² = 5 · 5 · 5¹ = 5 · 5 · 5 · 5⁰ = 125. La b nunca llega al caso base (n no cambia), la a cambia la base, y la c suma en vez de multiplicar.",
+r:"Ficha 14 · Definiciones recursivas"},
+
+{id:"1.3",u:1,src:["Cuest. 14","Daypo"],t:"single",
+q:"Suponga que la versión recursiva de la función factorial vista en clases fuese redefinida así. ¿Cuál es el problema (si lo hubiese)?",
+c:"def factorial(n):\n    f = n * factorial(n - 1)\n    if n == 0:\n        return 1\n    return f",
+o:["La función siempre retorna un 1, sin importar cuál sea el valor de n.",
+"Contiene todos los elementos que debería tener una función recursiva bien planteada, pero en el orden incorrecto: la condición para chequear si n es cero debería estar antes que la llamada recursiva para evitar la recursión infinita.",
+"Para calcular el factorial necesita un ciclo for que genere los números a multiplicar. Así planteada, la función hace un único primer cálculo incompleto y lo retorna.",
+"No hay ningún problema. Funciona correctamente."],a:[1],
+w:"La primera línea se llama a sí misma antes de preguntar si n es 0. Entonces nunca llega al if: factorial(3) llama a factorial(2), que llama a factorial(1), a factorial(0), a factorial(-1)… hasta que el stack se llena (stack overflow). La condición de corte tiene que ir antes de la llamada.",
+r:"Ficha 14 · Programación recursiva"},
+
+{id:"1.4",u:1,src:["Cuest. 14","Daypo","Parcial 51"],t:"single",
+q:"Podríamos plantear un programa controlado por menú de opciones usando recursión, sin ciclo, como el que se muestra. ¿Hay algún problema o contraindicación respecto del uso de esta versión recursiva?",
+c:"def menu():\n    print('1. Opcion 1')\n    print('2. Opcion 2')\n    print('3. Salir')\n    op = int(input('Ingrese opcion: '))\n    if op == 1:\n        print('Eligio la opcion 1...')\n    elif op == 2:\n        print('Eligio la opcion 2...')\n    elif op == 3:\n        return\n    menu()\n\n# script principal...\nmenu()",
+o:["Esta versión recursiva es completamente equivalente a la versión iterativa. No hay ningún motivo para preferir la una sobre la otra.",
+"No hay ningún problema ni contraindicación. Y no sólo eso: la versión recursiva es más simple y compacta, por lo cual es incluso preferible usarla.",
+"La versión recursiva que se mostró no funciona. Sólo permite cargar una vez la opción elegida, e inmediatamente se detiene.",
+"Esta versión recursiva posiblemente sea más simple y compacta que la versión basada en un ciclo, pero la versión recursiva pide memoria de stack cada vez que se invoca, por lo que es más conveniente la iterativa."],a:[3],
+w:"Funciona (vuelve a mostrar el menú), pero cada vez que elegís una opción se apila una nueva llamada en el stack que no se libera hasta salir. Si el usuario usa el menú muchas veces, el stack crece sin necesidad. Con un ciclo eso no pasa: por eso conviene la iterativa.",
+r:"Ficha 14 · Stack Segment / cuándo usar recursión"},
+
+{id:"1.5",u:1,src:["Cuest. 14","Daypo"],t:"single",
+q:"El producto de a y b (a ≥ 0, b ≥ 0) es en última instancia una suma: 5 · 3 = 5 + 5 + 5. ¿Es correcto el siguiente planteo recursivo de producto(a, b)?",
+c:"def producto(a, b):\n    if a == 0 or b == 0:\n        return 0\n    return a + producto(a, b-1)",
+o:["No. La función sugerida siempre retornará 0, sean cuales fuesen los valores de a y b.",
+"No. La última línea debería decir return a + producto(a-1, b-1) en lugar de return a + producto(a, b-1).",
+"Sí. Es correcto.",
+"No. La propia definición previa del concepto de producto es incorrecta: un producto es una multiplicación, y no una suma..."],a:[2],
+w:"Probalo con 5 · 3: producto(5,3) = 5 + producto(5,2) = 5 + 5 + producto(5,1) = 5 + 5 + 5 + producto(5,0) = 15 + 0 = 15. Tiene caso base (b == 0 devuelve 0) y el paso recursivo achica b. No siempre da 0: el 0 solo se suma al final.",
+r:"Ficha 14 · Definiciones recursivas"},
+
+{id:"1.6",u:1,src:["Cuest. 14","Daypo"],t:"single",
+q:"Tabla comparativa del cálculo del término n-ésimo de Fibonacci. Iterativa: código aceptable, memoria constante, tiempo ????. Recursiva: código óptimo, memoria proporcional a n, tiempo ????. ¿Cuál es la estimación para el tiempo de ejecución de ambos?",
+o:["Iterativa: tiempo proporcional a n (lineal) — Recursiva: tiempo proporcional a bⁿ (exponencial, para algún b > 1)",
+"Iterativa: tiempo constante (no depende de n) — Recursiva: tiempo proporcional a bⁿ (exponencial)",
+"Iterativa: tiempo proporcional a bⁿ (exponencial) — Recursiva: tiempo proporcional a n (lineal)",
+"Iterativa: tiempo proporcional a n (lineal) — Recursiva: tiempo proporcional a n (lineal)"],a:[0],
+w:"La iterativa hace un ciclo de n vueltas: lineal. La recursiva llama dos veces a sí misma (fibo(n-1) + fibo(n-2)) y recalcula los mismos subproblemas una y otra vez, así que las llamadas crecen de forma exponencial. La iterativa no es constante: necesita n vueltas.",
+r:"Ficha 14 · Fibonacci recursivo"},
+
+{id:"1.7",u:1,src:["Cuest. 14","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes propuestas generales son ciertas en relación al segmento de memoria conocido como Stack Segment?",
+o:["El Stack Segment funciona como una pila de datos (LIFO: Last In - First Out): el último dato en llegar se almacena en la cima del stack, y será por eso el primero en ser retirado.",
+"El Stack Segment funciona como una cola de datos (FIFO: First In - First Out): el primer dato en llegar se almacena al frente, y será el primero en ser retirado.",
+"El Stack Segment se utiliza como soporte interno solamente en el proceso de invocación a funciones recursivas.",
+"El Stack Segment se utiliza como soporte interno en el proceso de invocación a funciones (con o sin recursividad): se va llenando a medida que se desarrolla la cascada de invocaciones, y se vacía a medida que se produce el proceso de regreso."],a:[0,3],
+w:"El stack es una pila: la última función llamada es la primera en terminar. Y lo usa toda llamada a función, no solo las recursivas: si main() llama a f() y f() llama a g(), en el stack quedan main, f, g, y se van sacando en orden inverso.",
+r:"Ficha 14 · El Stack Segment"},
+
+{id:"1.8",u:1,src:["Cuest. 14","Daypo","Final 2022"],t:"single",
+q:"Con def fibo(n): if n <= 1: return 1 / return fibo(n-1) + fibo(n-2). Para fibo(4) se calcula 2 veces fibo(2), 3 veces fibo(1) y 2 veces fibo(0): 7 llamadas que repiten trabajo (2 + 3 + 2). Analice el árbol de t = fibo(6). ¿Cuántas veces en total se invoca fibo() para hacer más de una vez el mismo trabajo, SIN incluir las invocaciones para fibo(0) y fibo(1)?",
+o:["0","12","11","10"],a:[3],
+w:"Contá cuántas veces aparece cada subproblema en el árbol de fibo(6): fibo(5) 1 vez, fibo(4) 2 veces, fibo(3) 3 veces, fibo(2) 5 veces (siguen la serie de Fibonacci). Los que se repiten son fibo(4), fibo(3) y fibo(2), y se cuentan todas sus apariciones, como en el ejemplo: 2 + 3 + 5 = 10.",
+r:"Ficha 14 · Fibonacci recursivo",
+warn:"El enunciado dice F(0) = 0, pero el código devuelve 1 para n ≤ 1. Esa diferencia no cambia el conteo: lo que se cuentan son llamadas, no valores. La clave oficial (final julio 2022) confirma 10."},
+
+{id:"1.9",u:1,src:["Cuest. 14","Daypo","P5 2022","Parcial 51"],t:"multi",
+q:"¿En cuáles de las siguientes situaciones el uso de recursividad está efectivamente recomendado?",
+o:["Siempre que se pueda escribir una definición recursiva del problema.",
+"Recorrido y procesamiento de estructuras de datos no lineales como árboles y grafos.",
+"Nunca.",
+"Generación y procesamiento de imágenes y gráficos fractales (figuras compuestas por versiones más simples de la misma figura original)."],a:[1,3],
+w:"La recursión conviene cuando el problema tiene forma recursiva y la versión iterativa sería mucho más difícil: árboles, grafos y fractales. \"Siempre que se pueda\" es falso: Fibonacci o el factorial se pueden escribir recursivos y la iterativa es mejor.",
+r:"Ficha 14 · Cuándo usar recursión"},
+
+{id:"1.10",u:1,src:["P5 2021 (×2)","P5 2022 (×2)","Parcial 51"],t:"single",
+q:"¿Qué elementos son necesarios para que una función recursiva se considere bien planteada?",
+o:["La función debe tener al menos un ciclo en su bloque de acciones, y ese ciclo debe estar planteado de forma tal que nunca entre en un lazo infinito.",
+"La función debe tener al menos una invocación a sí misma en su bloque de acciones, y después de esas invocaciones debe tener una o más condiciones de control que permitan interrumpir el proceso recursivo si se ha llegado a alguna de las situaciones triviales o base del problema.",
+"La función debe tener al menos una invocación a sí misma en su bloque de acciones, y antes de esas invocaciones debe tener una o más condiciones de control que permitan interrumpir el proceso recursivo si se ha llegado a alguna de las situaciones triviales o base del problema.",
+"La función debe tener al menos una invocación a sí misma en su bloque de acciones."],a:[2],
+w:"Necesita las dos cosas: llamarse a sí misma y tener el caso base ANTES de la llamada. Es la misma idea que la pregunta del factorial (1.3): si el if va después, nunca se ejecuta. La b es la trampa: dice \"después\".",
+r:"Ficha 14 · Programación recursiva",
+warn:"No está en ningún cuestionario, pero salió dos veces en el mismo parcial en 2021 y en 2022. Fijate bien en la palabra \"antes\" vs \"después\": es lo único que cambia entre la b y la c."},
+
+{id:"1.11",u:1,src:["P5 2021"],t:"single",
+q:"Dada la siguiente función recursiva del factorial, ¿qué pasa si se le pasa como parámetro el valor -4?",
+c:"def factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)",
+o:["Así planteada, si entra el -4 (o cualquier negativo), la condición de corte nunca es cierta y se producirá un error de stack overflow en algún momento.",
+"La función devuelve como resultado: 24.",
+"La función no tiene definido ningún caso base, y por lo tanto no está bien planteada.",
+"La función devuelve como resultado: -24."],a:[0],
+w:"El caso base solo prevé el 0. Con -4 la función va a -5, -6, -7… restando 1 nunca llega a 0, así que se apilan llamadas hasta llenar el stack. La c es falsa: el caso base existe (n == 0), solo que con negativos no se alcanza.",
+r:"Ficha 14 · Programación recursiva"},
+
+{id:"1.12",u:1,src:["P5 2021"],t:"multi",
+q:"¿Cuáles de las siguientes afirmaciones son correctas respecto de las características de la recursividad?",
+o:["La recursividad puede ocupar más memoria que un algoritmo iterativo equivalente.",
+"La recursividad utiliza memoria de stack.",
+"La recursividad siempre ocupa más memoria que el algoritmo iterativo equivalente.",
+"La recursividad utiliza memoria ROM."],a:[0,1],
+w:"Cada llamada usa espacio en el stack, así que PUEDE ocupar más memoria, pero no SIEMPRE: hay casos en que la iterativa consume del mismo orden. La palabra \"siempre\" es la trampa. La ROM es memoria de solo lectura y no tiene nada que ver.",
+r:"Ficha 14 · El Stack Segment"},
+
+{id:"1.13",u:1,src:["Parcial 51"],t:"multi",
+q:"¿Cuáles de las siguientes afirmaciones son ciertas en relación a conceptos asociados con la recursividad?",
+o:["Si una función es recursiva, entonces no debe incluir ningún ciclo en su bloque de acciones.",
+"Cada instancia recursiva que es ejecutada almacena dos grupos de datos en el stack segment: la dirección de retorno (a la que se debe regresar cuando termine esa instancia) y las variables locales que esa instancia haya creado.",
+"A medida que se desarrolla la cascada de invocaciones recursivas, el stack segment se va llenando para darle soporte a cada instancia, y cuando una instancia logra finalizar y se produce el proceso de vuelta atrás, el stack segment comienza a vaciarse.",
+"Una función recursiva no puede incluir más de una invocación a sí misma en su bloque de acciones."],a:[1,2],
+w:"Cada llamada guarda en el stack a dónde volver y sus variables locales; el stack crece con la cascada y se vacía al volver. La a es falsa: una función recursiva puede tener ciclos. La d también: fibo() se llama dos veces a sí misma.",
+r:"Ficha 14 · El Stack Segment",
+warn:"Este parcial no tiene respuestas oficiales. La respuesta sale de la Ficha 14 y del contraejemplo de fibo()."},
+
+{id:"1.14",u:1,src:["Parcial 51"],t:"single",
+q:"¿Qué se entiende (esencialmente) por una gráfica o figura fractal?",
+o:["Es aquella que se compone de fragmentos distintos de diversas figuras, conformando una imagen sin un patrón definido ni obvio.",
+"Es aquella que se compone de versiones más simples y pequeñas de la misma figura original.",
+"Es aquella que se compone sólo por cuadrados, círculos y triángulos combinados.",
+"Es aquella que se compone a partir de la combinación de millares de pequeños puntos que al ser mirados desde cierta distancia producen la imagen compuesta."],a:[1],
+w:"Un fractal se repite a sí mismo a escalas más chicas (por ejemplo, un helecho donde cada hoja es un helecho chiquito). Por eso es un caso ideal para recursión: dibujar la figura = dibujar versiones más chicas de la misma figura.",
+r:"Ficha 14 · Cuándo usar recursión",
+warn:"Este parcial no tiene respuestas oficiales. La definición coincide con la que usa la pregunta 1.9 del cuestionario."}
+);
+// ───────────── UNIDAD 2 · ANÁLISIS DE ALGORITMOS Y BÚSQUEDAS (F27, F16) ─────────────
+const BIGO = ["O(1)","O(log(n))","O(n)","O(n*log(n))","O(n^2)","O(n^3)"];
+Q.push(
+{id:"2.1",u:2,src:["Cuest. 14","Daypo","P5 2021"],t:"multi",
+q:"¿Cuáles de los siguientes son factores esenciales a tener en cuenta cuando se realiza el análisis de la eficiencia de un algoritmo (por ejemplo, para comparar dos algoritmos que resuelven el mismo problema)?",
+o:["El diseño de la interfaz de usuario.","La complejidad aparente del código fuente.","El tiempo de ejecución.","El consumo de memoria."],a:[1,2,3],
+w:"Los dos factores principales son tiempo y memoria, y la ficha agrega un tercero: la complejidad aparente del código (si dos algoritmos tardan y ocupan lo mismo, elegís el más claro). La interfaz de usuario no tiene nada que ver con la eficiencia del algoritmo.",
+r:"Ficha 27 · Factores de eficiencia",
+warn:"Mucha gente marca solo tiempo y memoria y saca parcial. La clave oficial del P5 2021 marca las tres: tiempo, memoria y complejidad aparente del código."},
+
+{id:"2.2",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"¿Cuántas comparaciones en el peor caso obliga a hacer una búsqueda secuencial en una lista ordenada (o en un arreglo ordenado) que contenga n valores?",
+o:["Peor caso: O(1) comparaciones.","Peor caso: O(log(n)) comparaciones.","Peor caso: O(n) comparaciones.","Peor caso: O(n²) comparaciones."],a:[2],
+w:"La búsqueda secuencial mira casilla por casilla. Que el arreglo esté ordenado no la acelera: si x está al final (o no está), revisa las n casillas. O(log n) es la binaria, no la secuencial.",
+r:"Ficha 27 · Notación Big O (búsqueda secuencial)"},
+
+{id:"2.3",u:2,src:["Cuest. 27","Daypo","P5 2022"],t:"single",
+q:"¿Cuál es la diferencia entre el peor caso y el caso promedio en el análisis de algoritmos?",
+o:["El peor caso es la configuración más favorable; el caso promedio es una configuración pensada para desfavorecer al algoritmo.",
+"El peor caso es la configuración más favorable; el caso promedio es una configuración aleatoria.",
+"El peor caso es la configuración más desfavorable; el caso promedio es una configuración pensada para favorecer al algoritmo.",
+"El peor caso es la configuración de datos de entrada más desfavorable para el algoritmo, mientras que el caso promedio describe una configuración aleatoria de datos (no pensada ni para favorecer ni para desfavorecer al algoritmo)."],a:[3],
+w:"Peor caso = los datos que más trabajo le dan al algoritmo (por ejemplo, en la búsqueda secuencial, que x no esté). Caso promedio = datos en orden aleatorio, ni a favor ni en contra.",
+r:"Ficha 27 · Peor caso y caso promedio"},
+
+{id:"2.4",u:2,src:["Cuest. 27","Daypo","P5 2021"],t:"multi",
+q:"¿Cuáles de los siguientes son factores de eficiencia comunes a considerar en el análisis de algoritmos?",
+o:["La complejidad aparente del código fuente.","La calidad aparente de la interfaz de usuario.","El tiempo de ejecución.","El consumo de memoria."],a:[0,2,3],
+w:"Igual que la 2.1 con otras palabras: tiempo, memoria y complejidad aparente del código. La interfaz de usuario queda afuera.",
+r:"Ficha 27 · Factores de eficiencia",
+warn:"Gemela de la 2.1. La clave oficial del P5 2021 marca las tres opciones; no te quedes solo con tiempo y memoria."},
+
+{id:"2.5",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(1)?",
+o:["El tiempo de ejecución es logarítmico: a medida que aumenta el número de datos, aumenta el tiempo pero en forma muy suave.",
+"El tiempo de ejecución es constante, sin importar la cantidad de datos.",
+"El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción.",
+"El tiempo de ejecución siempre es de un segundo, sin importar la cantidad de datos."],a:[1],
+w:"O(1) = constante: tarda lo mismo con 10 datos que con un millón. Ejemplo: acceder a v[5]. No significa \"un segundo\": Big O no mide segundos, mide cómo crece el tiempo.",
+r:"Ficha 27 · Órdenes clásicos"},
+
+{id:"2.6",u:2,src:["Cuest. 27","Daypo","P5 2021","P5 2022"],t:"single",
+q:"¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(n²)?",
+o:["El tiempo de ejecución es constante, sin importar la cantidad de datos.",
+"El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción.",
+"A medida que aumenta el número de datos, aumenta el tiempo en forma muy suave: el conjunto se divide en dos, se procesa una mitad, se desecha la otra, y se repite.",
+"El proceso normalmente consiste en dos ciclos (uno dentro del otro) de aproximadamente n iteraciones cada uno, de forma que las operaciones críticas se aplican un número cuadrático de veces."],a:[3],
+w:"Dos ciclos anidados de n vueltas: n · n = n² operaciones. Ejemplo: Selección Directa. Si duplicás n, el tiempo se multiplica por 4.",
+r:"Ficha 27 · Órdenes clásicos"},
+
+{id:"2.7",u:2,src:["Cuest. 27","Daypo","Final 2022"],t:"single",
+q:"¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(n)?",
+o:["El proceso normalmente consiste en dos ciclos anidados de aproximadamente n iteraciones cada uno.",
+"El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción.",
+"El tiempo de ejecución es constante, sin importar la cantidad de datos.",
+"A medida que aumenta el número de datos, aumenta el tiempo en forma muy suave: se divide en dos, se procesa una mitad y se desecha la otra."],a:[1],
+w:"Lineal: el doble de datos, el doble de tiempo. Ejemplo: un solo ciclo que recorre el arreglo, como la búsqueda secuencial.",
+r:"Ficha 27 · Órdenes clásicos"},
+
+{id:"2.8",u:2,src:["Cuest. 27","Daypo","P5 2022"],t:"single",
+q:"¿Qué significa decir que un algoritmo dado tiene un tiempo de ejecución O(log(n))?",
+o:["El tiempo de ejecución es lineal: si aumenta el número de datos, aumenta el tiempo en la misma proporción.",
+"El proceso consiste en dos ciclos anidados de aproximadamente n iteraciones cada uno.",
+"A medida que aumenta el número de datos, aumenta el tiempo pero en forma muy suave: el conjunto de datos se divide en dos, se procesa una de las mitades, se desecha la otra y se repite el proceso hasta que no pueda volver a dividirse la mitad que haya quedado.",
+"El tiempo de ejecución es constante, sin importar la cantidad de datos."],a:[2],
+w:"Logarítmico: en cada paso se descarta la mitad. Es la búsqueda binaria. Con 1.000 datos alcanzan unas 10 comparaciones; con 1.000.000, unas 20.",
+r:"Ficha 27 · Órdenes clásicos"},
+
+{id:"2.9",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"Dispone de cuatro algoritmos para el mismo problema, con tiempos (peor caso) O(n*log(n)), O(n²), O(n³) y O(n). ¿Cuál debería elegir, suponiendo que todos hacen el mismo consumo razonable de memoria?",
+o:["El algoritmo cuyo tiempo de ejecución es O(n*log(n))","El algoritmo cuyo tiempo de ejecución es O(n²)","El algoritmo cuyo tiempo de ejecución es O(n)","El algoritmo cuyo tiempo de ejecución es O(n³)"],a:[2],
+w:"De más rápido a más lento: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ). De los cuatro, el que crece más despacio es O(n).",
+r:"Ficha 27 · Órdenes clásicos"},
+
+{id:"2.10",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"¿Con qué nombre general se conoce en la Teoría de la Complejidad a un problema para el cual sólo se conocen algoritmos cuyo tiempo de ejecución es exponencial (O(2ⁿ))?",
+o:["Problemas Inmanejables","Problemas Irresolubles","Problemas Imperdonables","Problemas Intratables"],a:[3],
+w:"Se llaman intratables: tienen solución, pero las conocidas tardan tiempo exponencial y no sirven en la práctica ni para n chicos. No son \"irresolubles\": se pueden resolver, solo que muy lento.",
+r:"Ficha 27 · Problemas intratables"},
+
+{id:"2.11",u:2,src:["Cuest. 27","Daypo","P5 2021"],t:"match",
+q:"Para cada proceso, seleccione la expresión de orden que mejor describe su tiempo de ejecución en el peor caso.",
+rows:["Dado un arreglo v con n componentes, acceder y cambiar el valor del casillero v[k].",
+"Dado un arreglo v con n componentes, ordenarlo de menor a mayor mediante selección directa.",
+"Dado un arreglo ya ordenado v con n componentes, buscar x aplicando búsqueda binaria.",
+"Dadas dos matrices de orden n*n, obtener la matriz producto con el método tradicional.",
+"Dado un arreglo v con n componentes, buscar x aplicando búsqueda secuencial."],
+o:["O(1)","O(n)","O(n^2)","O(n^3)","O(log(n))"],ma:[0,2,4,3,1],
+w:"Acceso directo: un solo paso, O(1). Selección: dos ciclos anidados, O(n²). Binaria: divide a la mitad, O(log n). Producto de matrices: tres ciclos anidados, O(n³). Secuencial: un ciclo, O(n).",
+r:"Ficha 27 · Ejemplos de análisis"},
+
+{id:"2.12",u:2,src:["Cuest. 27","Daypo"],t:"match",
+q:"Para cada código en Python, seleccione la expresión Big O que mejor describa su tiempo de ejecución en el peor caso.",
+rows:["n = int(input('N: '))\nac = 0\nfor i in range(n):\n    ac += i",
+"n = int(input('N: '))\nac = 0\nfor i in range(n):\n    for j in range(i+1, n):\n        ac += i*j\nfor i in range(n):\n    for j in range(n):\n        for k in range(n):\n            ac += (i+j+k)",
+"ac = 0\nfor i in range(10):\n    ac += i",
+"n = int(input('N: '))\nac = 0\nfor i in range(n):\n    for j in range(i+1, n):\n        ac += i*j"],
+o:["O(1)","O(n)","O(n^2)","O(n^3)"],ma:[1,3,0,2],codeRows:true,
+w:"Un ciclo de n: O(n). Dos anidados seguidos de tres anidados: O(n²) + O(n³) = O(n³) (queda el término mayor). Un ciclo de 10 vueltas fijas no depende de n: O(1). Dos anidados (aunque el de adentro arranque en i+1, hace unas n²/2 vueltas): O(n²).",
+r:"Ficha 27 · Ejemplos de análisis",
+warn:"El ciclo de range(10) es O(1) aunque tenga un for: lo que importa es si depende de n. Y en el bloque con dos ciclos y después tres, se suman los órdenes y queda solo el mayor."},
+
+{id:"2.13",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"Analice el siguiente esquema. ¿Cuál de las siguientes expresiones de orden describe mejor el tiempo de ejecución de esta función en el peor caso?",
+c:"def procesar(n, m):\n    for i in range(n+1):\n        for j in range(m+1):\n            # ... acciones sencillas a realizar...\n            # ... suponga que no hay otro ciclo aquí...\n            # ... y que sólo aparecen operaciones de tiempo constante...",
+o:["O(n*n)","O(n*m)","O(n)","O(m)"],a:[1],
+w:"El ciclo de afuera da n+1 vueltas y, por cada una, el de adentro da m+1. Total ≈ n · m operaciones. Como n y m son variables distintas, la respuesta depende de las dos: O(n·m). No es O(n²) porque m no tiene por qué ser igual a n.",
+r:"Ficha 27 · Big O con dos variables"},
+
+{id:"2.14",u:2,src:["Cuest. 27","Daypo","P5 2021","P5 2022"],t:"multi",
+q:"Selección Directa hace n-1 pasadas con n-1, n-2, …, 1 comparaciones: en total ½(n² - n) comparaciones, siempre. ¿Cuáles de las siguientes expresiones son correctas para describir esa cantidad?",
+o:["Cantidad de comparaciones: O(n²)","Cantidad de comparaciones: o(n²)","Cantidad de comparaciones: Θ(n²)","Cantidad de comparaciones: Ω(n²)"],a:[0,2,3],
+w:"½(n² - n) crece como n². Big O es cota superior (no crece más rápido que n²), Ω es cota inferior (no crece más lento) y Θ es las dos a la vez: las tres valen. La o minúscula exige que crezca estrictamente MÁS LENTO que n², y no es el caso.",
+r:"Ficha 27 · Notaciones O, Ω, Θ y o"},
+
+{id:"2.15",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"¿Qué diferencia existe entre el conteo exhaustivo de operaciones críticas y el análisis asintótico del comportamiento de una función?",
+o:["Ninguna. Ambas se refieren a la misma técnica básica del análisis de algoritmos.",
+"El conteo exhaustivo busca una fórmula que exprese de manera rigurosa la cantidad de operaciones críticas que lleva a cabo un algoritmo, mientras que el análisis asintótico busca determinar el comportamiento general de una función para valores muy grandes del tamaño del problema.",
+"El análisis asintótico busca la fórmula rigurosa de operaciones críticas, mientras que el conteo exhaustivo busca el comportamiento general para n muy grande.",
+"El conteo exhaustivo busca la fórmula rigurosa de operaciones críticas, mientras que el análisis asintótico busca la fórmula rigurosa de las operaciones no críticas."],a:[1],
+w:"Conteo exhaustivo = la cuenta exacta, por ejemplo ½(n² - n). Análisis asintótico = cómo se comporta eso cuando n es enorme: O(n²). La c tiene los nombres al revés.",
+r:"Ficha 27 · Análisis asintótico"},
+
+{id:"2.16",u:2,src:["Cuest. 27","Daypo","P5 2022","Final 2022"],t:"single",
+q:"¿Qué se entiende, en el contexto del Análisis de Algoritmos, por un Orden de Complejidad?",
+o:["Un conjunto o familia de funciones matemáticas que se comportan asintóticamente de la misma forma.","Un conjunto o familia de algoritmos que resuelven el mismo problema.","Un conjunto o familia de subrutinas con similares objetivos (equivalente al concepto de módulo).","Un conjunto de datos ordenados."],a:[0],
+w:"O(n²), por ejemplo, es la familia de todas las funciones que para n grande crecen como n² (3n² + 5, ½n² - n, etc.). Es un conjunto de funciones, no de algoritmos.",
+r:"Ficha 27 · Órdenes de complejidad",
+warn:"En el P5 2022 y en el final de julio 2022, la clave oficial aceptó también \"familia de algoritmos que resuelven el mismo problema\". La que coincide con la Ficha 27 es \"familia de funciones\": marcá esa."},
+
+{id:"2.17",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"Si los algoritmos de ordenamiento simples tienen todos un tiempo O(n²) en el peor caso, ¿cómo explica que las mediciones efectivas de sus tiempos sean diferentes frente al mismo arreglo?",
+o:["La notación Big O rescata el término más significativo en la expresión que calcula el rendimiento, descartando constantes y otros términos que podrían no coincidir en los tres algoritmos.",
+"Los tiempos deben coincidir. Si hay diferencias, se debe a errores en los instrumentos de medición.",
+"La notación Big O no se debe usar para estimar el peor caso, sino sólo el caso medio.",
+"La notación Big O no se usa para medir tiempos sino para contar comparaciones. Es un error decir que los tiempos tienen \"orden n cuadrado\"."],a:[0],
+w:"Un algoritmo puede hacer 2n² operaciones y otro 0,5n² + 10n: los dos son O(n²), pero en la práctica uno tarda 4 veces más. Big O se queda con el término dominante y descarta las constantes.",
+r:"Ficha 27 · Notación Big O"},
+
+{id:"2.18",u:2,src:["Cuest. 27","Daypo"],t:"single",
+q:"La cantidad de procesos que un algoritmo realiza en el peor caso es f(n) = 3n³ + 5n² + 2n^1.5. ¿Cuál expresión representa mejor el orden del algoritmo para el peor caso?",
+o:["O(3n³ + 5n² + 2n^1.5)","O(n^1.5)","O(n³ + n²)","O(n³)"],a:[3],
+w:"En Big O te quedás solo con el término que crece más rápido y sin su constante: de 3n³ + 5n² + 2n^1.5 queda n³. Las opciones a y c son técnicamente cotas, pero no la expresión simplificada que pide Big O.",
+r:"Ficha 27 · Polinomio de grado k es O(nᵏ)"},
+
+{id:"2.19",u:2,src:["Cuest. 32","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes afirmaciones son correctas en relación a conceptos elementales del análisis de algoritmos?",
+o:["Los dos factores de eficiencia más comúnmente utilizados en el análisis de algoritmos son el tiempo de ejecución de un algoritmo y el espacio de memoria que un algoritmo emplea.",
+"El análisis del peor caso es aquel en el cual se estudia el comportamiento de un algoritmo cuando debe procesar la configuración más desfavorable posible de los datos que recibe.",
+"La notación Big O se usa para expresar el rendimiento de un algoritmo en términos de una función que imponga una cota inferior para ese algoritmo en cuanto al factor medido.",
+"El análisis del caso promedio es aquel en el cual se estudia el comportamiento de un algoritmo cuando debe procesar una configuración de datos que llegan en forma aleatoria."],a:[0,1,3],
+w:"Big O es cota SUPERIOR (el algoritmo no se comporta peor que eso); la cota inferior es Ω. Las otras tres son las definiciones de la ficha: los dos factores más usados son tiempo y memoria, peor caso = datos más desfavorables, caso promedio = datos aleatorios.",
+r:"Ficha 27 · Notación Big O / peor caso",
+warn:"No confundir con la 2.1: acá dice \"los DOS factores más comúnmente utilizados\", y eso es cierto (tiempo y memoria). La complejidad aparente es un tercer factor que solo influye a veces. En el intento de 2022 se marcaron solo dos de las tres correctas y el resultado fue parcial."},
+
+{id:"2.20",u:2,src:["Cuest. 32","Daypo","P5 2021","P5 2022"],t:"match",
+q:"Para cada algoritmo o técnica, seleccione la expresión Big O que mejor expresa su tiempo de ejecución en el peor caso.",
+rows:["Ordenamiento por selección directa.","Ordenamiento rápido (Quicksort) (considere aquí el caso promedio).","Multiplicación de matrices cuadradas de tamaño n*n.","Acceso directo a un casillero de un vector.","Búsqueda binaria en un arreglo ya ordenado.","Búsqueda secuencial en un arreglo (ordenado o desordenado)."],
+o:BIGO,ma:[4,3,5,0,1,2],
+w:"Igual que la 2.11 pero suma Quicksort: en el caso promedio es O(n·log n) (log n niveles de recursión, n de trabajo por nivel).",
+r:"Ficha 27 · Ejemplos de análisis"},
+
+{id:"2.21",u:2,src:["Cuest. 32","Daypo"],t:"single",
+q:"Dado un arreglo de n componentes, ¿qué significa decir que en el peor caso la cantidad de comparaciones de la búsqueda secuencial es O(n)?",
+o:["Significa que en el peor caso el algoritmo hará n comparaciones.","Significa que en el peor caso el algoritmo no hará ninguna comparación.","Significa que en el peor caso el algoritmo hará siempre más de n comparaciones.","Significa que en el peor caso el algoritmo siempre hará menos de n comparaciones."],a:[0],
+w:"En el peor caso (x al final o ausente) compara con las n casillas: n comparaciones.",
+r:"Ficha 27 · Notación Big O (búsqueda secuencial)"},
+
+{id:"2.22",u:2,src:["Cuest. 16"],t:"single",
+q:"¿Cuántas comparaciones hace la Búsqueda Secuencial para encontrar un valor x en un arreglo de n componentes en el peor caso posible (x en la última casilla o ausente)?",
+o:["n² comparaciones.","n comparaciones.","log₂(n) comparaciones.","Una sola comparación, siempre."],a:[1],
+w:"Recorre casilla por casilla hasta el final: n comparaciones. log₂(n) es lo de la búsqueda binaria.",
+r:"Ficha 16 · Búsqueda secuencial"},
+
+{id:"2.23",u:2,src:["Cuest. 16"],t:"single",
+q:"Suponga la siguiente variante de la búsqueda secuencial. ¿Hay algún inconveniente o problema?",
+c:"def linear_search(v, x):\n    r = -1\n    for i in range(len(v)):\n        if x == v[i]:\n            r = i\n    return r",
+o:["La variante propuesta funciona solamente si el valor x está en el arreglo (falla si x no está).",
+"Hay un inconveniente: la variante propuesta encuentra el valor buscado (si existía) pero no corta el ciclo de búsqueda al encontrarlo, con lo que siempre se hacen n comparaciones.",
+"La variante propuesta no funciona correctamente: sólo llega a analizar el contenido de la primera casilla.",
+"La variante propuesta funciona correctamente."],a:[1],
+w:"Encuentra x, pero sigue recorriendo hasta el final aunque lo haya encontrado en la casilla 0: siempre n comparaciones. Si x no está, devuelve -1 sin problemas, así que la a es falsa.",
+r:"Ficha 16 · Búsqueda secuencial"},
+
+{id:"2.24",u:2,src:["Cuest. 16"],t:"single",
+q:"Suponga la siguiente variante de la búsqueda secuencial. ¿Funciona correctamente? Si no, ¿cuál es el problema?",
+c:"def linear_search(v, x):\n    n = len(v)\n    for i in range(n):\n        if x == v[i]:\n            return i\n        else:\n            return -1",
+o:["La variante propuesta no funciona correctamente: sólo llega a analizar el contenido de la primera casilla.",
+"Provoca un error de intérprete: un if no puede tener una instrucción return en cada una de sus ramas.",
+"La variante propuesta funciona correctamente.",
+"La variante propuesta funciona solamente si el valor x está en el arreglo (falla si x no está)."],a:[0],
+w:"En la primera vuelta, o encuentra x en v[0] y retorna, o entra al else y retorna -1. Nunca llega a la segunda casilla. El return -1 tendría que ir afuera del ciclo.",
+r:"Ficha 16 · Búsqueda secuencial"},
+
+{id:"2.25",u:2,src:["Cuest. 16"],t:"multi",
+q:"¿En cuáles de los siguientes casos es aplicable el algoritmo de búsqueda binaria en un arreglo?",
+o:["El arreglo está ordenado y permanecerá sin cambios.",
+"El arreglo está desordenado, se nos permite ordenarlo, luego podrá alterarse (quedando eventualmente desordenado) y debemos realizar varias búsquedas.",
+"El arreglo está desordenado y no se nos permite ordenarlo.",
+"El arreglo está desordenado, se nos permite ordenarlo, luego permanecerá sin cambios y debemos realizar muchas búsquedas."],a:[0,3],
+w:"La binaria exige que el arreglo esté ordenado al momento de buscar. Si se puede ordenar una vez y después no cambia, vale la pena (muchas búsquedas rápidas). Si se vuelve a desordenar, la binaria deja de funcionar.",
+r:"Ficha 16 · Búsqueda binaria"},
+
+{id:"2.26",u:2,src:["Cuest. 16"],t:"single",
+q:"Suponga la siguiente variante de la búsqueda binaria. ¿Funciona correctamente? Si no, ¿cuál es el problema?",
+c:"def binary_search(v, x):\n    izq, der = 0, len(v) - 1\n    while izq <= der:\n        c = (izq + der) // 2\n        if x == v[c]:\n            return c\n        else:\n            return -1\n        if x < v[c]:\n            der = c - 1\n        else:\n            izq = c + 1\n    return -1",
+o:["La variante propuesta no funciona correctamente: sólo llega a analizar el contenido de la casilla del centro del arreglo.",
+"Funciona solamente si el valor x está en el arreglo (falla si x no está).",
+"Provoca un error de intérprete y no llega a arrancar: el segundo if nunca puede ejecutarse.",
+"La variante propuesta funciona correctamente."],a:[0],
+w:"Mismo error que la 2.24: en la primera vuelta compara con el centro y retorna sí o sí (c o -1). Que haya código que nunca se ejecuta no es un error de intérprete: Python lo deja correr igual.",
+r:"Ficha 16 · Búsqueda binaria"},
+
+{id:"2.27",u:2,src:["Cuest. 16"],t:"single",
+q:"Con el algoritmo de búsqueda binaria visto en clase, ¿qué pasaría si el arreglo v contuviese cadenas de caracteres (en lugar de números) y x también fuese una cadena?",
+c:"def binary_search(v, x):\n    izq, der = 0, len(v) - 1\n    while izq <= der:\n        c = (izq + der) // 2\n        if x == v[c]:\n            return c\n        if x < v[c]:\n            der = c - 1\n        else:\n            izq = c + 1\n    return -1",
+o:["La función mostrada funcionaría correctamente de todos modos.",
+"Funciona solamente si el valor x está en el arreglo (falla si no está, con error).",
+"No interrumpe, pero funcionaría en forma incorrecta y retornaría siempre -1.",
+"Provocaría un error en tiempo de ejecución al intentar determinar si x es menor o mayor que v[c]."],a:[0],
+w:"En Python las cadenas se comparan con < y > por orden alfabético ('ana' < 'beto'). Si el arreglo de cadenas está ordenado, la binaria funciona igual que con números.",
+r:"Ficha 16 · Búsqueda binaria"},
+
+{id:"2.28",u:2,src:["Cuest. 16"],t:"single",
+q:"¿Qué pasaría con el algoritmo de Búsqueda Binaria si el valor buscado x estuviese repetido más de una vez en el arreglo?",
+o:["Funciona solamente si x está en el arreglo (falla si x no está, con un mensaje de error).",
+"No interrumpe el programa, pero retornaría siempre -1 (nunca encontraría x).",
+"El algoritmo funcionaría correctamente de todos modos: retornaría el índice de la primera casilla encontrada que contenga a x.",
+"Produciría un error en tiempo de ejecución y se interrumpiría el programa."],a:[2],
+w:"Apenas compara con una casilla que vale x, retorna ese índice. Con repetidos no se rompe nada: devuelve alguna de las casillas que tienen x.",
+r:"Ficha 16 · Búsqueda binaria",
+warn:"\"La primera casilla encontrada\" es la primera que el algoritmo toca, no necesariamente la de menor índice del arreglo. En el intento propio se marcó la a y estuvo mal."},
+
+{id:"2.29",u:2,src:["Cuest. 16"],t:"multi",
+q:"¿En cuáles de los siguientes casos es aplicable el algoritmo de Fusión de Arreglos visto en clases para producir un tercer arreglo ordenado?",
+o:["Los arreglos originales deben estar ordenados de menor a mayor si se quiere producir un tercer arreglo ordenado de menor a mayor.",
+"El proceso es aplicable sin importar si los dos arreglos originales están ordenados o no, ya que el algoritmo primero ordena esos dos arreglos y luego procede a la fusión.",
+"Los arreglos originales deben estar desordenados.",
+"Uno de los arreglos originales debe estar ordenado y el otro puede estar desordenado."],a:[0],
+w:"merge() recorre a y b en paralelo y copia siempre el menor de los dos actuales. Eso solo da un resultado ordenado si a y b ya estaban ordenados. La función de la ficha no ordena nada antes de fusionar.",
+r:"Ficha 16 · Fusión de arreglos ordenados",
+warn:"La b suena razonable, pero el merge() de la ficha no ordena: asume que los dos arreglos ya vienen ordenados."}
+);
+// ───────────── UNIDAD 3 · ORDENAMIENTO (F16, F22, F31) ─────────────
+Q.push(
+{id:"3.1",u:3,src:["Cuest. 16"],t:"single",
+q:"¿Cuál es la idea principal en la que se basa el algoritmo de ordenamiento de Selección Directa visto en clase (ordenar de menor a mayor)?",
+o:["Realizar varias pasadas sobre el arreglo, en cada pasada seleccionar el menor valor de los que aún no han sido ordenados, y colocarlo en su casilla definitiva.",
+"Realizar varias pasadas, comparar cada elemento con el que le sigue inmediatamente, intercambiarlos si están desordenados, hasta que el arreglo quede ordenado.",
+"En cada pasada seleccionar un elemento cualquiera x, pasar a la derecha los mayores y a la izquierda los menores, y repetir con cada \"mitad\".",
+"Realizar una sola pasada, comparando cada elemento con el que le sigue e intercambiándolos si están invertidos."],a:[0],
+w:"Selección = buscar el menor y ponerlo en su lugar. Ejemplo con [7, 3, 5, 2]: 1ª pasada deja el 2 en v[0], 2ª deja el 3 en v[1], 3ª deja el 5 en v[2]. La b es Burbuja y la c es Quicksort.",
+r:"Ficha 16 · Selección Directa"},
+
+{id:"3.2",u:3,src:["Cuest. 16"],t:"single",
+q:"La función implementa Selección Directa para ordenar de menor a mayor. ¿Qué efecto se produciría si la condición if v[i] > v[j]: fuese reemplazada por if v[i] < v[j]:?",
+c:"def selection_sort(v):\n    n = len(v)\n    for i in range(n-1):\n        for j in range(i+1, n):\n            if v[i] > v[j]:\n                v[i], v[j] = v[j], v[i]",
+o:["Provocará que el programa se interrumpa con un mensaje de error en la primera comparación.","No causaría ningún efecto particular: seguiría ordenando de menor a mayor.","El arreglo sería ordenado, pero ahora de mayor a menor.","El arreglo permanecería siempre sin cambio alguno."],a:[2],
+w:"Con > lleva el menor a la casilla pivot; con < lleva el mayor. El algoritmo sigue funcionando, pero ordena al revés: de mayor a menor.",
+r:"Ficha 16 · Selección Directa"},
+
+{id:"3.3",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Cuál es la principal característica de todos los métodos de ordenamiento conocidos como métodos simples o directos?",
+o:["Tienen muy mal rendimiento si el tamaño n del arreglo es pequeño, y un rendimiento aceptable si n es grande o muy grande.",
+"Tienen muy mal rendimiento en tiempo de ejecución si el tamaño n del arreglo es grande o muy grande, y un rendimiento aceptable si n es pequeño.",
+"Tienen muy mal rendimiento en tiempo de ejecución, cualquiera sea el tamaño n del arreglo.",
+"Tienen muy buen rendimiento en tiempo de ejecución, cualquiera sea el tamaño n del arreglo."],a:[1],
+w:"Son O(n²): con 100 datos no se nota (10.000 operaciones), con un millón es inviable. Por eso sirven para arreglos chicos y no para grandes.",
+r:"Ficha 22 · Métodos simples",
+warn:"Gemela de la 3.13, que pregunta lo mismo con otras opciones. Acá la respuesta es la del tamaño (mal si n es grande); en la 3.13 es \"orden cuadrático en el peor caso\"."},
+
+{id:"3.4",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Cuál de las siguientes describe mejor la idea de funcionamiento del ordenamiento por Inserción Simple?",
+o:["Realizar n pasadas comparando cada elemento con el siguiente, logrando que en cada pasada los mayores se acomoden al final.",
+"Realizar n pasadas, en cada una determinar el menor de los elementos analizados y llevarlo a la casilla pivot.",
+"Suponer que el arreglo tiene un subconjunto inicialmente ordenado que contiene sólo al primer elemento, luego realizar n pasadas, de forma que en cada una agregue el siguiente elemento al grupo que está ordenado.",
+"Reacomodar los n elementos en forma aleatoria, controlar si quedó ordenado, y si no, volver a reacomodarlos."],a:[2],
+w:"Como ordenar cartas en la mano: arrancás con una carta (ordenada) y cada carta nueva la insertás en su lugar dentro de las que ya tenés. La a es Burbuja, la b es Selección y la d es un chiste (\"bogosort\").",
+r:"Ficha 22 · Inserción Simple"},
+
+{id:"3.5",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Cuál de las siguientes describe mejor la idea del ordenamiento por Intercambio Directo (Burbuja) para ordenar de menor a mayor?",
+o:["Suponer un subconjunto ordenado con el primer elemento y en cada pasada agregar el siguiente al grupo ordenado.",
+"Reacomodar en forma aleatoria hasta que quede ordenado.",
+"Realizar n pasadas, de forma que en cada una se compare a cada elemento con el siguiente, logrando que en cada pasada los mayores vayan acomodándose al final del arreglo.",
+"Realizar n pasadas, en cada una determinar el menor y llevarlo a la casilla pivot."],a:[2],
+w:"Burbuja compara vecinos e intercambia si están al revés: el mayor \"sube\" como una burbuja hasta el final en cada pasada.",
+r:"Ficha 22 · Intercambio Directo (Burbuja)"},
+
+{id:"3.6",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Cuál de las siguientes describe mejor la idea del ordenamiento por Selección Simple o Selección Directa?",
+o:["Realizar n pasadas, de forma que en cada una se determine el menor de los elementos analizados, y llevar ese menor a la casilla pivot.",
+"Suponer un subconjunto ordenado con el primer elemento y agregar el siguiente en cada pasada.",
+"Reacomodar en forma aleatoria hasta que quede ordenado.",
+"Realizar n pasadas comparando cada elemento con el siguiente, llevando los mayores al final."],a:[0],
+w:"Selección = en cada pasada elegir el menor y llevarlo a la casilla pivot (v[0], después v[1], etc.).",
+r:"Ficha 16 · Selección Directa / Ficha 22"},
+
+{id:"3.7",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Por qué motivo el algoritmo Bubblesort usa una bandera de corte en la versión presentada en las fichas de clase?",
+o:["La bandera de corte se usa para terminar el proceso apenas se detecte que en la pasada actual no hubo intercambios, para ahorrar tiempo.",
+"La bandera de corte se usa para garantizar que el arreglo quede ordenado.",
+"La bandera determina si se ordena de menor a mayor (True) o de mayor a menor (False).",
+"No es cierto que la versión vista en clases use una bandera de corte."],a:[0],
+w:"Si en una pasada no hubo ningún intercambio, el arreglo ya está ordenado y no tiene sentido seguir. La bandera detecta eso y corta antes. No garantiza el orden: el orden lo garantiza el algoritmo.",
+r:"Ficha 22 · Intercambio Directo (Burbuja)"},
+
+{id:"3.8",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Cuál de los siguientes es el creador del famoso algoritmo de ordenamiento conocido como Quicksort?",
+o:["Charles Antony Richard Hoare","Donald Shell","Edsger Wybe Dijkstra","J. W. J. Williams"],a:[0],
+w:"Quicksort es de C. A. R. Hoare (1960). Shell creó el Shellsort y Williams el Heapsort; Dijkstra es el de caminos mínimos en grafos.",
+r:"Ficha 22 / Ficha 31",
+warn:"Está en el límite de los personajes célebres (que no entran), pero no es una biografía. La dejamos por las dudas: es una pregunta fácil."},
+
+{id:"3.9",u:3,src:["Cuest. 22","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes son características correctas del algoritmo Shellsort?",
+o:["El algoritmo Shellsort es complejo de analizar para determinar su rendimiento en forma matemática, ya que ese rendimiento depende fuertemente de la serie de incrementos decreciente que se haya seleccionado.",
+"El algoritmo Shellsort consiste en una mejora del algoritmo de Inserción Directa (o Inserción Simple), consistente en armar subconjuntos ordenados con elementos a distancia h > 1 en las primeras fases, y terminar con h = 1 en la última.",
+"El algoritmo Shellsort consiste en una mejora de Selección Directa, buscando el menor en tiempo logarítmico.",
+"Una muy buena serie de incrementos decrecientes a usar es la serie h = {...16, 8, 4, 2, 1}."],a:[0,1],
+w:"Shellsort mejora a Inserción: primero ordena elementos separados por distancia h (grande) y va bajando h hasta 1. Su rendimiento depende de la serie de h. La c describe Heapsort (mejora de Selección). La serie de potencias de 2 es mala (ver 3.10).",
+r:"Ficha 22 · Shellsort",
+warn:"Gemela de la 3.14, con opciones distintas. Acá son la a y la b."},
+
+{id:"3.10",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"¿Cuál es el problema si en el algoritmo Shellsort se elige una serie de incrementos decrecientes de la forma { ..., 16, 8, 4, 2, 1 }?",
+o:["Ningún problema: esa serie es tan buena como cualquier otra.","El arreglo no quedará ordenado al final.","Los subconjuntos analizados contendrán casi los mismos elementos cuando la distancia usada sea cada vez menor, sin garantías de lograr una buena organización del arreglo antes de la última pasada.","No sólo no hay ningún problema, sino que esa serie es la mejor posible para Shellsort."],a:[2],
+w:"Con h = 8 y después h = 4, los elementos que compara a distancia 4 ya se habían comparado a distancia 8 (8 es múltiplo de 4): se repite trabajo. El arreglo sí queda ordenado al final, porque la última pasada es con h = 1.",
+r:"Ficha 22 · Shellsort"},
+
+{id:"3.11",u:3,src:["Cuest. 22","Daypo"],t:"single",
+q:"Sabemos que en el algoritmo de Shell se termina haciendo una última pasada con incremento h = 1. ¿Cuál de las siguientes es cierta respecto de esa última pasada?",
+o:["La pasada con h = 1 es obligatoria pero no es necesario que sea la última.",
+"Con h = 1 el algoritmo sólo controla si el arreglo está ya ordenado, y si no lo está relanza el proceso con otra sucesión de valores h.",
+"No es obligatorio que lo haga, pero favorece un ordenamiento más rápido.",
+"Con h = 1 el algoritmo se convierte en un ordenamiento por inserción simple, y sólo entonces garantiza que el arreglo quede ordenado."],a:[3],
+w:"Con h = 1 se compara cada elemento con su vecino: es Inserción Simple pura. Las pasadas anteriores solo dejan el arreglo \"casi ordenado\" para que esta última sea rápida; recién la de h = 1 garantiza el orden.",
+r:"Ficha 22 · Shellsort",
+warn:"En el intento propio se marcó la c (\"no es obligatorio\") y estuvo mal: la pasada con h = 1 es obligatoria y es la que garantiza el orden."},
+
+{id:"3.12",u:3,src:["Cuest. 22","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes son características correctas del algoritmo Heapsort?",
+o:["Heapsort utiliza una cantidad de memoria adicional igual al tamaño del arreglo para armar el heap.",
+"Heapsort se basa en encontrar sucesivamente el menor (o el mayor) de entre los elementos que quedan, para llevar ese valor a su casillero final, pero de forma que la búsqueda en cada vuelta se haga en forma muy veloz.",
+"Heapsort es muy eficiente en tiempo de ejecución, tanto para el caso promedio como para el peor caso.",
+"Heapsort arma el heap en el mismo vector, sin usar memoria extra."],a:[1,2,3],
+w:"Heapsort es una Selección mejorada: busca el mayor usando un heap (un árbol armado dentro del mismo arreglo), en tiempo logarítmico. Es O(n·log n) en el caso promedio y en el peor, y no usa memoria extra.",
+r:"Ficha 22 · Heapsort"},
+
+{id:"3.13",u:3,src:["Cuest. 27","Daypo","Final 2022"],t:"single",
+q:"¿Cuál es la principal característica de todos los métodos de ordenamiento conocidos como métodos simples o directos?",
+o:["Son muy fáciles de programar.","Son muy veloces para cualquier tamaño del arreglo a ordenar.","Tienen un tiempo de ejecución de orden cuadrático en el peor caso.","Tienen un tiempo de ejecución de orden lineal en el peor caso."],a:[2],
+w:"Burbuja, Selección e Inserción son O(n²) en el peor caso. Que sean fáciles de programar es cierto, pero no es la característica que los define.",
+r:"Ficha 22 · Métodos simples",
+warn:"Gemela de la 3.3. Acá la respuesta es \"orden cuadrático\". \"Fáciles de programar\" es la trampa."},
+
+{id:"3.14",u:3,src:["Cuest. 27","Daypo","P5 2021"],t:"multi",
+q:"¿Cuáles de las siguientes son características correctas del algoritmo Shellsort?",
+o:["El algoritmo Shellsort consiste en una mejora del algoritmo de Inserción Directa (o Inserción Simple), consistente en armar subconjuntos ordenados con elementos a distancia h > 1 en las primeras fases, y terminar con h = 1 en la última.",
+"En el caso promedio, el algoritmo Shellsort es tan eficiente como el Heapsort o el Quicksort, con tiempo de ejecución O(n*log(n)).",
+"El algoritmo Shellsort es complejo de analizar para determinar su rendimiento en forma matemática. Se sabe que para la serie de incrementos decrecientes usada en la implementación vista en clases, tiene un tiempo de ejecución para el peor caso de O(n^1.5).",
+"El algoritmo Shellsort consiste en una mejora de Selección Directa, buscando el menor en tiempo logarítmico."],a:[0,2],
+w:"Shellsort mejora Inserción y, con la serie de la clase, es O(n^1.5) en el peor caso: mejor que O(n²) pero peor que O(n·log n). Por eso la b es falsa. La d describe Heapsort.",
+r:"Ficha 22 · Shellsort"},
+
+{id:"3.15",u:3,src:["Cuest. 27","Daypo","P5 2021","P5 2022"],t:"multi",
+q:"¿Cuáles de las siguientes son correctas en cuanto a los tiempos de ejecución de los algoritmos de ordenamiento clásicos?",
+o:["Algoritmo Heap Sort: O(n*log(n)) tanto para el caso promedio como para el peor caso.","Algoritmos directos o simples: O(n²) en el peor caso para todos ellos.","Algoritmo Quick Sort: O(n*log(n)) en el caso promedio, pero O(n²) en el peor caso.","Algoritmo Shell Sort: O(n²) en el peor caso para la serie de incrementos decrecientes vista en clase."],a:[0,1,2],
+w:"Resumen para memorizar: simples O(n²); Shell O(n^1.5) con la serie de clase; Heap O(n·log n) siempre; Quick O(n·log n) promedio y O(n²) en el peor. La d es falsa porque Shell es O(n^1.5), no O(n²).",
+r:"Ficha 22 / Ficha 27 · Ordenamientos compuestos"},
+
+{id:"3.16",u:3,src:["Cuest. 31","Daypo","P5 2022","Final 2022"],t:"single",
+q:"¿Cuál es la mejora esencial que el algoritmo Quicksort realiza sobre el algoritmo Bubblesort o Burbuja?",
+o:["En las versiones analizadas en clases, Quicksort sólo usa un ciclo para recorrer el arreglo, mientras que Bubblesort usa dos.",
+"Quicksort primero determina qué tan desordenado está el arreglo, mientras que Bubblesort procede directamente a ordenarlo.",
+"Quicksort acelera el cambio de posición tanto de los elementos menores como de los mayores, mientras que Bubblesort solo acelera a los mayores (o a los menores, dependiendo de la implementación).",
+"Quicksort no implementa ninguna mejora sustancial sobre Bubblesort."],a:[2],
+w:"Burbuja mueve los elementos de a un lugar (intercambia vecinos). Quicksort recorre desde los dos extremos e intercambia elementos lejanos, así los menores y los mayores llegan rápido a su zona.",
+r:"Ficha 31 · Quicksort"},
+
+{id:"3.17",u:3,src:["Cuest. 31","Daypo","P5 2022","Final 2022"],t:"single",
+q:"¿Cuál de las siguientes situaciones haría que el algoritmo Quicksort degenere en su peor caso, de orden n²?",
+o:["Que el arreglo esté ya ordenado, en la misma secuencia en que se lo quiere ordenar.",
+"El algoritmo Quicksort no tiene un peor caso O(n²). Su tiempo siempre es O(n*log(n)).",
+"Que el arreglo de entrada tenga sus elementos dispuestos de tal forma que cada vez que se seleccione el pivot en cada partición, resulte que ese pivot sea siempre el menor o el mayor de la partición que se está procesando.",
+"Que el arreglo esté ya ordenado, pero al revés."],a:[2],
+w:"Si el pivot siempre es el menor o el mayor, cada partición deja 0 elementos de un lado y n-1 del otro: n niveles de recursión con n de trabajo cada uno, O(n²).",
+r:"Ficha 31 · Peor caso de Quicksort",
+warn:"\"Ya ordenado\" (a o d) solo lleva al peor caso si se toma como pivot el primero o el último. La pregunta es general y la respuesta es la del pivot. En el final 2022 marcaron \"ya ordenado\" y estuvo mal."},
+
+{id:"3.18",u:3,src:["Cuest. 31","Daypo"],t:"single",
+q:"¿Cuál de las siguientes estrategias de obtención del pivot es la más recomendable para evitar que Quicksort se degrade a su peor caso O(n²)?",
+o:["En cada partición, usar como pivot al valor de la casilla central.","En cada partición, usar como pivot al valor de la primera casilla.","En cada partición, obtener el pivot por la mediana de tres (ya sea la mediana entre el primero, el último y el central; o bien la mediana entre tres elementos aleatorios de la partición).","En cada partición, usar como pivot al valor de la última casilla."],a:[2],
+w:"La mediana de tres casi nunca elige el menor ni el mayor, que es justo lo que provoca el peor caso. El central solo también puede caer mal; la mediana de tres lo reduce mucho más.",
+r:"Ficha 31 · Mediana de tres"},
+
+{id:"3.19",u:3,src:["Cuest. 31","Daypo","P5 2021","P5 2022","Parcial 51"],t:"single",
+q:"¿Por qué es considerada una mala idea tomar como pivot al primer elemento (o al último) de cada partición al implementar Quicksort?",
+o:["Porque de esa forma aumenta el riesgo de caer en el peor caso, o aproximarse a él, si el arreglo estuviese ya ordenado o casi ordenado.",
+"No es cierto que sea una mala idea. Ambas alternativas son tan buenas como cualquier otra.",
+"Porque aumenta el riesgo de caer en el peor caso si el tamaño n del arreglo fuese muy grande.",
+"Porque aumenta el riesgo de caer en el peor caso si el arreglo estuviese completamente desordenado."],a:[0],
+w:"En un arreglo ordenado el primero es el menor y el último es el mayor: exactamente el pivot que lleva al peor caso. Y los arreglos ordenados o casi ordenados aparecen seguido en la práctica.",
+r:"Ficha 31 · Elección del pivot"},
+
+{id:"3.20",u:3,src:["Cuest. 31","Daypo"],t:"single",
+q:"Considere la función vista en clases para calcular la mediana de tres de una partición entre izq y der (n = der - izq + 1). ¿Cuál es su tiempo de ejecución en notación O?",
+c:"def get_pivot_m3(v, izq, der):\n    central = int((izq + der) / 2)\n    if v[der] < v[izq]:\n        v[der], v[izq] = v[izq], v[der]\n    if v[central] < v[izq]:\n        v[central], v[izq] = v[izq], v[central]\n    if v[central] > v[der]:\n        v[central], v[der] = v[der], v[central]\n    return v[central]",
+o:["O(n)","O(n²)","O(1)","O(log(n))"],a:[2],
+w:"No tiene ciclos: hace siempre 3 comparaciones y como mucho 3 intercambios, sea la partición de 10 o de un millón de elementos. Tiempo constante.",
+r:"Ficha 31 · Mediana de tres"},
+
+{id:"3.21",u:3,src:["Cuest. 31","Daypo"],t:"single",
+q:"¿Cuál es la cantidad de niveles (altura) del árbol de invocaciones recursivas que genera Quicksort al ordenar n elementos, en el caso promedio?",
+o:["Altura = n","Altura = n * log(n)","Altura = log(n)","Altura = n²"],a:[2],
+w:"En promedio cada partición divide el arreglo más o menos a la mitad: n, n/2, n/4… hasta 1. Eso son log₂(n) niveles. Por eso el total es n (trabajo por nivel) · log n (niveles).",
+r:"Ficha 31 · Análisis de Quicksort"},
+
+{id:"3.22",u:3,src:["Cuest. 31","Daypo","P5 2021"],t:"single",
+q:"¿Cuál es la cantidad de niveles (altura) del árbol de invocaciones recursivas que genera Quicksort al ordenar n elementos, en el peor caso?",
+o:["Altura = n","Altura = n²","Altura = log(n)","Altura = n * log(n)"],a:[0],
+w:"En el peor caso cada partición saca un solo elemento (el pivot) y deja n-1: n, n-1, n-2… son n niveles. Con n de trabajo por nivel da O(n²).",
+r:"Ficha 31 · Peor caso de Quicksort",
+warn:"No confundir con la 3.21: en el peor caso la altura es n, no log(n). En el P5 2021 marcaron log(n) y estuvo mal."}
+);
+// ───────────── UNIDAD 4 · PILAS, COLAS, ABB Y GRAFOS (F28, F29, F30) ─────────────
+Q.push(
+{id:"4.1",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"¿Cuál es la diferencia entre la abstracción de datos y la abstracción funcional?",
+o:["La abstracción de datos busca captar el conjunto de procesos relevante para el tipo abstracto, mientras que la funcional busca determinar el conjunto de datos más relevante.",
+"La abstracción de datos busca captar el conjunto de datos más relevante para representar un tipo abstracto, mientras que la funcional busca determinar el conjunto de procesos relevante para esos datos.",
+"Ninguna. Son sólo dos formas de referirse al mecanismo de abstracción.",
+"No existe un mecanismo de abstracción de datos ni uno funcional. Existe sólo un mecanismo de abstracción."],a:[1],
+w:"Abstracción de DATOS = qué datos guardo (una pila guarda una lista de elementos). Abstracción FUNCIONAL = qué operaciones ofrezco sobre esos datos (push, pop, peek). La a tiene los nombres al revés.",
+r:"Ficha 28 · Tipos abstractos de datos"},
+
+{id:"4.2",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"Se quiere implementar un tipo abstracto Fecha para un programa de gestión de eventos sociales (casamientos, cumpleaños, etc.). ¿Cuál de las siguientes estrategias de abstracción es la más adecuada?",
+o:["Datos: una tupla con tres componentes para el año, el mes y el día. Funcional: buscar una fecha, reservar una fecha, liberar una fecha y modificar los datos de una fecha para un evento.",
+"Datos: un registro con año, mes, día, nombre del cliente, tipo de evento, monto presupuestado y una proyección meteorológica. Funcional: buscar, reservar, liberar y modificar.",
+"Datos: un registro con tres campos para el año, el mes y el día. Funcional: buscar una fecha dada, reservar una fecha para un evento, liberar una fecha para un evento y modificar los datos de una fecha para un evento.",
+"Datos: una cadena de caracteres con toda la fecha (por ejemplo '2015/08/31'). Funcional: mostrar la fecha en colores, imprimirla como cartel, cambiar el número del mes por el nombre."],a:[2],
+w:"Una Fecha necesita solo año, mes y día (la b mete datos del evento, que no son de la fecha). Y las operaciones tienen que servir al problema (reservar, liberar), no ser decorativas como en la d. Entre registro y tupla gana el registro: la tupla es inmutable y no se podría \"modificar los datos de una fecha\".",
+r:"Ficha 28 · Abstracción de datos y funcional",
+warn:"La a y la c solo difieren en \"tupla\" vs \"registro\". La clave es que la tupla de Python es inmutable."},
+
+{id:"4.3",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"¿Cuál de las siguientes expresiones describe la forma de trabajo general de una Pila?",
+o:["LIFO (Last In - First Out)","FIFO (First In - First Out)","OIFO (Ordered In - First Out)","OIRO (Ordered In - Random Out)"],a:[0],
+w:"Pila = como una pila de platos: el último que ponés arriba es el primero que sacás. LIFO.",
+r:"Ficha 28 · Pilas"},
+
+{id:"4.4",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"¿Cuál de las siguientes situaciones de programación es la principal aplicación de una Pila?",
+o:["Procesar una secuencia de datos en orden aleatorio.","Procesar una secuencia de datos en orden inverso al de su entrada.","Procesar una secuencia de datos en orden de menor a mayor.","Procesar una secuencia de datos en el mismo orden en el que ingresaron."],a:[1],
+w:"Si entran 1, 2, 3, salen 3, 2, 1: la pila invierte el orden. Ejemplo: el botón \"deshacer\" o el Stack Segment de las llamadas a funciones.",
+r:"Ficha 28 · Pilas"},
+
+{id:"4.5",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"Una pila p tiene [8 - 6 - 5 - 3 - 7] (el 8 es el tope). ¿Cuál secuencia permite retirar el 5 dejando el 6 y el 8 nuevamente arriba, es decir, dejar la pila en [8 - 6 - 3 - 7]?",
+o:["n1 = p.pop()\nn2 = p.pop()\nx = p.pop()\np.push(n2)\np.push(n1)",
+"n1 = p.pop()\nn2 = p.pop()\nx = p.pop()",
+"n1 = p.pop()\nn2 = p.pop()\nx = p.peek()\np.push(n2)\np.push(n1)",
+"n1 = p.pop()\nn2 = p.pop()\nx = p.pop()\np.push(n1)\np.push(n2)"],a:[0],oc:true,
+w:"Sacás el 8 (n1), el 6 (n2) y el 5 (x). Para que quede el 8 arriba, tenés que volver a meter primero el 6 y después el 8: push(n2), push(n1). La d los deja al revés (6 arriba). La c usa peek, que mira el 5 sin sacarlo. La b no vuelve a meter el 6 ni el 8.",
+r:"Ficha 28 · Pilas (push, pop, peek)",
+warn:"En el Daypo las opciones aparecen como \"Primero / Segundo / Tercero / Cuarto\" según el orden de la imagen. La correcta es la que saca tres veces y vuelve a meter n2 y después n1."},
+
+{id:"4.6",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"Una pila p tiene [3 - 4 - 6 - 7] con el 3 al frente. p2 y p3 son pilas vacías. ¿Cuál secuencia deja p invertida, en [7 - 6 - 4 - 3] con el 7 al frente?",
+o:["while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p3.push(p2.pop())",
+"while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p3.push(p2.pop())\nwhile not p3.is_empty():\n    p.push(p3.pop())",
+"while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p3.push(p2.pop())\nwhile not p3.is_empty():\n    p2.push(p3.pop())",
+"while not p.is_empty():\n    p2.push(p.pop())\nwhile not p2.is_empty():\n    p.push(p2.pop())"],a:[1],oc:true,
+w:"Cada vez que pasás todo de una pila a otra, el orden se invierte. p → p2 (invertida), p2 → p3 (vuelve al original), p3 → p (invertida otra vez, y queda en p). Tres pasadas = invertida, y en la pila correcta. La d hace dos pasadas: deja p como estaba. La c termina en p2, no en p.",
+r:"Ficha 28 · Pilas",
+warn:"En el Daypo las opciones aparecen como \"Primero / Segundo / Tercero / Cuarto\". La correcta es la de tres ciclos que termina con p.push(p3.pop())."},
+
+{id:"4.7",u:4,src:["Cuest. 28","Daypo","Final 2022"],t:"single",
+q:"¿Cuál de las siguientes expresiones describe la forma de trabajo general de una Cola?",
+o:["OIRO (Ordered In - Random Out)","OIFO (Ordered In - First Out)","LIFO (Last In - First Out)","FIFO (First In - First Out)"],a:[3],
+w:"Cola = la fila del súper: el primero que llega es el primero que atienden. FIFO.",
+r:"Ficha 28 · Colas"},
+
+{id:"4.8",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"¿Cuál de las siguientes situaciones de programación es la principal aplicación de una Cola?",
+o:["Procesar una secuencia de datos en orden de menor a mayor.","Procesar una secuencia de datos en orden inverso al de su entrada.","Procesar una secuencia de datos en el mismo orden en el que ingresaron.","Procesar una secuencia de datos en orden aleatorio."],a:[2],
+w:"La cola respeta el orden de llegada: si entran 1, 2, 3, salen 1, 2, 3. Ejemplo: la cola de impresión.",
+r:"Ficha 28 · Colas"},
+
+{id:"4.9",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"Una cola c tiene [3 - 4 - 6 - 7] con el 3 al frente. ¿Cuál secuencia la deja invertida, en [7 - 6 - 4 - 3] con el 7 al frente?",
+o:["# c2 y c3 son dos colas vacías\nwhile not c.is_empty():\n    c2.add(c2, c.remove())\nwhile not c2.is_empty():\n    c2.add(c2.remove())\nwhile not c3.is_empty():\n    c.add(c3.remove())",
+"# c2 es OTRA cola vacía\nwhile not c.is_empty():\n    c2.add(c.remove())\nwhile not c2.is_empty():\n    c.add(c2.remove())",
+"# p1 y p2 son dos PILAS vacías\nwhile not c.is_empty():\n    p1.push(c.remove())\nwhile not p1.is_empty():\n    p2.push(p1.pop())\nwhile not p2.is_empty():\n    c.add(p2.pop())",
+"# p es una PILA vacía\nwhile not c.is_empty():\n    p.push(c.remove())\nwhile not p.is_empty():\n    c.add(p.pop())"],a:[3],oc:true,
+w:"Pasar de cola a cola mantiene el orden (FIFO → FIFO). Lo único que invierte es una pila. La d pasa todo a una pila y lo devuelve: invierte una vez. La c usa dos pilas: invierte dos veces y queda igual que al principio.",
+r:"Ficha 28 · Pilas y colas",
+warn:"La primera opción tiene código roto en el original (c2.add(c2, …)). En el Daypo nuevo aparece \"arreglada\" como c → c2 → c3 → c, pero igual no invierte: de cola a cola el orden se mantiene."},
+
+{id:"4.10",u:4,src:["Cuest. 28","Daypo"],t:"single",
+q:"Una Cola de Prioridad devuelve siempre el menor de los valores almacenados al retirar. ¿Cuál de las siguientes podría ser una forma básica de implementarla?",
+o:["Soporte: list de Python. Inserción: ordenada de menor a mayor (recorrer el arreglo y al encontrar el primer mayor a x, insertar x allí con un corte de índices). Eliminación: siempre el primer elemento.",
+"Soporte: list de Python. Inserción: siempre al final. Eliminación: siempre el último elemento.",
+"Soporte: list de Python. Inserción: ordenada de mayor a menor. Eliminación: siempre el primer elemento.",
+"Soporte: list de Python. Inserción: siempre al frente. Eliminación: siempre el primer elemento."],a:[0],
+w:"Si mantenés la lista ordenada de menor a mayor, el menor siempre está en la posición 0, así que retirar el primero devuelve el menor. La c ordena al revés: el primero sería el mayor. La b es una pila y la d también.",
+r:"Ficha 28 · Colas de prioridad"},
+
+{id:"4.11",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"En un árbol binario un nodo tiene a lo sumo dos hijos y un único padre (salvo la raíz). ¿Qué parte de la definición de árbol binario impide que un nodo tenga más de un padre?",
+o:["La sección en la que se afirma que del nodo raíz se desprenden dos subconjuntos.",
+"La sección en la que se afirma que los dos subconjuntos que dependen del nodo raíz son conjuntos separados o mutuamente excluyentes.",
+"La sección en la que se afirma que el árbol puede estar vacío o contener un nodo designado como raíz.",
+"La sección en la que se afirma que los dos subconjuntos que dependen del nodo raíz pueden estar vacíos."],a:[1],
+w:"Si los dos subárboles no comparten ningún nodo (son disjuntos), un nodo no puede estar colgado de dos lugares a la vez: tiene un solo padre. Si pudieran compartir nodos, ya no sería un árbol sino un grafo.",
+r:"Ficha 29 · Definición de árbol binario"},
+
+{id:"4.12",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"¿Cuál de las siguientes es CIERTA respecto de los árboles binarios de búsqueda?",
+o:["Siempre tienen altura mínima.","Siempre tienen altura máxima.","Si el árbol tiene n nodos, el tiempo de búsqueda en el peor caso es O(log(n)) si la altura del árbol h es O(log(n)).","Si el árbol tiene n nodos, el tiempo de búsqueda en el peor caso es O(n*log(n)) si la altura h es O(log(n))."],a:[2],
+w:"Buscar en un ABB hace una comparación por nivel, así que el tiempo depende de la altura h. Si h = log(n) (árbol equilibrado), buscar es O(log n). La altura depende del orden de inserción: no es siempre mínima ni siempre máxima.",
+r:"Ficha 29 · Búsqueda en ABB"},
+
+{id:"4.13",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"¿Cuántas comparaciones por nivel se realizan en un árbol de búsqueda de n nodos cuando se busca una clave (en los niveles hasta los que llegue la búsqueda)?",
+o:["Comparaciones por nivel: 1 (una)","Comparaciones por nivel: n","Comparaciones por nivel: log(n)","Comparaciones por nivel: n²"],a:[0],
+w:"En cada nivel comparás x con un solo nodo y decidís ir a la izquierda o a la derecha. Una comparación por nivel.",
+r:"Ficha 29 · Búsqueda en ABB"},
+
+{id:"4.14",u:4,src:["Cuest. 29","Daypo"],t:"multi",
+q:"Considere el método contains() de la ficha. Si el árbol se creó con la inserción simple, sin control de altura o balance, ¿cuáles afirmaciones son correctas?",
+c:"def contains(self, x):\n    if x is None:\n        return False\n    p = self.root\n    while p is not None:\n        if x == p.info:\n            return True\n        elif x < p.info:\n            p = p.left\n        else:\n            p = p.right\n    return False",
+o:["El tiempo de ejecución del algoritmo mostrado es O(log(n)) en el peor caso.","El tiempo de ejecución del algoritmo mostrado es O(1) en el peor caso.","El tiempo de ejecución del algoritmo mostrado es O(n) en el peor caso.","El tiempo de ejecución del algoritmo mostrado es O(log(n)) en el peor caso, pero sólo si el árbol tiene altura h = O(log(n)) = mínima."],a:[2,3],
+w:"Sin balance, si insertás 1, 2, 3, 4… el árbol queda como una diagonal (una lista) y buscar recorre los n nodos: O(n). Solo si el árbol quedó con altura mínima la búsqueda es O(log n). Sin esa condición, la a es falsa.",
+r:"Ficha 29 · Búsqueda y balance"},
+
+{id:"4.15",u:4,src:["Cuest. 29","Daypo"],t:"multi",
+q:"Desconoce la forma de un árbol binario (NO necesariamente de búsqueda), pero puede conocer una o dos secuencias de recorrido. ¿Con cuáles se garantiza que podrá volver a dibujar el árbol original sin ambigüedades?",
+o:["Podrá volver a dibujar el árbol si conoce la secuencia de recorrido en postorden y la secuencia en entreorden.","Podrá volver a dibujar el árbol si conoce la secuencia de recorrido en preorden y la secuencia en entreorden.","Podrá volver a dibujar el árbol si sólo conoce la secuencia de recorrido en entreorden.","Podrá volver a dibujar el árbol si conoce la secuencia de recorrido en preorden y la secuencia en postorden."],a:[0,1],
+w:"El preorden (o el postorden) te dice cuál es la raíz; el entreorden te dice qué queda a la izquierda y qué a la derecha de esa raíz. Con los dos reconstruís todo. Pre + post no alcanza: si un nodo tiene un solo hijo, no sabés si es izquierdo o derecho. Y el entreorden solo tampoco.",
+r:"Ficha 29 · Recorridos",
+warn:"El Daypo nuevo dice \"árbol binario DE BÚSQUEDA\", pero el cuestionario original dice \"NO necesariamente de búsqueda\". Estudiá la versión original (esta)."},
+
+{id:"4.16",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"¿En qué condiciones el recorrido en preorden de un árbol binario de búsqueda visitará los nodos en secuencia ordenada de menor a mayor?",
+o:["Sólo si el árbol es una diagonal con todos los hijos derechos nulos.","Nunca.","Siempre.","Sólo si el árbol es una diagonal con todos los hijos izquierdos nulos."],a:[3],
+w:"Preorden visita raíz, izquierda, derecha. Si no hay hijos izquierdos, visita raíz, después su hijo derecho (mayor), después el siguiente derecho (mayor todavía): orden creciente. El que siempre da ordenado es el entreorden, no el preorden.",
+r:"Ficha 29 · Recorridos"},
+
+{id:"4.17",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"¿Qué es lo peor que puede pasar con un árbol de búsqueda de n nodos si no se lo mantiene equilibrado (si los n nodos se distribuyen en más de log(n) niveles)?",
+o:["Que una búsqueda obligue a O(log(n)) comparaciones.","Que una búsqueda obligue a O(2ⁿ) comparaciones.","Que una búsqueda obligue a O(n²) comparaciones.","Que una búsqueda obligue a O(n) comparaciones."],a:[3],
+w:"Lo peor es que el árbol quede como una diagonal de n niveles: una comparación por nivel da n comparaciones. Nunca puede ser peor que revisar todos los nodos una vez.",
+r:"Ficha 29 · Balance"},
+
+{id:"4.18",u:4,src:["Cuest. 29","Daypo"],t:"multi",
+q:"Si en un ABB se relaja la regla de inserción para permitir claves repetidas (menores a la izquierda, mayores o iguales a la derecha), ¿cuáles afirmaciones son ciertas?",
+o:["Dos o más claves iguales podrán quedar separadas por dos o más niveles de distancia.","Si solo se insertan claves iguales a la que contiene la raíz, el árbol tendrá estructura de una diagonal con todos los enlaces derechos nulos.","Si solo se insertan claves iguales a la que contiene la raíz, el árbol tendrá estructura de una diagonal con todos los enlaces izquierdos nulos.","Dos claves iguales quedarán siempre en el árbol una como hija derecha e inmediata de la otra."],a:[0,2],
+w:"Iguales van a la derecha: si insertás 5, 5, 5, cada una cuelga a la derecha de la anterior y los enlaces izquierdos quedan nulos. Y pueden quedar separadas: insertás 5, 8 y otro 5; el segundo 5 va a la derecha del primero, pero es menor que 8, así que queda a la izquierda del 8, dos niveles abajo del primer 5.",
+r:"Ficha 29 · Inserción en ABB"},
+
+{id:"4.19",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"¿Cuál es la razón por la que es recomendable usar una pila como soporte al recorrer un árbol binario (y por lo tanto, usar recursión)?",
+o:["No es necesario: alcanza con un ciclo que baje por los hijos izquierdos hasta llegar a uno nulo.",
+"No hay ninguna razón: un ciclo y una referencia de persecución alcanzan siempre.",
+"En realidad es mejor usar una cola: en orden FIFO la dirección del nodo quedará al frente y será accesible en forma directa.",
+"Porque una pila permite almacenar en orden LIFO las direcciones de los nodos que se acaban de visitar, y cuando se necesite regresar a ese nodo luego de procesar alguno de sus dos hijos, su dirección quedará en el tope de la pila y será accesible en forma directa."],a:[3],
+w:"Al recorrer bajás por un hijo y después tenés que volver al padre para ir al otro hijo. El último nodo que visitaste es el primero al que tenés que volver: eso es LIFO, una pila. La recursión usa justamente el stack para eso.",
+r:"Ficha 29 · Recorridos recursivos"},
+
+{id:"4.20",u:4,src:["Cuest. 29","Daypo"],t:"single",
+q:"En base a la idea intuitiva vista en clase, ¿cuál describe mejor lo que se entiende por un árbol balanceado o equilibrado?",
+o:["Un árbol binario está balanceado si tiene forma de zig-zag, con no más de un nodo en cada nivel.","Un árbol binario está balanceado si su altura es la mínima posible (o se acerca mucho a esa mínima) para la cantidad de nodos que tiene el árbol.","Un árbol binario está balanceado si tiene forma de diagonal (hacia la derecha o hacia la izquierda).","Un árbol binario está balanceado si su altura es la máxima posible para la cantidad de nodos que tiene."],a:[1],
+w:"Equilibrado = los nodos repartidos para que la altura sea la menor posible (unos log₂ n niveles). El zig-zag y la diagonal son justamente los casos peores: altura n.",
+r:"Ficha 29 · Balance"},
+
+{id:"4.21",u:4,src:["Cuest. 30","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes afirmaciones referidas a conceptos básicos generales sobre grafos son correctas?",
+o:["Un grafo puede tener nodos aislados: nodos que no tienen ningún arco incidente (ninguno de entrada y ninguno de salida).","Dos nodos a y b de un grafo (dirigido o no) pueden tener varios caminos de distinta longitud que los unan.","Un grafo puede tener subgrafos no unidos entre sí por arcos (o sea, dos o más componentes conexas).","Todo arco de un grafo, necesaria y obligatoriamente une dos nodos diferentes de ese grafo."],a:[0,1,2],
+w:"La ficha lo dice explícito: puede haber vértices aislados, varias componentes conexas y más de un camino (de igual o distinta longitud) entre dos vértices. La d es falsa porque existen los auto ciclos: un arco que sale y llega al mismo nodo.",
+r:"Ficha 30 · Conceptos básicos",
+warn:"En el intento propio se marcaron solo la a y la c, y salió parcial. La b también es correcta: la ficha dice que nada impide varios caminos entre los mismos dos vértices."},
+
+{id:"4.22",u:4,src:["Cuest. 30","Daypo"],t:"single",
+q:"¿Cuál de las siguientes afirmaciones es FALSA respecto de los ciclos en un grafo?",
+o:["Es válido que un ciclo conste de un único arco que vincule a un nodo consigo mismo.","Los ciclos no están permitidos en un grafo.","Un ciclo es un camino que parte de un nodo y lleva de vuelta al mismo nodo.","Los ciclos pueden ser válidos o no, dependiendo del problema que se quiere resolver."],a:[1],
+w:"Ojo que pide la FALSA. Los grafos sí pueden tener ciclos (se llaman grafos cíclicos). Lo que depende del problema es si te sirven o no.",
+r:"Ficha 30 · Ciclos"},
+
+{id:"4.23",u:4,src:["Cuest. 30","Daypo"],t:"multi",
+q:"Se modela con un grafo dirigido el plan de estudios de una carrera: vértices = asignaturas, arco (x, y) = para cursar y debe estar regularizada x. ¿Cuáles situaciones NO serían aceptables y deberían evitarse por validación?",
+o:["Vértices a los que no llega ningún arco de entrada (aunque podrían tener arcos de salida).","La ocurrencia de ciclos en general en el grafo.","La ocurrencia de auto ciclos en cualquiera de sus vértices.","La ocurrencia de alguna relación transitiva explícita, es decir, que existan al mismo tiempo los arcos (x, y), (y, z) y (x, z).","Vértices aislados, es decir, vértices a los que no llega ningún arco de entrada y de los cuales tampoco hay arcos de salida."],a:[1,2],
+w:"Un ciclo significa que A necesita B y B necesita A: nadie podría cursar ninguna de las dos. Un auto ciclo es una materia que es correlativa de sí misma. Las demás son normales: las materias de primer año no tienen correlativas previas (sin arcos de entrada), puede haber una materia sin correlativas para ningún lado, y repetir una correlativa indirecta es redundante pero no rompe el plan.",
+r:"Ficha 30 · Ciclos (aplicación)",
+warn:"No hay clave oficial completa. En el intento propio, marcar solo \"ciclos\" dio 1 de 2 puntos: con la fórmula de Moodle eso indica que hay 2 respuestas correctas. La otra sería \"auto ciclos\", porque un auto ciclo es un ciclo de un solo arco."},
+
+{id:"4.24",u:4,src:["Cuest. 30","Daypo"],t:"single",
+q:"¿En cuál de las siguientes situaciones NO debería usar un grafo dirigido?",
+o:["Para modelar un \"sociograma\": un gráfico que expresa en qué forma un grupo de personas se relacionan entre sí.","Para modelar un plano de rutas entre localidades o ciudades.","Para modelar un plan de estudios de una carrera universitaria.","Para modelar un sistema de cañerías que transportan líquidos desde una fuente hasta un destino."],a:[1],
+w:"Una ruta entre dos ciudades se recorre en los dos sentidos: no hace falta dirección. El sociograma es el ejemplo de la ficha de grafo dirigido (A elige a B no implica que B elija a A); el plan de estudios y las cañerías tienen sentido obligatorio.",
+r:"Ficha 30 · Tipos de grafos"},
+
+{id:"4.25",u:4,src:["Cuest. 30","Daypo"],t:"multi",
+q:"¿En cuáles de las siguientes situaciones sería ideal un grafo no dirigido?",
+o:["Para modelar un sistema de rutas aéreas entre distintos aeropuertos del mundo.","Para modelar un plano de rutas entre localidades o ciudades.","Para modelar un plan de estudios de una carrera universitaria.","Para modelar un \"sociograma\": un gráfico que expresa en qué forma un grupo de personas se relacionan entre sí."],a:[0,1],
+w:"Rutas entre ciudades y rutas aéreas entre aeropuertos conectan en los dos sentidos: no dirigido. El plan de estudios y el sociograma necesitan dirección.",
+r:"Ficha 30 · Tipos de grafos",
+warn:"La ficha solo nombra el plano de rutas como ejemplo de grafo no dirigido. Las rutas aéreas se incluyen porque una ruta entre dos aeropuertos se vuela en los dos sentidos, pero no hay clave oficial que lo confirme. Si dudás en el examen, el plano de rutas es seguro."},
+
+{id:"4.26",u:4,src:["Cuest. 30","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes son ciertas cuando se quiere implementar un grafo ponderado en forma matricial simple?",
+o:["Si se almacena solo un entero para representar al arco y su peso, sería inviable representar arcos con pesos múltiples.","Una manera recomendable es hacer que cada casilla de la matriz de adyacencias apunte a un objeto que represente a un arco, y guardar en ese objeto todos los atributos necesarios.","El problema no existe: no hay manera de representar grafos ponderados en forma matricial.","Si se almacena directamente el peso del arco en cada casillero, un problema posible es la ambigüedad del cero: no se podría distinguir si el cero es el peso de un arco o el indicador de que el arco no existe."],a:[0,1,3],
+w:"Guardar solo el peso en la matriz tiene dos problemas: ¿un 0 es \"no hay arco\" o \"arco de peso 0\"? y no entran varios pesos (distancia y costo, por ejemplo). La solución: que cada casilla apunte a un objeto Arco con todos sus datos. La c es falsa: sí se puede.",
+r:"Ficha 30 · Implementación matricial"},
+
+{id:"4.27",u:4,src:["Cuest. 30","Daypo"],t:"single",
+q:"Un grafo reflexivo es un grafo dirigido en el que todo vértice tiene un auto ciclo. Si G es dirigido y reflexivo, implementado con una matriz de adyacencias de booleanos, ¿qué es verdadero respecto de esa matriz?",
+o:["Todos los casilleros del triángulo superior de la matriz valen True.","Todos los casilleros de la matriz valen True.","Todos los casilleros de la diagonal principal valen True, y sólo ellos pueden valer True.","Todos los casilleros de la diagonal principal valen True, pero no es obligatorio que sólo ellos puedan valer True."],a:[3],
+w:"Auto ciclo en el vértice i = casillero ady[i][i] en True: toda la diagonal principal es True. Pero el grafo puede tener además otros arcos, así que otros casilleros también pueden ser True.",
+r:"Ficha 30 · Matriz de adyacencias"},
+
+{id:"4.28",u:4,src:["Cuest. 30","Daypo"],t:"single",
+q:"Un grafo simétrico es un grafo dirigido en el que si existe el arco (x, y) existe también el (y, x). Si G es dirigido y simétrico, implementado con una matriz de booleanos, ¿qué es verdadero respecto de esa matriz?",
+o:["Todos los casilleros de la diagonal principal valen True.","Todos los casilleros de la matriz son True o todos son False.","Todos los casilleros del triángulo inferior valen True y los del superior valen False.","La matriz es simétrica (o espejada) respecto de la diagonal principal: el valor en ady[x][y] siempre será igual al valor en ady[y][x]."],a:[3],
+w:"Si está (x, y) también está (y, x): ady[x][y] = ady[y][x]. Eso es una matriz espejada respecto de la diagonal. No dice nada de los auto ciclos (la diagonal).",
+r:"Ficha 30 · Matriz de adyacencias"},
+
+{id:"4.29",u:4,src:["Cuest. 30","Daypo"],t:"single",
+q:"Un grafo transitivo es un grafo dirigido en el que si existen (x, y) e (y, z) existe también (x, z). Si G es dirigido y transitivo, implementado con una matriz de booleanos, ¿qué es verdadero?",
+o:["Si los casilleros ady[x][y] y ady[y][z] son True, entonces el casillero ady[x][z] será también True.","Si el casillero ady[y][z] es True entonces ady[x][z] será también True, sin importar ady[x][y].","Si ady[x][y] y ady[y][z] son False, entonces ady[x][z] será True.","Si ady[x][y] es True entonces ady[x][z] será también True, sin importar ady[y][z]."],a:[0],
+w:"Es la definición pasada a la matriz: hacen falta los DOS arcos, (x, y) y (y, z), para garantizar el (x, z). Con uno solo no alcanza.",
+r:"Ficha 30 · Matriz de adyacencias"},
+
+{id:"4.30",u:4,src:["Cuest. 30","Daypo"],t:"multi",
+q:"¿Cuáles de las siguientes afirmaciones sobre arcos de entrada o de salida de un nodo son correctas?",
+o:["El Entre Grado de un nodo (o Grado de Entrada) en un grafo dirigido es la cantidad de arcos que tienen a ese nodo como nodo de llegada.","El Grado de un nodo (dirigido o no dirigido) es la cantidad de arcos incidentes a ese nodo (arcos que lo tienen como partida o como llegada).","El Fuera de Grado de un nodo (o Grado de Salida) en un grafo dirigido es la cantidad de arcos que tienen a ese nodo como nodo de partida.","El Grado de un nodo es la cantidad de arcos no incidentes a ese nodo."],a:[0,1,2],
+w:"Grado = todos los arcos que lo tocan. Entre grado = los que llegan. Fuera de grado = los que salen. La d dice \"no incidentes\": al revés.",
+r:"Ficha 30 · Grados"}
+);
+// ───────────── UNIDAD 5 · ESTRATEGIAS (F31, F32) ─────────────
+const INTEND = "def intend(col):\n    global rc, qr, qid, qnd\n    fil, res = -1, False\n    while not res and fil != 7:\n        res = False\n        fil += 1\n        di = col + fil\n        dn = (col - fil) + 7\n        if qr[fil] and qid[di] and qnd[dn]:\n            rc[col] = fil\n            qr[fil] = qid[di] = qnd[dn] = False\n            if col < 7:\n                res = intend(col + 1)\n                if not res:\n                    qr[fil] = qid[di] = qnd[dn] = True\n                    rc[col] = -1\n            else:\n                res = True\n    return res";
+Q.push(
+{id:"5.1",u:5,src:["Cuest. 31","Daypo"],t:"single",
+q:"¿Cuál de los siguientes esquemas representa a un algoritmo Divide y Vencerás con tiempo de ejecución O(n*log(n))? Todos tienen la forma: proceso(partición): adicional() [costo indicado]; proceso(partición/2); proceso(partición/2).",
+o:["adicional() de costo O(n)","adicional() de costo O(n²)","adicional() de costo O(n³)","adicional() de costo O(1)"],a:[0],
+w:"Partir a la mitad da log₂(n) niveles. Si en cada nivel el trabajo adicional suma n (como la partición de Quicksort o la mezcla de Mergesort), el total es n · log n. Con O(1) adicional daría O(n); con O(n²), O(n²).",
+r:"Ficha 31 · Análisis de Divide y Vencerás",
+warn:"En el Daypo las opciones solo dicen O(1), O(n2), O(n3), O(n): se refieren al costo de adicional() de cada esquema. La correcta es la de adicional() O(n)."},
+
+{id:"5.2",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)","Parcial 51"],t:"multi",
+q:"¿Cuáles de las siguientes afirmaciones son ciertas en referencia a las Estrategias de Resolución de Problemas que se citan?",
+o:["La técnica de Programación Dinámica se basa en calcular los resultados de los subproblemas de menor tamaño que pudieran aparecer, almacenar esos resultados en una tabla, y luego re-usarlos cuando vuelvan a ser requeridos en el cálculo del problema mayor.",
+"La estrategia de Fuerza Bruta se basa en aplicar ideas intuitivas y directas, simples de codificar, pero normalmente produce algoritmos de mal rendimiento en tiempo de ejecución y/o de espacio de memoria empleado.",
+"La estrategia de Backtracking es de base recursiva y permite implementar soluciones de prueba y error explorando las distintas soluciones y volviendo atrás si se detecta que un camino conduce a una solución incorrecta. Cuando es aplicable, es más eficiente que la Fuerza Bruta, ya que permite eliminar caminos por deducción.",
+"El empleo de la Recursividad para resolver un problema no es recomendable en ningún caso, debido a la gran cantidad de recursos de memoria o de tiempo que implica."],a:[0,1,2],
+w:"Las tres primeras son las definiciones de la ficha. La d es falsa por el \"en ningún caso\": la recursión es lo indicado para árboles, grafos o fractales (ver 1.9).",
+r:"Ficha 32 · Estrategias"},
+
+{id:"5.3",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)"],t:"single",
+q:"¿Cuál de las siguientes afirmaciones es FALSA en relación a las Estrategias de Resolución de Problemas?",
+o:["Un mismo problema podría ser resuelto en base a dos o más estrategias diferentes, dando lugar a distintos algoritmos.",
+"Se trata de un conjunto de técnicas que podrían ayudar a encontrar la solución, sin garantía de éxito, y aún si se llega a una solución, tampoco se garantiza que sea eficiente.",
+"Se trata de un conjunto de técnicas diversas que podrían ayudar a encontrar la solución a un problema, pero sin garantía de éxito.",
+"Son técnicas y recomendaciones para el planteo de problemas que garantizan que se encontrará una solución, empleando la estrategia correcta para cada problema que se enfrente."],a:[3],
+w:"Pide la FALSA. Las estrategias ayudan, pero no garantizan nada: ni encontrar la solución, ni que sea eficiente.",
+r:"Ficha 32 · Estrategias"},
+
+{id:"5.4",u:5,src:["Cuest. 32","Daypo","P5 2022","Cuest. 28 (2022)"],t:"match",
+q:"Para cada problema general, seleccione la estrategia de planteo de algoritmos que se sabe haya resultado más útil para resolverlo (o la que haya podido aplicarse aún sin llegar a una solución eficiente).",
+rows:["Problema del Viajante.","Problema de la alineación de secuencias.","Problema de las Ocho Reinas.","Ordenamiento rápido (Quicksort).","Problema del árbol de expansión mínimo de un grafo.","Generación de gráficos fractales."],
+o:["Recursión","Divide y vencerás","Algoritmo ávido","Backtracking","Fuerza Bruta [O(n!)] / Programación Dinámica [O(n^2 * 2^n)]","Programación dinámica"],ma:[4,5,3,1,2,0],
+w:"Viajante: no hay solución eficiente, solo Fuerza Bruta o PD exponencial. Alineación de secuencias: PD. Ocho Reinas: Backtracking. Quicksort: Divide y Vencerás. Árbol de expansión mínimo: ávido (Prim o Kruskal). Fractales: recursión.",
+r:"Ficha 32 · Estrategias (aplicaciones)",
+warn:"Hay dos opciones con \"Programación dinámica\": la larga (Fuerza Bruta / PD con O(n!) y O(n² · 2ⁿ)) es la del Viajante; la corta es la de alineación de secuencias."},
+
+{id:"5.5",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)","Parcial 51"],t:"multi",
+q:"¿Cuáles de los siguientes son conocidos algoritmos basados en la estrategia Divide y Vencerás?",
+o:["Algoritmo Mergesort para ordenamiento de arreglos.","Algoritmo Shellsort para ordenamiento de arreglos.","Algoritmo Quicksort para ordenamiento de arreglos.","Algoritmo Heapsort para ordenamiento de arreglos."],a:[0,2],
+w:"Quicksort y Mergesort parten el arreglo en partes, resuelven cada parte recursivamente y combinan. Shellsort es una mejora de Inserción y Heapsort una mejora de Selección: no dividen el problema.",
+r:"Ficha 31 · Divide y Vencerás"},
+
+{id:"5.6",u:5,src:["Cuest. 32","Daypo","P5 2022","Cuest. 28 (2022)"],t:"single",
+q:"¿Cuál de las siguientes resume en forma correcta la idea general de la estrategia Divide y Vencerás?",
+o:["El conjunto de n datos se divide en subconjuntos de cualquier tamaño, sin importar si coinciden entre sí. Luego se aplica recursión a cada uno y se unen las partes.",
+"Se usa una tabla para almacenar los resultados de los subproblemas ya calculados, y cuando un subproblema vuelve a aparecer se toma su valor desde la tabla.",
+"Se aplica una regla simple que parece beneficiosa, sin volver atrás ni medir las consecuencias, con la esperanza de lograr el resultado óptimo al final.",
+"El conjunto de n datos se divide en subconjuntos de aproximadamente el mismo tamaño (n/2, n/3, n/4, etc.). Luego se aplica recursión para procesar cada uno de esos subconjuntos. Finalmente se unen las partes que se acaban de procesar para lograr el resultado final."],a:[3],
+w:"Dividir en partes parecidas, resolver cada una con recursión, unir. Las partes tienen que ser de tamaño parecido; si no, se pierde la eficiencia (como Quicksort en su peor caso). La b es Programación Dinámica y la c es Ávido.",
+r:"Ficha 31 · Divide y Vencerás",
+warn:"La a y la d solo difieren en \"de cualquier tamaño\" vs \"aproximadamente el mismo tamaño\". En el P5 2022 marcaron la a y estuvo mal."},
+
+{id:"5.7",u:5,src:["Cuest. 32","Daypo","P5 2021","P5 2022","Cuest. 28 (2022)"],t:"multi",
+q:"Considere el problema del Cambio de Monedas y la solución mediante el Algoritmo Ávido presentada en clases. ¿Cuáles de las siguientes afirmaciones son ciertas?",
+o:["Si el Problema de Cambio de Monedas no puede resolverse en forma óptima para un conjunto de monedas que incluya a la de 1 centavo mediante el Algoritmo Ávido propuesto, entonces el problema no tiene solución.",
+"El Algoritmo Ávido sugerido funciona correctamente para cualquier conjunto de valores nominales de monedas, siempre y cuando ese conjunto incluya a la moneda de 1 centavo.",
+"El Algoritmo Ávido sugerido falla si el valor x a cambiar tiene una moneda igual a x en el conjunto de valores nominales: en ese caso provoca un error de runtime y se interrumpe.",
+"Sea cual sea el algoritmo que se emplee, es exigible que exista la moneda de 1 centavo, pues de otro modo no habrá solución posible para muchos valores de cambio."],a:[3],
+w:"Sin moneda de 1 no podés dar, por ejemplo, 3 centavos con monedas de 5 y 10. Pero tener la de 1 no alcanza para el ávido: si el sistema no es canónico (ej.: monedas de 1, 5, 10, 21, 25 y cambio de 63) el ávido no da el óptimo. Y que no sea óptimo no significa que no haya solución: la PD siempre la encuentra. Si existe una moneda igual a x, el ávido devuelve 1: no falla.",
+r:"Ficha 32 · Cambio de monedas (ávido)",
+warn:"Es de \"marcar todas\" pero tiene una sola correcta. Las claves oficiales del P5 2021 y del P5 2022 lo confirman."},
+
+{id:"5.8",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)"],t:"multi",
+q:"Considere el problema del Cambio de Monedas y la solución mediante Programación Dinámica presentada en clases. ¿Cuáles de las siguientes afirmaciones son ciertas?",
+c:"def dinamic_change(x, coins):\n    n = len(coins)\n    prev = [0] * (x + 1)\n    for v in range(1, x + 1):\n        minv = v\n        for j in range(n):\n            if coins[j] > v:\n                continue\n            ui = v - coins[j]\n            if prev[ui] + 1 < minv:\n                minv = prev[ui] + 1\n        prev[v] = minv\n    return prev[x]",
+o:["En el algoritmo basado en Programación Dinámica los valores de las monedas que sean mayores a x son dejados de lado y la recurrencia de cálculo no se aplica sobre ellos.",
+"En el algoritmo basado en Programación Dinámica, el resultado final a retornar es el que haya quedado almacenado en la casilla x del arreglo prev (o sea, en prev[x]).",
+"El resultado final a retornar es igual a la suma o acumulación de todos los valores almacenados en el arreglo prev.",
+"En el algoritmo basado en Programación Dinámica no es importante si el arreglo coins está ordenado o desordenado: funcionará correctamente de todas formas."],a:[0,1,3],
+w:"Mirá el código: if coins[j] > v: continue salta las monedas que se pasan, así que las mayores a x nunca se usan. Al final devuelve prev[x], no una suma. Y como prueba todas las monedas en cada paso y se queda con el mínimo, el orden de coins no importa (a diferencia del ávido, que sí necesita ordenarlas).",
+r:"Ficha 32 · Cambio de monedas (Programación Dinámica)",
+warn:"Los intentos propios dan señales cruzadas sobre la d. Se marca como correcta porque el código de la Ficha 32 recorre todas las monedas en cada paso y no depende del orden."},
+
+{id:"5.9",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)"],t:"multi",
+q:"Problema de las Ocho Reinas (tablero de 8 × 8). ¿Cuáles de las siguientes afirmaciones son ciertas en relación a las diagonales del tablero?",
+o:["En cada una de las diagonales que se orientan como la principal, es constante la resta entre el número de columna y el número de fila de cada uno de sus elementos.",
+"En cada una de las diagonales que se orientan como la contra-diagonal o diagonal inversa, es constante la suma entre el número de columna y el número de fila de cada uno de sus elementos.",
+"En general hay dos tipos de diagonales: las normales (orientadas como la diagonal principal) y las inversas (orientadas como la contra-diagonal).",
+"La cantidad total de diagonales que contiene el tablero (sumando todas las diagonales de todos los tipos posibles) es 30."],a:[0,1,2,3],
+w:"Normales: col - fil constante (de -7 a 7). Inversas: col + fil constante (de 0 a 14). La Ficha 32 dice que una matriz de 8 × 8 tiene 15 diagonales de cada tipo: 15 + 15 = 30.",
+r:"Ficha 32 · Ocho Reinas (diagonales)",
+warn:"La opción de las 30 diagonales es la dudosa. Según la Ficha 32 (15 de cada tipo) es cierta, y en el intento 2026, marcar las otras tres sin ella dio \"parcialmente correcta\". En un intento de 2022 parece haber dado correcta sin marcarla. Seguimos a la ficha 2026: marcala."},
+
+{id:"5.10",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)"],t:"multi",
+q:"Problema de las Ocho Reinas (8 × 8). ¿Cuáles de las siguientes son ciertas en relación a las diagonales NORMALES?",
+o:["Las diagonales normales pueden representarse con un arreglo qnd de 15 componentes, en el que cada diagonal con el mismo valor (col + fil) coincide con el casillero qnd[(col + fil)].",
+"Las diagonales normales pueden representarse con un arreglo qnd de 15 componentes, en el que cada diagonal con el mismo valor (col - fil) coincide con el casillero qnd[(col - fil) + 7] (evitando así los índices negativos).",
+"El valor de la resta entre el número de columna y el número de fila de cada componente de una diagonal normal es constante para cada diagonal, y los posibles valores están en el intervalo [-7..7].",
+"El valor de la suma entre columna y fila de cada componente de una diagonal normal es constante, y los posibles valores están en [0..14]."],a:[1,2],
+w:"Normal = resta. col - fil va de -7 a 7; se le suma 7 para que el índice quede entre 0 y 14 y no haya índices negativos en Python. La suma es de las inversas.",
+r:"Ficha 32 · Ocho Reinas (arreglo qnd)"},
+
+{id:"5.11",u:5,src:["Cuest. 32","Daypo","Cuest. 28 (2022)"],t:"multi",
+q:"Problema de las Ocho Reinas (8 × 8). ¿Cuáles de las siguientes son ciertas en relación a las diagonales INVERSAS?",
+o:["Las diagonales inversas pueden representarse con un arreglo qid de 15 componentes, en el que cada diagonal con el mismo valor (col + fil) coincide con el casillero qid[(col + fil)].",
+"El valor de la suma entre el número de columna y el número de fila de cada componente de una diagonal inversa es constante para cada diagonal, y los posibles valores están en el intervalo [0..14].",
+"El valor de la resta entre columna y fila de cada componente de una diagonal inversa es constante, y los valores están en [-7..7].",
+"Las diagonales inversas pueden representarse con un arreglo qid de 15 componentes, usando el casillero qid[(col - fil) + 7]."],a:[0,1],
+w:"Inversa = suma. col + fil ya va de 0 a 14, así que se usa directo como índice: qid[col + fil]. La resta y el +7 son de las normales.",
+r:"Ficha 32 · Ocho Reinas (arreglo qid)"},
+
+{id:"5.12",u:5,src:["Cuest. 32","Daypo","P5 2021","Final 2022","Cuest. 28 (2022)"],t:"multi",
+q:"En las Ocho Reinas, rc[col] = fil indica la fila de la reina de la columna col. ¿Cuáles de las siguientes configuraciones representan soluciones INCORRECTAS?",
+o:["rc = [4, 7, 3, 0, 2, 5, 1, 6]","rc = [5, 3, 6, 0, 7, 1, 4, 2]","rc = [3, 5, 7, 0, 5, 1, 2, 4]","rc = [2, 0, 7, 4, 5, 1, 6, 3]"],a:[2,3],
+w:"[3, 5, 7, 0, 5, …]: el 5 se repite, así que dos reinas están en la misma fila (columnas 1 y 4). [2, 0, 7, 4, 5, …]: las columnas 3 y 4 tienen filas 4 y 5; col - fil da -1 en las dos, así que están en la misma diagonal normal. Las otras dos son soluciones válidas.",
+r:"Ficha 32 · Ocho Reinas",
+warn:"Pide las INCORRECTAS. Truco para el examen: primero buscá números repetidos (misma fila); después calculá col - fil y col + fil y buscá valores repetidos."},
+
+{id:"5.13",u:5,src:["P5 2021","P5 2022","Final 2022","Parcial 51"],t:"multi",
+q:"¿Cuáles de las siguientes son ciertas respecto de la estrategia de resolución de problemas conocida como Algoritmos Ávidos?",
+o:["Se trata de un planteo basado en identificar una regla local que intuitivamente parece correcta, y aplicarla una y otra vez sin volver atrás ni analizar caminos alternativos, hasta llegar a la solución del problema global.",
+"Normalmente, una ventaja de intentar aplicar un algoritmo ávido es que si bien la validez de la regla local debe ser demostrada formalmente, eso es comúnmente fácil de hacer.",
+"Normalmente, una ventaja de un algoritmo ávido es que, si la regla local aplicada es correcta, suele ser sencillo de plantear y de comprender, además de veloz para ejecutar.",
+"Se trata de un planteo basado en explorar y analizar cada camino posible, de forma que si algún camino conduce a una solución incorrecta, se abandone y se regrese para explorar otros posibles."],a:[0,2],
+w:"Ávido = tomar en cada paso la opción que parece mejor (ej.: la moneda más grande) y no volver atrás nunca. Si la regla sirve, es simple y rápido. Demostrar que la regla es correcta suele ser DIFÍCIL, no fácil. La d describe Backtracking.",
+r:"Ficha 32 · Algoritmos ávidos",
+warn:"No está en ningún cuestionario, pero salió en los tres exámenes reales que tenemos. En el P5 2022 marcaron solo una de las dos y sacaron 0."},
+
+{id:"5.14",u:5,src:["P5 2021"],t:"single",
+q:"Considere la función de backtracking vista en clases para las Ocho Reinas. ¿Cuál de las opciones es correcta en relación al corte de la recursión?",
+c:INTEND,
+o:["La recursión corta cuando res es True o fil es 7.","La recursión corta cuando res es True y fil es 7.","La recursión corta cuando res es False y fil es distinto de 7.","La recursión corta solo cuando se terminan de recorrer todas las columnas."],a:[0],
+w:"El ciclo es while not res and fil != 7: sigue mientras las dos condiciones se cumplan, así que corta apenas UNA deja de cumplirse. O encontró solución (res es True), o probó todas las filas (fil llegó a 7). Por la ley de De Morgan, el \"y\" del while se vuelve un \"o\" en el corte.",
+r:"Ficha 32 · Ocho Reinas (backtracking)",
+warn:"En el P5 2021 marcaron \"res es True y fil es 7\" y estuvo mal. Negar un \"and\" da un \"or\"."},
+
+{id:"5.15",u:5,src:["P5 2021"],t:"single",
+q:"Considere la función de backtracking vista en clases para las Ocho Reinas. ¿Cuál de las opciones es correcta?",
+c:INTEND,
+o:["La función es correcta y funciona sin problemas.","La función no es correcta porque no debe asignarse a rc[col] el valor de -1.","La función no es correcta porque qr debe señalar las columnas disponibles y no las filas.","La función no es correcta porque la diagonal normal debe almacenar valores (columna + fila)."],a:[0],
+w:"Es la función de la ficha tal cual. rc[col] = -1 deshace la ubicación al volver atrás; qr marca filas libres (las columnas ya las recorre col); la diagonal normal usa la resta (col - fil) + 7, no la suma.",
+r:"Ficha 32 · Ocho Reinas (backtracking)"},
+
+{id:"5.16",u:5,src:["Parcial 51"],t:"single",
+q:"Un algoritmo Divide y Vencerás tiene esta estructura: proceso(partición): adicional() [O(n)]; proceso(partición/3); proceso(partición/3); proceso(partición/3). ¿Cuál es la expresión Big O de su tiempo de ejecución? (Aclaración: la base del logaritmo no es esencial en Big O, pero acá es relevante para la pregunta.)",
+o:["O(n * log₃(n))","O(n * log₂(n))","O(n² * log₂(n))","O(n² * log₃(n))"],a:[0],
+w:"Es la misma idea que la 5.1, pero partiendo en 3: cada nivel divide por 3, así que hay log₃(n) niveles, y en cada nivel el trabajo adicional suma n. Total: n · log₃(n).",
+r:"Ficha 31 · Análisis de Divide y Vencerás",
+warn:"Este parcial no tiene respuestas oficiales. La respuesta sale del mismo razonamiento de la 5.1 (n de trabajo por nivel por la cantidad de niveles)."}
+);
+// Machetes por unidad. Formato: **negrita**, `código`, → 4.x = preguntas que resuelve.
+const MACHETES = {
+4: [
+ {t:"Tipos abstractos (TAD)", q:"4.1 · 4.2", items:[
+  "**Abstracción de datos** = qué DATOS guardo. **Abstracción funcional** = qué OPERACIONES ofrezco sobre esos datos.",
+  "Ejemplo pila: datos = una lista de elementos; funciones = `push`, `pop`, `peek`, `is_empty`.",
+  "**TAD Fecha** para eventos: datos = **registro con año, mes y día** (solo eso, nada del evento); funciones útiles = buscar, reservar, liberar, modificar.",
+  "Registro y no tupla: la **tupla es inmutable** y no se podría modificar la fecha."]},
+ {t:"Pila · LIFO", q:"4.3 – 4.6", items:[
+  "**LIFO**: el último que entra es el primero que sale (pila de platos).",
+  "`push(x)` mete arriba · `pop()` saca el de arriba · `peek()` **mira sin sacar**.",
+  "Aplicación: procesar datos **en orden inverso** al de entrada.",
+  "**Sacar uno del medio** de [8-6-5-3-7] dejando [8-6-3-7]: `n1=pop` (8), `n2=pop` (6), `x=pop` (5), `push(n2)`, `push(n1)`. Se devuelve primero el de abajo.",
+  "Pasar todo de una pila a otra **invierte**. Cantidad de pasadas: impar = invertida, par = igual. Invertir p: p→p2→p3→**p** (3 pasadas y termina en p)."]},
+ {t:"Cola · FIFO", q:"4.7 – 4.10", items:[
+  "**FIFO**: el primero que entra es el primero que sale (fila del súper).",
+  "`add(x)` agrega al final · `remove()` saca el del frente.",
+  "Aplicación: procesar datos **en el mismo orden** en que entraron.",
+  "Cola → cola **mantiene** el orden. Para **invertir una cola**: cola → **una pila** → cola. Con dos pilas se invierte dos veces y queda igual.",
+  "**Cola de prioridad** (sale el menor): lista **ordenada de menor a mayor**, insertar en su lugar y **sacar siempre el primero**."]},
+ {t:"Árbol binario y ABB", q:"4.11 · 4.18 · 4.20", items:[
+  "Definición: vacío, o una raíz con **dos subárboles disjuntos** (mutuamente excluyentes). Por ser disjuntos, **cada nodo tiene un solo padre**.",
+  "**ABB**: menores a la izquierda, mayores a la derecha.",
+  "**Balanceado** = altura **mínima posible** (≈ log₂ n). Diagonal o zig-zag = lo peor (altura n).",
+  "**Repetidos** con regla \"mayores o iguales a la derecha\": insertar iguales a la raíz arma una **diagonal con los enlaces izquierdos nulos**; dos iguales **pueden quedar separados por varios niveles** (ej.: 5, 8, 5)."]},
+ {t:"Buscar en un ABB", q:"4.12 – 4.14 · 4.17", items:[
+  "**1 comparación por nivel** → el tiempo depende de la **altura h**.",
+  "Si h = log(n) (balanceado): búsqueda **O(log n)**.",
+  "Sin control de balance, en el **peor caso** el árbol es una diagonal: **O(n)**. Nunca peor que eso.",
+  "`contains()` con inserción simple: **O(n) en el peor caso** y **O(log n) solo si la altura es mínima**. \"O(log n) en el peor caso\" a secas es falso.",
+  "Que sea ABB no garantiza altura mínima ni máxima: depende del orden en que insertaste."]},
+ {t:"Recorridos", q:"4.15 · 4.16 · 4.19", items:[
+  "**Preorden**: raíz, izq, der · **Entreorden**: izq, raíz, der · **Postorden**: izq, der, raíz.",
+  "En un ABB, el **entreorden sale ordenado** de menor a mayor.",
+  "El **preorden** sale ordenado solo si el árbol es una **diagonal con todos los hijos izquierdos nulos**.",
+  "Reconstruir un árbol binario (no necesariamente de búsqueda): **pre + entre** o **post + entre**. No alcanza con pre + post ni con entre solo.",
+  "Se recorre con **pila o recursión** porque hay que volver al último nodo visitado para ir a su otro hijo: **LIFO**."]},
+ {t:"Grafos: conceptos", q:"4.21 – 4.25 · 4.30", items:[
+  "**Dirigido** si el sentido importa: sociograma, plan de estudios, cañerías. **No dirigido**: plano de rutas entre ciudades (y rutas aéreas).",
+  "Se permite: **vértices aislados**, **varias componentes conexas**, **varios caminos** de distinta longitud entre dos nodos, **ciclos** y **auto ciclos** (arco de un nodo a sí mismo).",
+  "\"Los ciclos no están permitidos\" es **FALSO**: si son válidos o no depende del problema.",
+  "Plan de estudios (correlativas): hay que evitar **ciclos** y **auto ciclos**. Materias sin correlativas previas o aisladas son normales.",
+  "**Grado** = arcos que tocan al nodo · **Entre grado** = los que llegan · **Fuera de grado** = los que salen."]},
+ {t:"Matriz de adyacencias", q:"4.26 – 4.29", items:[
+  "`ady[x][y] = True` si hay arco de x a y.",
+  "**Reflexivo** (todos con auto ciclo): toda la **diagonal principal en True**, pero **otros casilleros también pueden** ser True.",
+  "**Simétrico** (si está (x,y) está (y,x)): la matriz es **espejada**: `ady[x][y] == ady[y][x]`.",
+  "**Transitivo**: si `ady[x][y]` **y** `ady[y][z]` son True, entonces `ady[x][z]` es True. Hacen falta los dos.",
+  "**Ponderado**: guardar el peso directo trae la **ambigüedad del 0** (¿peso 0 o sin arco?) y **no entran pesos múltiples**. Lo recomendado: cada casilla **apunta a un objeto Arco** con todos sus datos."]}
+],
+2: [
+ {t:"Qué se analiza", q:"2.1 · 2.3 · 2.4 · 2.19", items:[
+  "Factores de eficiencia: **tiempo** y **memoria** (los dos principales) + **complejidad aparente del código** (si empatan, gana el más claro). La interfaz de usuario **no** cuenta.",
+  "**Peor caso** = los datos más desfavorables (ej.: buscar x y que no esté). **Caso promedio** = datos aleatorios, ni a favor ni en contra.",
+  "**Conteo exhaustivo** = la cuenta exacta (½(n² − n)). **Análisis asintótico** = cómo crece con n enorme (O(n²))."]},
+ {t:"Big O: cómo simplificar", q:"2.16 · 2.17 · 2.18", items:[
+  "Big O es **cota superior**: el algoritmo no se comporta peor que eso.",
+  "Te quedás con el **término que más crece** y **sin constantes**: 3n³ + 5n² + 2n^1.5 → **O(n³)**.",
+  "**Orden de complejidad** = familia de **funciones** que crecen igual (3n² + 5 y ½n² − n son O(n²)). Funciones, no algoritmos.",
+  "Dos algoritmos O(n²) pueden tardar distinto en la práctica: 2n² vs 0,5n². Big O **descarta las constantes**."]},
+ {t:"Los órdenes y su algoritmo", q:"2.5 – 2.11 · 2.20", items:[
+  "**O(1)** constante: acceso directo `v[5]`, no depende de n. **No** significa \"1 segundo\".",
+  "**O(log n)**: descarta la mitad en cada paso → **búsqueda binaria** (1.000 datos ≈ 10 pasos).",
+  "**O(n)**: un ciclo → **búsqueda secuencial**. **O(n log n)**: **Quicksort** promedio, Heap, Merge.",
+  "**O(n²)**: dos ciclos anidados → **Selección**, simples. Doble n = cuádruple tiempo. **O(n³)**: tres ciclos → **producto de matrices**.",
+  "Orden: **1 < log n < n < n log n < n² < n³ < 2ⁿ**. Problemas que solo tienen soluciones exponenciales = **intratables** (no \"irresolubles\")."]},
+ {t:"Contar ciclos en código", q:"2.12 · 2.13", items:[
+  "Un ciclo de n → **O(n)**. Dos anidados → **O(n²)** (aunque el de adentro arranque en i+1). Tres anidados → **O(n³)**.",
+  "Bloques **seguidos** se suman y queda el mayor: O(n²) + O(n³) = **O(n³)**.",
+  "Ciclo de vueltas **fijas** (`range(10)`) no depende de n → **O(1)**.",
+  "Ciclo de n con otro de m adentro → **O(n·m)**. No es O(n²): m no tiene por qué ser n."]},
+ {t:"O, Ω, Θ y o", q:"2.14 · 2.19", items:[
+  "**O** = cota superior (no crece más rápido). **Ω** = cota inferior (no crece más lento). **Θ** = las dos a la vez.",
+  "**o** (minúscula) = crece **estrictamente más lento**.",
+  "Selección hace ½(n² − n) siempre: es **O(n²), Ω(n²) y Θ(n²)**. **No** es o(n²)."]},
+ {t:"Búsqueda secuencial", q:"2.2 · 2.21 – 2.24", items:[
+  "Mira casilla por casilla. Peor caso: **n comparaciones** (x al final o ausente). Sirve con el arreglo **desordenado**.",
+  "Que el arreglo esté **ordenado no la acelera** en el peor caso: sigue siendo n.",
+  "Error típico 1: no cortar al encontrar → hace n siempre (pero funciona).",
+  "Error típico 2: `return -1` **adentro** del ciclo (en el else) → retorna en la 1ª vuelta y nunca mira la 2ª casilla. Va **afuera** del ciclo."]},
+ {t:"Búsqueda binaria", q:"2.25 – 2.28", items:[
+  "Compara con el **centro** y descarta la mitad: **O(log n)**. Exige el arreglo **ordenado** al buscar.",
+  "Conviene si se puede **ordenar una vez** y después **no cambia** (muchas búsquedas). Si se vuelve a desordenar, deja de servir.",
+  "Con **cadenas** funciona igual (Python compara por orden alfabético) si están ordenadas.",
+  "Con **repetidos** devuelve **alguna** de las casillas que valen x. No se rompe.",
+  "Mismo error que la secuencial: si retorna -1 en la 1ª vuelta, no funciona. Código que nunca se ejecuta **no** es error del intérprete."]},
+ {t:"Fusión de arreglos (merge)", q:"2.29", items:[
+  "Recorre a y b en paralelo y copia siempre el **menor** de los dos actuales.",
+  "El resultado sale ordenado **solo si a y b ya estaban ordenados**. La función no ordena nada antes de fusionar."]}
+],
+3: [
+ {t:"Métodos simples", q:"3.3 · 3.13", items:[
+  "**Burbuja, Selección e Inserción**: todos **O(n²)** en el peor caso.",
+  "Sirven para arreglos **chicos**; con un millón de datos son inviables. \"Fáciles de programar\" es cierto pero no es lo que los define."]},
+ {t:"Selección directa", q:"3.1 · 3.2 · 3.6", items:[
+  "En cada pasada **busca el menor** y lo pone en la casilla pivot (v[0], después v[1]…).",
+  "[7, 3, 5, 2] → 1ª pasada deja el 2 en v[0], 2ª el 3 en v[1], 3ª el 5 en v[2].",
+  "Hace siempre ½(n² − n) comparaciones. Si cambiás `>` por `<` en la condición, **ordena al revés** (de mayor a menor)."]},
+ {t:"Burbuja (intercambio)", q:"3.5 · 3.7", items:[
+  "Compara **vecinos** e intercambia si están al revés: el mayor \"sube\" al final en cada pasada.",
+  "**Bandera de corte**: si en una pasada **no hubo intercambios**, ya está ordenado y corta antes. No es lo que garantiza el orden."]},
+ {t:"Inserción simple", q:"3.4", items:[
+  "Como ordenar **cartas en la mano**: cada elemento nuevo se **inserta en su lugar** entre los ya ordenados.",
+  "Es la base del **Shellsort**."]},
+ {t:"Shellsort", q:"3.9 – 3.11 · 3.14", items:[
+  "Mejora de **Inserción**: compara elementos a distancia **h** grande y va bajando h. **La última pasada es con h = 1** = Inserción pura, y es la que **garantiza** el orden.",
+  "Las pasadas con h > 1 dejan el arreglo **casi ordenado** para que la última sea rápida.",
+  "Rendimiento **difícil de analizar**: depende de la **serie de h**. Con la de clase: **O(n^1.5)** en el peor caso (mejor que n², peor que n log n).",
+  "Serie **16, 8, 4, 2, 1** es **mala**: al ser múltiplos, repite comparaciones ya hechas (igual ordena)."]},
+ {t:"Heapsort", q:"3.12", items:[
+  "Mejora de **Selección**: busca el mayor usando un **heap** (árbol donde el padre es mayor que sus hijos) en tiempo **logarítmico**.",
+  "Arma el heap **en el mismo arreglo**: **sin memoria extra**.",
+  "**O(n log n)** en el caso promedio **y en el peor**."]},
+ {t:"Quicksort", q:"3.8 · 3.16 – 3.22", items:[
+  "Creador: **C. A. R. Hoare**. Mejora de **Burbuja**: intercambia elementos **lejanos** recorriendo desde los dos extremos.",
+  "Elige un **pivot**, deja menores a la izquierda y mayores a la derecha, y repite recursivamente en cada parte.",
+  "**Promedio**: altura **log n** → **O(n log n)**. **Peor caso**: pivot siempre el menor o el mayor → altura **n** → **O(n²)**.",
+  "Mala idea: pivot = **primero o último** (en un arreglo ordenado es justo el menor o el mayor).",
+  "Lo recomendado: **mediana de tres** (primero, medio, último). Esa función es **O(1)**: 3 comparaciones fijas."]},
+ {t:"Resumen de tiempos", q:"3.15", items:[
+  "**Simples**: O(n²). **Shell**: O(n^1.5) (serie de clase). **Heap**: O(n log n) siempre. **Quick**: O(n log n) promedio, **O(n²)** peor."]}
+],
+5: [
+ {t:"Estrategias en general", q:"5.2 · 5.3", items:[
+  "Son técnicas que **ayudan** a encontrar una solución, **sin garantía** de éxito ni de eficiencia.",
+  "Un mismo problema puede resolverse con **varias** estrategias distintas.",
+  "**Fuerza bruta**: directa e intuitiva, simple de programar, pero suele ser **lenta o gastar mucha memoria**.",
+  "\"La recursión no se recomienda **en ningún caso**\" → **falso**."]},
+ {t:"Divide y Vencerás", q:"5.1 · 5.5 · 5.6 · 5.16", items:[
+  "**Dividir** en partes de **tamaño parecido** (n/2, n/3…) → resolver cada una con **recursión** → **unir**. \"De cualquier tamaño\" es falso.",
+  "Ejemplos: **Quicksort y Mergesort**. Shell y Heap **no** son D&V.",
+  "Partir en 2 con trabajo adicional **O(n)** por nivel → **O(n log n)**. Con O(1) adicional → O(n).",
+  "Partir en **3** con adicional O(n) → **O(n · log₃ n)**."]},
+ {t:"Algoritmos ávidos", q:"5.7 · 5.13", items:[
+  "Aplicar una **regla local** que parece buena una y otra vez, **sin volver atrás**.",
+  "Ventaja: si la regla es correcta, es **simple y rápido**. Pero **demostrar** que la regla sirve suele ser **difícil**.",
+  "Monedas: siempre la **más grande** que entra. Necesita las monedas **ordenadas**.",
+  "Sin moneda de **1 centavo** muchos valores no tienen solución con **ningún** algoritmo. Con la de 1 igual puede fallar el óptimo (1, 5, 10, 21, 25 para 63).",
+  "Que el ávido no dé el óptimo **no** significa que no haya solución: la PD la encuentra."]},
+ {t:"Programación Dinámica", q:"5.2 · 5.8", items:[
+  "Calcula los **subproblemas chicos**, los guarda en una **tabla** y los **reusa**.",
+  "Monedas con PD: `prev[v]` = mínimo de monedas para pagar v. Devuelve **prev[x]** (no la suma de la tabla).",
+  "Salta las monedas **mayores** a lo que falta pagar (`continue`), y el **orden** de `coins` **no importa**: prueba todas en cada paso."]},
+ {t:"Qué estrategia para cada problema", q:"5.4", items:[
+  "**Viajante** → Fuerza Bruta O(n!) / PD O(n²·2ⁿ) (la opción **larga**).",
+  "**Alineación de secuencias** → PD (la **corta**). **Ocho Reinas** → Backtracking.",
+  "**Quicksort** → Divide y Vencerás. **Árbol de expansión mínimo** → Ávido (Prim, Kruskal). **Fractales** → Recursión."]},
+ {t:"Ocho Reinas: diagonales", q:"5.9 – 5.11", items:[
+  "**Normales** ( ╲ ): **col − fil** constante, de −7 a 7. Arreglo `qnd[(col − fil) + 7]` (el +7 evita índices negativos).",
+  "**Inversas** ( ╱ ): **col + fil** constante, de 0 a 14. Arreglo `qid[col + fil]` directo.",
+  "15 de cada tipo → **30 diagonales** en total. Regla: **N**ormal = **resta**, **I**nversa = **suma**."]},
+ {t:"Ocho Reinas: validar rc[]", q:"5.12", items:[
+  "`rc[col] = fil`: una reina por columna.",
+  "1) ¿**Número repetido**? → misma fila. 2) ¿**col − fil** repetido? → misma diagonal normal. 3) ¿**col + fil** repetido? → misma inversa.",
+  "Si pide las **INCORRECTAS**, marcá las que fallan en algún paso."]},
+ {t:"Ocho Reinas: la función", q:"5.14 · 5.15", items:[
+  "`while not res and fil != 7` corta cuando **res es True O fil llega a 7** (negar un \"y\" da un \"o\").",
+  "`rc[col] = -1` = **volver atrás** (deshace la reina). Es correcto.",
+  "`qr` marca **filas** libres (las columnas las recorre `col`). La normal usa **resta** + 7. La función de la ficha es **correcta**."]}
+],
+1: [
+ {t:"Qué es y cómo se plantea", q:"1.1 · 1.10", items:[
+  "Una función que **se llama a sí misma** con un problema **más chico**.",
+  "Necesita: **caso base** (se resuelve sin llamarse) **antes** de la llamada + **paso recursivo** que achica el problema.",
+  "Bosque: \"vacío, **o** árboles agrupados con **otro bosque**\". Sin el \"vacío\" no hay caso base → regresión infinita."]},
+ {t:"Errores típicos", q:"1.3 · 1.11", items:[
+  "Llamarse **antes** del `if` del caso base → nunca llega al if → **stack overflow**.",
+  "factorial(−4): el caso base existe (n == 0), pero restando 1 **nunca se alcanza** → stack overflow."]},
+ {t:"Ejecutar a mano", q:"1.2 · 1.5", items:[
+  "Potencia: **aⁿ = a · aⁿ⁻¹**, caso base a⁰ = 1. Lo que se achica es **n**, no a.",
+  "Producto: `producto(a, b) = a + producto(a, b − 1)`, caso base b == 0 → 0. producto(5,3) = 5 + 5 + 5 + 0 = **15**. Es correcto."]},
+ {t:"El stack", q:"1.7 · 1.12 · 1.13", items:[
+  "Funciona como **pila LIFO**: la última función llamada es la primera en terminar.",
+  "Lo usa **toda** llamada a función, **no solo** las recursivas.",
+  "Cada llamada guarda **dirección de retorno + variables locales**. Se llena con la cascada de llamadas y se vacía al volver.",
+  "La recursión **puede** ocupar más memoria que la iterativa, pero **no siempre**. Usa stack, **no ROM**.",
+  "Una recursiva **puede** tener ciclos y **puede** llamarse más de una vez (fibo)."]},
+ {t:"Fibonacci", q:"1.6 · 1.8", items:[
+  "**Iterativa**: memoria constante, tiempo **lineal O(n)** (un ciclo de n vueltas; tiempo **no** constante).",
+  "**Recursiva**: memoria proporcional a n (stack), tiempo **exponencial bⁿ** (dos llamadas por llamada).",
+  "fibo(6) recalcula fibo(4) **2** veces, fibo(3) **3** y fibo(2) **5** → **10** cálculos repetidos."]},
+ {t:"Cuándo conviene", q:"1.4 · 1.9 · 1.14", items:[
+  "**Sí** conviene: **árboles, grafos y fractales** (problemas con forma recursiva).",
+  "\"Siempre que se pueda\" es **falso**: factorial y Fibonacci son mejores iterativos.",
+  "**Menú recursivo**: funciona, pero cada opción **apila una llamada** que no se libera. Mejor con un ciclo.",
+  "**Fractal** = figura hecha de **versiones más chicas de sí misma** (helecho, árbol, copo de Koch)."]}
+]
+
+};
+// Lo esencial de cada unidad (lo mínimo que hay que entender).
+const ESENCIAL = {
+4: ["**Pila = LIFO** (invierte el orden) y **Cola = FIFO** (mantiene el orden). Pasar de pila a pila invierte; de cola a cola, no.",
+    "En un **ABB** buscar cuesta **una comparación por nivel**: O(log n) si está balanceado, **O(n)** en el peor caso (diagonal).",
+    "**Entreorden** de un ABB sale ordenado. Para reconstruir un árbol hace falta el **entreorden + pre o post**.",
+    "En la **matriz de adyacencias**: reflexivo = diagonal en True, simétrico = espejada, transitivo = (x,y) y (y,z) dan (x,z)."],
+2: ["**Big O** es una **cota superior**: te quedás con el término que más crece y sin constantes (3n³ + 5n² → O(n³)).",
+    "De mejor a peor: **O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ)**, y qué algoritmo es cada uno.",
+    "**Peor caso** = datos más desfavorables; **caso promedio** = datos aleatorios. Factores: tiempo, memoria (y a veces complejidad aparente del código).",
+    "**Secuencial** O(n), sirve siempre; **binaria** O(log n), solo con el arreglo **ordenado**. Ω = cota inferior, Θ = las dos, o = estrictamente menor."],
+3: ["**Simples** (Burbuja, Selección, Inserción): **O(n²)**, buenos solo para n chico. Saber la idea de cada uno.",
+    "**Shell** = Inserción con saltos h que bajan hasta **h = 1** (obligatoria, garantiza el orden). O(n^1.5) con la serie de clase.",
+    "**Heap** = Selección mejorada con un heap en el mismo arreglo: **O(n log n) siempre**, sin memoria extra.",
+    "**Quick** = Divide y Vencerás: **O(n log n)** promedio (altura log n), **O(n²)** si el pivot es siempre el menor o el mayor (altura n). Pivot: **mediana de tres**."],
+5: ["**Divide y Vencerás**: partir en partes **de tamaño parecido**, resolver con recursión, unir. Quick y Merge. Con unión O(n) → O(n log n).",
+    "**Ávido**: regla local que parece buena, **sin volver atrás**. Simple y rápido, pero puede no dar el óptimo (monedas no canónicas).",
+    "**Programación Dinámica**: guardar en una **tabla** los resultados de subproblemas y reusarlos. Monedas con PD: siempre óptimo, devuelve prev[x].",
+    "**Backtracking**: prueba y error recursivo, vuelve atrás si un camino falla (Ocho Reinas: **resta + 7** para normales, **suma** para inversas)."],
+1: ["Una función recursiva bien planteada tiene **caso base ANTES de la llamada** y un paso que **achica** el problema.",
+    "Cada llamada ocupa lugar en el **stack (LIFO)**: dirección de retorno + variables locales. Si nunca llega al caso base: **stack overflow**.",
+    "La recursión conviene en **árboles, grafos y fractales**. No conviene cuando la iterativa es mejor: Fibonacci recursivo es **exponencial**, el menú recursivo gasta stack.",
+    "Saber **ejecutar a mano**: producto(5,3) = 15, potencia = a · potencia(a, n−1), fibo(6) repite trabajo **10 veces**."]
+};
+
+
+const UNITS = [
+  {u:4, name:"Pilas, colas, ABB y grafos", fichas:"F28 · F29 · F30", prio:1},
+  {u:2, name:"Análisis de algoritmos y búsquedas", fichas:"F27 · F16", prio:2},
+  {u:3, name:"Ordenamiento", fichas:"F16 · F22 · F31", prio:3},
+  {u:5, name:"Estrategias", fichas:"F31 · F32", prio:4},
+  {u:1, name:"Recursividad", fichas:"F14", prio:5},
+];
+const UNAME = Object.fromEntries(UNITS.map(x=>[x.u,x.name]));
+const SRC_OPTS = [
+  {k:"all", t:"Todas"},
+  {k:"cuest", t:"Cuestionario 2026"},
+  {k:"real", t:"Salió en un parcial real"},
+  {k:"extra", t:"Fuera de los cuestionarios"},
+];
+const SHOW_OPTS = [
+  {k:"all", t:"Todas"},
+  {k:"todo", t:"Sin responder"},
+  {k:"bad", t:"Mis errores"},
+  {k:"warn", t:"Con advertencia"},
+];
+const ORD_OPTS = [{k:"num", t:"Por número"},{k:"rand", t:"Aleatorio"}];
+const LET = "abcdefgh";
+const ICON = {
+  ok:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg>',
+  bad:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m5.5 5.5 9 9m0-9-9 9"/></svg>',
+  part:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="6.5"/><path d="M10 3.5v13" /></svg>',
+  miss:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5" stroke-dasharray="2.5 2.2"/><path d="m6.8 10.2 2.2 2.2 4.4-4.8"/></svg>',
+  eye:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.8 10S5 4.5 10 4.5 18.2 10 18.2 10 15 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>',
+  warn:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M8 1.8 15 14H1L8 1.8Z"/><path d="M8 6.5v3.5M8 11.8v.2" stroke-linecap="round"/></svg>',
+};
+
+/* ---------- storage (light, per browser) ---------- */
+const KEY = "aed-p5-preguntero-v1";
+let store = {res:{}};
+try { const raw = localStorage.getItem(KEY); if (raw) store = Object.assign(store, JSON.parse(raw)); } catch(e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e) {} }
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const isCuest = q => q.src.some(s => /^Cuest\. \d+$/.test(s));
+const isReal = q => q.src.some(s => /P5 20|Final 2022|Parcial 51/.test(s));
+const status = q => { const r = store.res[q.id]; return r ? (r.ok ? "ok" : "bad") : "todo"; };
+
+const state = { unit: 0, src: "all", show: "all", ord: "num", idx: 0, list: [], answered: null, seed: Math.random() };
+
+function shuffled(arr){
+  let s = Math.floor(state.seed * 2147483647) || 1;
+  const rnd = () => (s = s * 16807 % 2147483647) / 2147483647;
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function order(arr){
+  const pr = Object.fromEntries(UNITS.map(x=>[x.u,x.prio]));
+  return arr.slice().sort((a,b) => (pr[a.u]-pr[b.u]) || (parseFloat(a.id.split(".")[1]) - parseFloat(b.id.split(".")[1])));
+}
+function filtered(){
+  let l = Q.filter(q => !state.unit || q.u === state.unit);
+  if (state.src === "cuest") l = l.filter(isCuest);
+  if (state.src === "real") l = l.filter(isReal);
+  if (state.src === "extra") l = l.filter(q => !isCuest(q));
+  if (state.show === "todo") l = l.filter(q => status(q) === "todo");
+  if (state.show === "bad") l = l.filter(q => status(q) === "bad");
+  if (state.show === "warn") l = l.filter(q => q.warn);
+  return state.ord === "rand" ? shuffled(l) : order(l);
+}
+
+/* ---------- sidebar ---------- */
+function renderUnits(){
+  const all = {u:0, name:"Todas las unidades", fichas:"111 preguntas"};
+  $("#units").innerHTML = [all, ...UNITS].map(x => {
+    const qs = Q.filter(q => !x.u || q.u === x.u);
+    const ok = qs.filter(q => status(q) === "ok").length, bad = qs.filter(q => status(q) === "bad").length;
+    const sub = x.u ? `Prioridad ${x.prio} · ${x.fichas}` : `Ordenadas por prioridad`;
+    return `<button class="unit" aria-pressed="${state.unit === x.u}" data-u="${x.u}">
+      <span class="nm">${x.u ? `U${x.u} · ` : ""}${esc(x.name)}<small>${sub}</small></span>
+      <span class="num">${ok}/${qs.length}</span>
+      <span class="bar" aria-hidden="true"><i class="g" style="width:${ok/qs.length*100}%"></i><i class="r" style="width:${bad/qs.length*100}%"></i></span>
+    </button>`;
+  }).join("");
+}
+function renderSeg(el, opts, key){
+  el.innerHTML = opts.map(o => {
+    let n = "";
+    if (key === "show" && o.k === "bad") n = Q.filter(q => status(q) === "bad").length;
+    if (key === "show" && o.k === "warn") n = Q.filter(q => q.warn).length;
+    return `<button class="chip" aria-pressed="${state[key] === o.k}" data-k="${o.k}">${o.t}${n !== "" ? ` <span class="n">${n}</span>` : ""}</button>`;
+  }).join("");
+}
+function renderSide(){
+  renderUnits();
+  renderSeg($("#srcSeg"), SRC_OPTS, "src");
+  renderSeg($("#showSeg"), SHOW_OPTS, "show");
+  renderSeg($("#ordSeg"), ORD_OPTS, "ord");
+  const bad = Q.filter(q => status(q) === "bad").length;
+  $("#errCount").textContent = bad;
+  $("#errCount").classList.toggle("bad", bad > 0);
+}
+
+/* ---------- question card ---------- */
+function typeLabel(q){
+  return q.t === "single" ? "Seleccione una:" : q.t === "multi" ? "Seleccione una o más de una:" : "Relacione cada fila con una opción:";
+}
+function renderCard(){
+  state.list = filtered();
+  if (state.idx >= state.list.length) state.idx = Math.max(0, state.list.length - 1);
+  const wrap = $("#cardWrap");
+  renderCells();
+  if (!state.list.length){
+    $("#qpos").textContent = "";
+    wrap.innerHTML = `<div class="empty"><p>No hay preguntas con este filtro.</p><button class="btn" id="clearF">Ver todas</button></div>`;
+    $("#clearF").onclick = () => { Object.assign(state,{unit:0,src:"all",show:"all",idx:0}); refresh(); };
+    $("#prevBtn").disabled = $("#nextBtn").disabled = true;
+    return;
+  }
+  const q = state.list[state.idx];
+  state.answered = null;
+  $("#qpos").innerHTML = `Pregunta <b>${state.idx + 1}</b> de ${state.list.length}`;
+  $("#prevBtn").disabled = state.idx === 0;
+  $("#nextBtn").disabled = state.idx === state.list.length - 1;
+
+  const srcTags = q.src.map(s => `<span class="tag${/P5 20|Final 2022|Parcial 51/.test(s) ? " real" : ""}">${esc(s)}</span>`).join("");
+  let body = "";
+  if (q.t === "match"){
+    body = `<table class="match"><tbody>${q.rows.map((r,i) => `<tr data-i="${i}"><td class="row-t">${q.codeRows ? `<pre>${esc(r)}</pre>` : esc(r)}</td>
+      <td class="row-s"><label class="vh" for="m${i}">Opción para la fila ${i+1}</label><select id="m${i}"><option value="">Elegir…</option>${q.o.map((o,j)=>`<option value="${j}">${esc(o)}</option>`).join("")}</select></td></tr>`).join("")}</tbody></table>`;
+  } else {
+    const type = q.t === "single" ? "radio" : "checkbox";
+    body = `<fieldset class="opts" id="opts"><legend class="vh">${typeLabel(q)}</legend>${q.o.map((o,i) => `<label class="opt" data-i="${i}">
+      <input type="${type}" name="o" value="${i}"><span class="l">${LET[i]}.</span><span class="t">${q.oc ? `<pre>${esc(o)}</pre>` : esc(o)}</span><span class="ic" aria-hidden="true"></span></label>`).join("")}</fieldset>`;
+  }
+  wrap.innerHTML = `<article class="card" id="card" aria-labelledby="qtext">
+    <div class="meta"><span class="qid">${q.id}</span><span class="tag unit-t">U${q.u} · ${esc(UNAME[q.u])}</span>${srcTags}${q.warn ? `<span class="tag warn-t">Tiene advertencia</span>` : ""}</div>
+    <p class="qtext" id="qtext">${esc(q.q)}</p>
+    ${q.c ? `<pre>${esc(q.c)}</pre>` : ""}
+    <p class="qtype">${typeLabel(q)}</p>
+    ${body}
+    <div class="actions act-pre">
+      <button class="btn primary" id="checkBtn" disabled>Comprobar</button>
+      <button class="btn ghost" id="showBtn">Ver respuesta</button>
+      <span class="kbd"><kbd>1</kbd>–<kbd>${q.t==="match"?q.rows.length:q.o.length}</kbd> elegir · <kbd>Enter</kbd> comprobar · <kbd>←</kbd><kbd>→</kbd> navegar</span>
+    </div>
+    <div id="result"></div>
+  </article>`;
+
+  const check = $("#checkBtn");
+  if (q.t === "match"){
+    wrap.querySelectorAll("select").forEach(s => s.onchange = () => { check.disabled = [...wrap.querySelectorAll("select")].some(x => x.value === ""); });
+  } else {
+    wrap.querySelectorAll(".opt input").forEach(inp => inp.onchange = () => {
+      wrap.querySelectorAll(".opt").forEach(l => l.classList.toggle("sel", l.querySelector("input").checked));
+      check.disabled = !wrap.querySelector(".opt input:checked");
+    });
+  }
+  check.onclick = () => grade(q, false);
+  $("#showBtn").onclick = () => grade(q, true);
+}
+
+function grade(q, reveal){
+  if (state.answered) return;
+  const card = $("#card");
+  let score = 0, ok = false;
+  if (q.t === "match"){
+    const sels = [...card.querySelectorAll("select")];
+    let good = 0;
+    sels.forEach((s,i) => {
+      const tr = s.closest("tr"), right = q.ma[i];
+      const hit = s.value !== "" && +s.value === right;
+      if (reveal) s.value = right;
+      s.tabIndex = -1;
+      if (!reveal){ tr.classList.add(hit ? "ok" : "bad"); if (hit) good++; }
+      else tr.classList.add("ok");
+      if (!hit && !reveal) s.insertAdjacentHTML("afterend", `<span class="fix">Correcta: ${esc(q.o[right])}</span>`);
+    });
+    score = good / q.rows.length; ok = good === q.rows.length;
+  } else {
+    const inputs = [...card.querySelectorAll(".opt input")];
+    const chosen = inputs.filter(i => i.checked).map(i => +i.value);
+    const right = new Set(q.a);
+    inputs.forEach(i => {
+      const lab = i.closest(".opt"), v = +i.value, isR = right.has(v), was = i.checked;
+      i.tabIndex = -1; lab.classList.remove("sel");
+      if (reveal){ if (isR){ lab.classList.add("ok"); lab.querySelector(".ic").innerHTML = ICON.ok; } return; }
+      if (was && isR){ lab.classList.add("ok"); lab.querySelector(".ic").innerHTML = ICON.ok; }
+      else if (was && !isR){ lab.classList.add("bad"); lab.querySelector(".ic").innerHTML = ICON.bad; }
+      else if (!was && isR){ lab.classList.add("miss"); lab.querySelector(".ic").innerHTML = ICON.miss; lab.querySelector(".t").insertAdjacentHTML("beforeend", `<span class="miss-note">No la marcaste</span>`); }
+    });
+    if (q.t === "single"){ ok = chosen.length === 1 && right.has(chosen[0]); score = ok ? 1 : 0; }
+    else {
+      const k = q.a.length, n = q.o.length;
+      const hits = chosen.filter(v => right.has(v)).length, errs = chosen.length - hits;
+      score = Math.max(0, hits / k - (n - k ? errs / (n - k) : 0));
+      ok = hits === k && errs === 0;
+    }
+  }
+  card.classList.add("locked");
+  state.answered = true;
+  $("#checkBtn").disabled = true; $("#showBtn").disabled = true;
+
+  let v;
+  if (reveal) v = `<p class="verdict seen">${ICON.eye}Respuesta correcta <small>· no cuenta como respondida</small></p>`;
+  else if (ok) v = `<p class="verdict ok">${ICON.ok}Correcta</p>`;
+  else if (score > 0) v = `<p class="verdict part">${ICON.part}Parcialmente correcta <small>· en Moodle valdría ${score.toFixed(2).replace(".",",")} de 1</small></p>`;
+  else v = `<p class="verdict bad">${ICON.bad}Incorrecta</p>`;
+  if (!reveal){ store.res[q.id] = {ok, score: +score.toFixed(3), at: Date.now()}; save(); }
+
+  $("#result").innerHTML = `<div class="result" role="status">${v}
+    <p class="why">${esc(q.w)}</p>
+    <p class="ref"><b>Ficha:</b> ${esc(q.r)}</p>
+    ${q.warn ? `<div class="warnbox"><h4>${ICON.warn}Advertencia</h4><p>${esc(q.warn)}</p></div>` : ""}
+    <div class="actions"><button class="btn" id="retryBtn">Volver a intentar</button>${state.idx < state.list.length - 1 ? `<button class="btn primary" id="goNext">Siguiente pregunta</button>` : ""}</div>
+  </div>`;
+  $("#retryBtn").onclick = () => { renderCard(); };
+  const gn = $("#goNext"); if (gn) { gn.onclick = () => go(1); gn.focus({preventScroll:true}); }
+  renderSide(); renderCells();
+}
+
+function renderCells(){
+  const cur = state.list[state.idx];
+  $("#cells").innerHTML = state.list.map((q,i) => `<button class="cell ${status(q)}${cur && q.id === cur.id ? " cur" : ""}" data-i="${i}" title="${q.id} · ${esc(q.q.slice(0,80))}">${q.id}</button>`).join("");
+}
+function go(d){
+  const n = state.idx + d;
+  if (n < 0 || n >= state.list.length) return;
+  state.idx = n; renderCard(); window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- other views ---------- */
+function renderErrors(){
+  const bad = order(Q.filter(q => status(q) === "bad"));
+  $("#practErr").disabled = !bad.length;
+  $("#elistWrap").innerHTML = bad.length ? `<ul class="elist">${bad.map(q => `<li><span class="id">${q.id}</span>
+      <span class="q">${esc(q.q)}<small>U${q.u} · ${esc(UNAME[q.u])} · ${store.res[q.id].score > 0 ? "parcial" : "incorrecta"}</small></span>
+      <button class="btn" data-id="${q.id}">Practicar</button></li>`).join("")}</ul>`
+    : `<div class="empty"><p>Todavía no tenés errores guardados. Las preguntas que respondas mal o a medias van a aparecer acá.</p></div>`;
+}
+let mUnit = 4;
+const fmt = t => esc(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/`(.+?)`/g,"<code>$1</code>");
+function renderMachete(){
+  $("#mpick").innerHTML = UNITS.map(x => `<button style="--uc:var(--u${x.u});--ut:var(--u${x.u}t)" aria-pressed="${mUnit===x.u}" data-u="${x.u}"><i></i>U${x.u} · ${esc(x.name)}${MACHETES[x.u] ? "" : " <small>(pendiente)</small>"}</button>`).join("");
+  const x = UNITS.find(y => y.u === mUnit), blocks = MACHETES[mUnit], ess = ESENCIAL[mUnit];
+  const n = Q.filter(q => q.u === mUnit).length;
+  $("#mgrid").innerHTML = `<article class="sheet" style="--uc:var(--u${mUnit});--ut:var(--u${mUnit}t)">
+    <header class="sheet-h"><h2>U${mUnit} · ${esc(x.name)}</h2><p>Prioridad ${x.prio} · ${x.fichas} · ${n} preguntas</p></header>
+    ${ess ? `<section class="ess"><h3>Lo esencial</h3><ul>${ess.map(e=>`<li>${fmt(e)}</li>`).join("")}</ul></section>` : ""}
+    ${blocks ? `<div class="blocks">${blocks.map((b,i)=>`<section class="blk"><div class="blk-h"><b>${i+1}.</b><h3>${esc(b.t)}</h3><span>Preg. ${esc(b.q)}</span></div><ul>${b.items.map(it=>`<li>${fmt(it)}</li>`).join("")}</ul></section>`).join("")}</div>`
+      : `<div class="sheet-empty">El machete completo de esta unidad se arma cuando la estudiemos. Por ahora tenés lo esencial arriba.</div>`}
+  </article>`;
+}
+function show(view){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.view === view));
+  document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== "v-" + view);
+  if (view === "errores") renderErrors();
+  if (view === "machete") renderMachete();
+  window.scrollTo({top:0});
+}
+function refresh(){
+  renderSide(); renderCard();
+  const parts = [state.unit ? "U" + state.unit + " · " + UNAME[state.unit] : "Todas las unidades"];
+  if (state.src !== "all") parts.push(SRC_OPTS.find(o => o.k === state.src).t);
+  if (state.show !== "all") parts.push(SHOW_OPTS.find(o => o.k === state.show).t);
+  $("#filtDesc").textContent = parts.join(" · ");
+}
+const mq = matchMedia("(max-width: 900px)");
+function syncFilters(){ $("#filters").open = !mq.matches; }
+syncFilters(); mq.addEventListener("change", syncFilters);
+
+/* ---------- events ---------- */
+$("#units").onclick = e => { const b = e.target.closest(".unit"); if (!b) return; state.unit = +b.dataset.u; state.idx = 0; refresh(); };
+[["#srcSeg","src"],["#showSeg","show"],["#ordSeg","ord"]].forEach(([sel,key]) => {
+  $(sel).onclick = e => { const b = e.target.closest(".chip"); if (!b) return; state[key] = b.dataset.k; if (key === "ord") state.seed = Math.random(); state.idx = 0; refresh(); };
+});
+$("#cells").onclick = e => { const b = e.target.closest(".cell"); if (!b) return; state.idx = +b.dataset.i; renderCard(); };
+$("#prevBtn").onclick = () => go(-1);
+$("#nextBtn").onclick = () => go(1);
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => show(t.dataset.view));
+function bindReset(){
+  $("#resetBtn").onclick = () => {
+    $("#resetWrap").innerHTML = `<p class="side-note">¿Borrar todas tus respuestas guardadas y la lista de errores?</p>
+      <div class="seg" style="margin-top:8px"><button class="chip" id="resetYes">Sí, borrar</button><button class="chip" id="resetNo">Cancelar</button></div>`;
+    $("#resetYes").onclick = () => { store.res = {}; save(); restoreReset(); refresh(); };
+    $("#resetNo").onclick = restoreReset;
+  };
+}
+function restoreReset(){ $("#resetWrap").innerHTML = '<button class="linkbtn" id="resetBtn">Borrar mi progreso</button>'; bindReset(); }
+bindReset();
+$("#mpick").onclick = e => { const b = e.target.closest("button[data-u]"); if (!b) return; mUnit = +b.dataset.u; renderMachete(); };
+$("#practErr").onclick = () => { Object.assign(state, {unit:0, src:"all", show:"bad", idx:0}); show("practica"); refresh(); };
+$("#elistWrap").onclick = e => {
+  const b = e.target.closest("button[data-id]"); if (!b) return;
+  Object.assign(state, {unit:0, src:"all", show:"bad", ord:"num"}); state.list = filtered();
+  state.idx = Math.max(0, state.list.findIndex(q => q.id === b.dataset.id)); show("practica"); refresh();
+};
+document.addEventListener("keydown", e => {
+  if ($("#v-practica").hidden || e.target.closest("select") || e.altKey || e.metaKey || e.ctrlKey) return;
+  if (e.key === "ArrowRight") { go(1); return; }
+  if (e.key === "ArrowLeft") { go(-1); return; }
+  const card = $("#card"); if (!card) return;
+  if (e.key === "Enter" && !state.answered && !$("#checkBtn").disabled && !e.target.closest("button")) { e.preventDefault(); $("#checkBtn").click(); return; }
+  const n = parseInt(e.key, 10);
+  if (!state.answered && n >= 1) {
+    const inp = card.querySelectorAll(".opt input")[n - 1];
+    if (inp) { inp.checked = inp.type === "radio" ? true : !inp.checked; inp.dispatchEvent(new Event("change")); }
+  }
+});
+refresh();
+</script>
+</body>
+</html>

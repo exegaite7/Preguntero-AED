@@ -10,3 +10,7 @@ Práctica de las preguntas de **Algoritmos y Estructuras de Datos (AED, UTN FRC)
 Cada respuesta indica su origen: **oficial** (confirmada con la corrección de Moodle) o **según la ficha** (resuelta con el material de la cátedra).
 
 Para usarla, abrí `index.html` en el navegador o entrá por GitHub Pages. El banco completo está en `datos/preguntas.json`.
+
+## Versión Claude (`/claude`)
+
+En la carpeta `claude/` hay un segundo preguntero, más sobrio: 111 preguntas organizadas por unidad (U1 a U5) con el origen de cada una, explicación y ficha de referencia, advertencias en las respuestas dudosas, "Mis errores" y un machete completo por unidad. Se abre en `claude/index.html` o en GitHub Pages agregando `/claude/` a la dirección.
